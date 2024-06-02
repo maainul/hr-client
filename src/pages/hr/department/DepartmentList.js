@@ -10,9 +10,9 @@ function DepartmentList({ departments }) {
                     <td>{dpt.name}</td>
                     <td>{dpt.dptCode}</td>
                     <td>{dpt.status}</td>
-                    <td>Edit</td>
                     <td><Link to={`/department/${dpt._id}`}>View</Link></td>
-                    <td>Delete</td>
+                    <td><Link to={`/department/update/${dpt._id}`}>Edit</Link></td>
+                    <td><Link to={`/department/update/status/${dpt._id}`}>Update Status</Link></td>
                 </tr>
             )
         })
