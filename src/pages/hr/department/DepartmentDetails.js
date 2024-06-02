@@ -5,27 +5,27 @@ import axios from "axios"
 
 function DepartmentDetails({ departments }) {
 
-    const [department, setDepartment] = useState({})
     const { id } = useParams()
-
-    async function getSingleDepartment() {
-        try {
-            const res = await axios.get(`http://localhost:1337/api/v1/department/${id}`)
-            setDepartment(res.data.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const [department, setDepartment] = useState({})
 
     useEffect(() => {
+        async function getSingleDepartment() {
+            try {
+                const res = await axios.get(`http://localhost:1337/api/v1/department/${id}`)
+                setDepartment(res.data.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
         getSingleDepartment()
     }, [id])
 
     return (<>
-        <h1>Hi there</h1>
-        <h2>{id}</h2>
-        <h2>{department.name}</h2>
-        <h2>{department.dptCode}</h2>
+        <h1>Department Details</h1>
+        <h2>ID: {id}</h2>
+        <h2>Name: {department.name}</h2>
+        <h2>Code: {department.dptCode}</h2>
+        <h2>Status: {department.status}</h2>
     </>)
 }
 
