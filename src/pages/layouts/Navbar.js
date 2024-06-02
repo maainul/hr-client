@@ -6,7 +6,6 @@ import LogoutBtn from '../auth/LogoutBtn';
 function Navbar() {
 
     const { loggedIn } = useContext(AuthContext)
-    console.log(loggedIn)
 
     return (
         <nav>
@@ -22,6 +21,9 @@ function Navbar() {
                     <>
                         <Link to="/">Home</Link>
                         <Link to="/department/list">Departments</Link>
+                        <Link to="/division/list">Division</Link>
+                        <Link to="/designation/list">Designation</Link>
+                        <Link to="/unit/list">Unit</Link>
                         <LogoutBtn />
                     </>
                 )
