@@ -27,14 +27,15 @@ function Router() {
 
                     )
                 }
-                {loggedIn === true} && (
-                <>
-                    <Route path='/' element={<div> Home </div>} />
-                    <Route path='/department/list' element={<Department />} />
-                    <Route path='/designation/list' element={<Designation />} />
-                    <Route path='/unit/list' element={<Unit />} />
-                </>
-                )
+                {loggedIn === true && (
+                    <>
+                        <Route path='/' element={<div> Home </div>} />
+                        <Route path='/department/list' element={<Department />} />
+                        <Route path='/designation/list' element={<Designation />} />
+                        <Route path='/unit/list' element={<Unit />} />
+                        <Route path='*' element={<div>Page Not Found</div>} />
+                    </>
+                )}
             </Routes>
         </BrowserRouter>
     )
