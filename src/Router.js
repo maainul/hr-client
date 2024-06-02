@@ -4,7 +4,8 @@ import React, { useContext } from 'react'
 import Navbar from './pages/layouts/Navbar'
 import Register from './pages/auth/Register'
 import AuthContext from './context/AuthContext'
-import Department from './pages/hr/department/Department'
+import Dashboard from './pages/layouts/dashboard/Dashboard'
+import Departments from './pages/hr/department/Departments'
 import Designation from './pages/hr/designation/Designation'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -29,8 +30,8 @@ function Router() {
                 }
                 {loggedIn === true && (
                     <>
-                        <Route path='/' element={<div> Home </div>} />
-                        <Route path='/department/list' element={<Department />} />
+                        <Route path='/' element={<Dashboard />} />
+                        <Route path='/departments' element={<Departments />} />
                         <Route path='/designation/list' element={<Designation />} />
                         <Route path='/unit/list' element={<Unit />} />
                         <Route path='*' element={<div>Page Not Found</div>} />

@@ -21,7 +21,7 @@ function Navbar() {
                 loggedIn === true && (
                     <>
                         <Link to="/">Home</Link>
-                        <Link to="/department/list">Departments</Link>
+                        <Link to="/departments">Departments</Link>
                         <Link to="/division/list">Division</Link>
                         <Link to="/designation/list">Designation</Link>
                         <Link to="/unit/list">Unit</Link>
