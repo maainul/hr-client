@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 function DepartmentList({ departments }) {
@@ -9,6 +10,9 @@ function DepartmentList({ departments }) {
                     <td>{dpt.name}</td>
                     <td>{dpt.dptCode}</td>
                     <td>{dpt.status}</td>
+                    <td>Edit</td>
+                    <td><Link to={`/department/${dpt._id}`}>View</Link></td>
+                    <td>Delete</td>
                 </tr>
             )
         })
