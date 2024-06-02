@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext'
 import LogoutBtn from '../auth/LogoutBtn';
+import AuthContext from '../../context/AuthContext'
+
 
 function Navbar() {
 
