@@ -8,6 +8,7 @@ function DivisionUpdate() {
     const { id } = useParams()
 
     const [name, setName] = useState()
+    const [code, setCode] = useState()
     const [status, setStatus] = useState()
 
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ function DivisionUpdate() {
             try {
                 const res = await axios.get(`http://localhost:1337/api/v1/division/${id}`)
                 setName(res.data.data.name)
+                setCode(res.data.data.code)
                 setStatus(res.data.data.status)
 
             } catch (error) {
@@ -37,7 +39,7 @@ function DivisionUpdate() {
     async function saveDivision(e) {
         e.preventDefault()
         try {
-            const customerData = { name, status }
+            const customerData = { name, status, code }
             await axios.put(`http://localhost:1337/api/v1/division/${id}`, customerData)
             navigate("/divisions")
         } catch (error) {
@@ -53,6 +55,11 @@ function DivisionUpdate() {
                     placeholder="Enter division Name"
                     onChange={(e) => setName(e.target.value)}
                     value={name}
+                />
+                <input type="text"
+                    placeholder="Enter division Code"
+                    onChange={(e) => setCode(e.target.value)}
+                    value={code}
                 />
                 <select
                     id="status-select"

@@ -24,6 +24,7 @@ function DivisionDetails() {
         <h1>Division Details</h1>
         <h2>ID: {id}</h2>
         <h2>Name: {division.name}</h2>
+        <h2>Code: {division.code}</h2>
         <h2>Status: {division.status}</h2>
     </>)
 }
