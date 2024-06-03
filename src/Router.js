@@ -6,10 +6,11 @@ import Register from './pages/auth/Register'
 import AuthContext from './context/AuthContext'
 import Dashboard from './pages/layouts/dashboard/Dashboard'
 import Departments from './pages/hr/department/Departments'
-import DepartmentDetails from './pages/hr/department/DepartmentDetails'
-import DepartmentUpdate from './pages/hr/department/DepartmentUpdate'
-import Designation from './pages/hr/designation/Designation'
+import Designations from './pages/hr/designation/Designations'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import DepartmentUpdate from './pages/hr/department/DepartmentUpdate'
+import DepartmentDetails from './pages/hr/department/DepartmentDetails'
+import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 
 
 function Router() {
@@ -35,8 +36,8 @@ function Router() {
                         <Route path='/departments' element={<Departments />} />
                         <Route path='/department/:id' element={<DepartmentDetails />} />
                         <Route path='/department/update/:id' element={<DepartmentUpdate />} />
-                        {/* <Route path='/department/update/status/:id' element={<DepartmentUpdate />} /> */}
-                        <Route path='/designation/list' element={<Designation />} />
+                        <Route path='/department/update/status/:id' element={<DepartmentStatusUpdate />} />
+                        <Route path='/designations' element={<Designations />} />
                         <Route path='/unit/list' element={<Unit />} />
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </>
