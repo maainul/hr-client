@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 
 
-function DepartmentDetails({ departments }) {
+function DepartmentDetails() {
 
     const { id } = useParams()
     const [department, setDepartment] = useState({})
