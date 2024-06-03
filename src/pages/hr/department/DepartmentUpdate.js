@@ -1,24 +1,34 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-
+import { useNavigate } from "react-router-dom"
 
 function DepartmentUpdate() {
 
     const { id } = useParams()
 
-    //https://www.youtube.com/watch?v=j0KQh07u3Mk&ab_channel=simplyjs
-
     const [name, setName] = useState()
     const [dptCode, setDptCode] = useState()
+    const [status, setStatus] = useState()
 
-    const [department, setDepartment] = useState({})
+    const navigate = useNavigate()
+
+
+    // Department Status
+    const statuses = [
+        { code: 0, name: 'Inactive' },
+        { code: 1, name: 'Active' },
+        { code: 2, name: 'Pending' },
+    ]
 
     useEffect(() => {
         async function getSingleDepartment() {
             try {
                 const res = await axios.get(`http://localhost:1337/api/v1/department/${id}`)
-                setDepartment(res.data.data)
+                setName(res.data.data.name)
+                setDptCode(res.data.data.dptCode)
+                setStatus(res.data.data.status)
+
             } catch (error) {
                 console.log(error)
             }
@@ -26,15 +36,12 @@ function DepartmentUpdate() {
         getSingleDepartment()
     }, [id])
 
-
-
-
-
     async function saveDepartment(e) {
         e.preventDefault()
         try {
-            const customerData = { name, dptCode, status: 1 }
-            await axios.post('http://localhost:1337/api/v1/department/create', customerData)
+            const customerData = { name, dptCode, status }
+            await axios.put(`http://localhost:1337/api/v1/department/${id}`, customerData)
+            navigate("/departments")
         } catch (error) {
             console.log(error)
         }
@@ -54,6 +61,18 @@ function DepartmentUpdate() {
                     onChange={(e) => setDptCode(e.target.value)}
                     value={dptCode}
                 />
+
+                <select
+                    id="status-select"
+                    onChange={(e) => setStatus(e.target.value)}
+                    value={status}
+                >
+                    <option value="" disabled> Select Status</option>
+                    {statuses.map((statOption) => (
+                        <option key={statOption.code} value={statOption.code}>{statOption.name}</option>
+                    ))}
+
+                </select>
 
                 <button type="submit">Submit</button>
             </form>
