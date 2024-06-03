@@ -1,12 +1,15 @@
 import Login from './pages/auth/Login'
-import Unit from './pages/hr/unit/Unit'
 import React, { useContext } from 'react'
+import Units from './pages/hr/unit/Units'
 import Navbar from './pages/layouts/Navbar'
 import Register from './pages/auth/Register'
 import AuthContext from './context/AuthContext'
-import Dashboard from './pages/layouts/dashboard/Dashboard'
+import UnitUpdate from './pages/hr/unit/UnitUpdate'
+import UnitDetails from './pages/hr/unit/UnitDetails'
 import Departments from './pages/hr/department/Departments'
+import Dashboard from './pages/layouts/dashboard/Dashboard'
 import Designations from './pages/hr/designation/Designations'
+import UnitStatusUpdate from './pages/hr/unit/UnitStatusUpdate'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DepartmentUpdate from './pages/hr/department/DepartmentUpdate'
 import DepartmentDetails from './pages/hr/department/DepartmentDetails'
@@ -49,8 +52,13 @@ function Router() {
                         <Route path='/designation/update/:id' element={<DesignationUpdate />} />
                         <Route path='/designation/update/status/:id' element={<DesignationStatusUpdate />} />
 
+
                         {/* Unit */}
-                        <Route path='/unit/list' element={<Unit />} />
+                        <Route path='/units' element={<Units />} />
+                        <Route path='/unit/:id' element={<UnitDetails />} />
+                        <Route path='/unit/update/:id' element={<UnitUpdate />} />
+                        <Route path='/unit/update/status/:id' element={<UnitStatusUpdate />} />
+
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </>
                 )}

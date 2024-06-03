@@ -24,7 +24,7 @@ function Navbar() {
                         <Link to="/departments">Departments</Link>
                         <Link to="/division/list">Division</Link>
                         <Link to="/designations">Designation</Link>
-                        <Link to="/unit/list">Unit</Link>
+                        <Link to="/units">Unit</Link>
                         <LogoutBtn />
                     </>
                 )
