@@ -17,6 +17,10 @@ import DesignationUpdate from './pages/hr/designation/DepartmentUpdate'
 import DesignationDetails from './pages/hr/designation/DesignationDetails'
 import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 import DesignationStatusUpdate from './pages/hr/designation/DesignationStatusUpdate'
+import Divisions from './pages/hr/division/Divisions'
+import DivisionDetails from './pages/hr/division/DivisionDetails'
+import DivisionUpdate from './pages/hr/division/DivisionUpdate'
+import DivisionStatusUpdate from './pages/hr/division/DivisionStatusUpdate'
 
 
 function Router() {
@@ -58,6 +62,12 @@ function Router() {
                         <Route path='/unit/:id' element={<UnitDetails />} />
                         <Route path='/unit/update/:id' element={<UnitUpdate />} />
                         <Route path='/unit/update/status/:id' element={<UnitStatusUpdate />} />
+
+                        {/* Division */}
+                        <Route path='/divisions' element={<Divisions />} />
+                        <Route path='/division/:id' element={<DivisionDetails />} />
+                        <Route path='/division/update/:id' element={<DivisionUpdate />} />
+                        <Route path='/division/update/status/:id' element={<DivisionStatusUpdate />} />
 
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </>

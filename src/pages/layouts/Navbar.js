@@ -22,7 +22,7 @@ function Navbar() {
                     <>
                         <Link to="/">Home</Link>
                         <Link to="/departments">Departments</Link>
-                        <Link to="/division/list">Division</Link>
+                        <Link to="/divisions">Division</Link>
                         <Link to="/designations">Designation</Link>
                         <Link to="/units">Unit</Link>
                         <LogoutBtn />
