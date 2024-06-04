@@ -24,7 +24,7 @@ function Units() {
 
     return (
         <>
-            <UnitForm getDepartmentList={getUnitList} />
+            <UnitForm getUnitList={getUnitList} />
             <UnitList units={units} />
         </>
     )
