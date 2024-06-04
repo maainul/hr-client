@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 function UnitForm({ getUnitList }) {
     const [name, setName] = useState('')
     const [code, setCode] = useState('')
-    const [divisionName, setDivisionName] = useState('')
     const [dptList, setDptList] = useState([]) // State to store division list
     const [loading, setLoading] = useState(false)  // State for loading
 
