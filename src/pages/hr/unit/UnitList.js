@@ -8,6 +8,8 @@ function UnitList({ units }) {
             return (
                 <tr key={i}>
                     <td>{dpt.name}</td>
+                    <td>{dpt.division.name}</td>
+                    <td>{dpt.division.code}</td>
                     <td>{dpt.status}</td>
                     <td><Link to={`/unit/${dpt._id}`}>View</Link></td>
                     <td><Link to={`/unit/update/${dpt._id}`}>Edit</Link></td>
@@ -24,6 +26,8 @@ function UnitList({ units }) {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Division</th>
+                        <th>Code</th>
                         <th>Status</th>
                     </tr>
                 </thead>
