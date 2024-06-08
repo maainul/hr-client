@@ -26,10 +26,11 @@ function Profile() {
             <p>{profileInfo.group && profileInfo.group.map((group, index) => (
                 <div key={index}>
                     <h2>Group Info</h2>
-                    <h3>{group.name}</h3>
+                    <h3>Name : {group.name}</h3>
+                    <h3>Code : {group.code}</h3>
                     <ul>
                         {group.permissions.map((per, ix) => (
-                            <li key={ix}>Resource: {per.resouce}, Action:{per.action}</li>
+                            <li key={ix}>Resource: {per.resource}, Action:{per.action}</li>
                         ))}
                     </ul>
                 </div>
