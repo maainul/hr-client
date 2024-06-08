@@ -23,26 +23,26 @@ import DesignationDetails from './pages/hr/designation/DesignationDetails'
 import DivisionStatusUpdate from './pages/hr/division/DivisionStatusUpdate'
 import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 import DesignationStatusUpdate from './pages/hr/designation/DesignationStatusUpdate'
+import Profile from './pages/auth/Profile'
 
 
 function Router() {
 
     const { loggedIn } = useContext(AuthContext)
 
-
     return (
         <BrowserRouter>
             <Navbar />
             <Routes>
                 {
-                    loggedIn === false && (
+                    !loggedIn && (
                         <>
                             <Route path='/login' element={<Login />} />
                             <Route path='/register' element={<Register />} />
                         </>
                     )
                 }
-                {loggedIn === true && (
+                {loggedIn && (
                     <>
                         <Route path='/' element={<Dashboard />} />
 
@@ -72,6 +72,7 @@ function Router() {
                         <Route path='/division/update/status/:id' element={<DivisionStatusUpdate />} />
 
                         {/* Groups */}
+                        <Route path='/profile' element={<Profile />} />
                         <Route path='/groups' element={<Groups />} />
                         <Route path='/group/:id' element={<GroupDetails />} />
                         {/* <Route path='/division/update/:id' element={<DivisionUpdate />} /> */}

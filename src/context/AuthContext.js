@@ -5,10 +5,12 @@ const AuthContext = createContext();
 
 function AuthContextProvider(props) {
     const [loggedIn, setLoggedIn] = useState(undefined);
+    const [userID, setUserID] = useState(undefined);
 
     async function getLoggedIn() {
         const loggedInRes = await axios.get('http://localhost:1337/api/v1/auth/loggedin');
-        setLoggedIn(loggedInRes.data);
+        setLoggedIn(loggedInRes.data.loggedIn);
+        setUserID(loggedInRes.data.userId);
     }
 
     useEffect(() => {
@@ -16,7 +18,7 @@ function AuthContextProvider(props) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ loggedIn, getLoggedIn }}>
+        <AuthContext.Provider value={{ loggedIn, getLoggedIn, userID }}>
             {props.children}
         </AuthContext.Provider>
     );
