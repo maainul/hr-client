@@ -2,7 +2,8 @@
 function Dashboard() {
     return (
         <>
-            Dashboard Dashboard Dashboard Dashboard
+            <h1>Welcome Dashobord</h1>
+
         </>
     )
 }

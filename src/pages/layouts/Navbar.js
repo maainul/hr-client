@@ -9,7 +9,7 @@ function Navbar() {
     const { loggedIn } = useContext(AuthContext)
 
     return (
-        <nav>
+        <nav className='navbar'>
             {
                 loggedIn === false && (
                     <>
@@ -25,7 +25,8 @@ function Navbar() {
                         <Link to="/divisions">Division</Link>
                         <Link to="/designations">Designation</Link>
                         <Link to="/units">Unit</Link>
-                        <LogoutBtn />
+                        <Link to="/groups">Groups</Link>
+                        <LogoutBtn  />
                     </>
                 )
             }
