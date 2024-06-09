@@ -33,6 +33,10 @@ import DivisionStatusUpdate from './pages/hr/division/DivisionStatusUpdate'
 import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 import DesignationStatusUpdate from './pages/hr/designation/DesignationStatusUpdate'
 import SalaryGradeStatusUpdate from './pages/hr/salaryGrade/SalaryGradeStatusUpdate'
+import Employees from './pages/hr/employee/Employees'
+import EmployeeDetails from './pages/hr/employee/EmployeeDetails'
+import EmployeeUpdate from './pages/hr/employee/EmployeeUpdate'
+import EmployeeStatusUpdate from './pages/hr/employee/EmployeeStatusUpdate'
 
 
 
@@ -100,6 +104,13 @@ function Router() {
                         <Route path='/policy/:id' element={<PolicyDetails />} />
                         <Route path='/policy/update/:id' element={<PolicyUpdate />} />
                         <Route path='/policy/update/status/:id' element={<PolicyStatusUpdate />} />
+
+
+                        {/* Employee */}
+                        <Route path='/employee' element={<Employees />} />
+                        <Route path='/employee/:id' element={<EmployeeDetails />} />
+                        <Route path='/employee/update/:id' element={<EmployeeUpdate />} />
+                        <Route path='/employee/update/status/:id' element={<EmployeeStatusUpdate />} />
 
 
                         <Route path='*' element={<div>Page Not Found</div>} />
