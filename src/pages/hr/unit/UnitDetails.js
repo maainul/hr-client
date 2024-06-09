@@ -16,9 +16,10 @@ function UnitDetails() {
             try {
                 const res = await axios.get(`http://localhost:1337/api/v1/unit/${id}`)
                 setName(res.data.data.name)
-                setCode(res.data.data.division.code)
                 setStatus(res.data.data.status)
                 setDivisionName(res.data.data.division.name)
+                setCode(res.data.data.division.code)
+
             } catch (error) {
                 console.log(error)
             }
@@ -27,12 +28,13 @@ function UnitDetails() {
     }, [id])
 
     return (<>
-        <h1>Unit Details</h1>
+        <h1>Unit Details :</h1>
         <h2>ID: {id}</h2>
         <h2>Name: {name}</h2>
-        <h2>Name: {code}</h2>
-        <h2>Name: {divisionName}</h2>
         <h2>Name: {status}</h2>
+        <h1>Division Info : </h1>
+        <h2>Name: {divisionName}</h2>
+        <h2>Code : {code}</h2>
 
     </>)
 }
