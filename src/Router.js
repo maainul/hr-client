@@ -24,6 +24,10 @@ import DivisionStatusUpdate from './pages/hr/division/DivisionStatusUpdate'
 import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 import DesignationStatusUpdate from './pages/hr/designation/DesignationStatusUpdate'
 import Profile from './pages/auth/Profile'
+import SalaryGrades from './pages/hr/salaryGrade/SalaryGrades'
+import SalaryGradeDetails from './pages/hr/salaryGrade/SalaryGradeDetails'
+import SalaryGradeUpdate from './pages/hr/salaryGrade/SalaryGradeUpdate'
+import SalaryGradeStatusUpdate from './pages/hr/salaryGrade/SalaryGradeStatusUpdate'
 
 
 function Router() {
@@ -75,8 +79,13 @@ function Router() {
                         <Route path='/profile' element={<Profile />} />
                         <Route path='/groups' element={<Groups />} />
                         <Route path='/group/:id' element={<GroupDetails />} />
-                        {/* <Route path='/division/update/:id' element={<DivisionUpdate />} /> */}
-                        {/* <Route path='/division/update/status/:id' element={<DivisionStatusUpdate />} /> */}
+
+
+                        {/* SalaryGrade */}
+                        <Route path='/salary-grade' element={<SalaryGrades />} />
+                        <Route path='/salary-grade/:id' element={<SalaryGradeDetails />} />
+                        <Route path='/salary-grade/update/:id' element={<SalaryGradeUpdate />} />
+                        <Route path='/salary-grade/status/:id' element={<SalaryGradeStatusUpdate />} />
 
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </>
