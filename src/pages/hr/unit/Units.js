@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 
 function Units() {
 
+    console.log("###################")
+
     const [units, setUnits] = useState([])
 
     async function getUnitList() {
