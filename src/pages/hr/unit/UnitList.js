@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 function UnitList({ units }) {
 
-    console.log(units)
     function renderUnits() {
         return units.map((dpt, i) => {
             return (
