@@ -9,7 +9,6 @@ function GroupList({ groups }) {
                 <tr key={i}>
                     <td>{dpt.name}</td>
                     <td>{dpt.code}</td>
-                    <td>{dpt.permissions}</td>
                     <td><Link to={`/group/${dpt._id}`}>View</Link></td>
                     <td><Link to={`/group/update/${dpt._id}`}>Edit</Link></td>
                 </tr>

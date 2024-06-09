@@ -1,6 +1,7 @@
 import Login from './pages/auth/Login'
 import React, { useContext } from 'react'
 import Units from './pages/hr/unit/Units'
+import Profile from './pages/auth/Profile'
 import Navbar from './pages/layouts/Navbar'
 import Register from './pages/auth/Register'
 import Groups from './pages/auth/group/Groups'
@@ -8,10 +9,12 @@ import AuthContext from './context/AuthContext'
 import UnitUpdate from './pages/hr/unit/UnitUpdate'
 import Divisions from './pages/hr/division/Divisions'
 import UnitDetails from './pages/hr/unit/UnitDetails'
+import GroupUpdate from './pages/auth/group/GroupUpdate'
 import GroupDetails from './pages/auth/group/GroupDetails'
 import Dashboard from './pages/layouts/dashboard/Dashboard'
 import Departments from './pages/hr/department/Departments'
 import Designations from './pages/hr/designation/Designations'
+import SalaryGrades from './pages/hr/salaryGrade/SalaryGrades'
 import DivisionUpdate from './pages/hr/division/DivisionUpdate'
 import UnitStatusUpdate from './pages/hr/unit/UnitStatusUpdate'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -19,15 +22,14 @@ import DivisionDetails from './pages/hr/division/DivisionDetails'
 import DepartmentUpdate from './pages/hr/department/DepartmentUpdate'
 import DepartmentDetails from './pages/hr/department/DepartmentDetails'
 import DesignationUpdate from './pages/hr/designation/DepartmentUpdate'
+import SalaryGradeUpdate from './pages/hr/salaryGrade/SalaryGradeUpdate'
 import DesignationDetails from './pages/hr/designation/DesignationDetails'
+import SalaryGradeDetails from './pages/hr/salaryGrade/SalaryGradeDetails'
 import DivisionStatusUpdate from './pages/hr/division/DivisionStatusUpdate'
 import DepartmentStatusUpdate from './pages/hr/department/DepartmentStatusUpdate'
 import DesignationStatusUpdate from './pages/hr/designation/DesignationStatusUpdate'
-import Profile from './pages/auth/Profile'
-import SalaryGrades from './pages/hr/salaryGrade/SalaryGrades'
-import SalaryGradeDetails from './pages/hr/salaryGrade/SalaryGradeDetails'
-import SalaryGradeUpdate from './pages/hr/salaryGrade/SalaryGradeUpdate'
 import SalaryGradeStatusUpdate from './pages/hr/salaryGrade/SalaryGradeStatusUpdate'
+
 
 
 function Router() {
@@ -79,6 +81,7 @@ function Router() {
                         <Route path='/profile' element={<Profile />} />
                         <Route path='/groups' element={<Groups />} />
                         <Route path='/group/:id' element={<GroupDetails />} />
+                        <Route path='/group/update/:id' element={<GroupUpdate />} />
 
 
                         {/* SalaryGrade */}
