@@ -33,6 +33,7 @@ function Navbar() {
                 <>
                     <Link to="/">Home</Link>
 
+                    {hasPermission('employee', 'list') && <Link to="/employee">Employee</Link>}
                     {hasPermission('department', 'list') && <Link to="/departments">Departments</Link>}
                     {hasPermission('division', 'list') && <Link to="/division">Division</Link>}
                     {hasPermission('designation', 'list') && <Link to="/designations">Designation</Link>}
@@ -42,7 +43,6 @@ function Navbar() {
                     {hasPermission('promotionAndIncrement', 'list') && <Link to="/promotion-and-increment">Promotion And Increment</Link>}
                     {hasPermission('policy', 'list') && <Link to="/policy">Policy</Link>}
                     {hasPermission('employeeSalary', 'list') && <Link to="/employee-salary">Employee Salary</Link>}
-                    {hasPermission('employee', 'list') && <Link to="/employee">Employee</Link>}
                     {hasPermission('employeePolicy', 'list') && <Link to="/employee-policy">Employee Policy</Link>}
                     {hasPermission('document', 'list') && <Link to="/document">Document</Link>}
 
