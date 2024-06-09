@@ -6,19 +6,23 @@ import Navbar from './pages/layouts/Navbar'
 import Register from './pages/auth/Register'
 import Groups from './pages/auth/group/Groups'
 import AuthContext from './context/AuthContext'
+import Policies from './pages/hr/policy/Policies'
 import UnitUpdate from './pages/hr/unit/UnitUpdate'
 import Divisions from './pages/hr/division/Divisions'
 import UnitDetails from './pages/hr/unit/UnitDetails'
 import GroupUpdate from './pages/auth/group/GroupUpdate'
+import PolicyUpdate from './pages/hr/policy/PolicyUpdate'
 import GroupDetails from './pages/auth/group/GroupDetails'
 import Dashboard from './pages/layouts/dashboard/Dashboard'
 import Departments from './pages/hr/department/Departments'
+import PolicyDetails from './pages/hr/policy/PolicyDetails'
 import Designations from './pages/hr/designation/Designations'
 import SalaryGrades from './pages/hr/salaryGrade/SalaryGrades'
 import DivisionUpdate from './pages/hr/division/DivisionUpdate'
 import UnitStatusUpdate from './pages/hr/unit/UnitStatusUpdate'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DivisionDetails from './pages/hr/division/DivisionDetails'
+import PolicyStatusUpdate from './pages/hr/policy/PolicyStatusUpdate'
 import DepartmentUpdate from './pages/hr/department/DepartmentUpdate'
 import DepartmentDetails from './pages/hr/department/DepartmentDetails'
 import DesignationUpdate from './pages/hr/designation/DepartmentUpdate'
@@ -89,6 +93,14 @@ function Router() {
                         <Route path='/salary-grade/:id' element={<SalaryGradeDetails />} />
                         <Route path='/salary-grade/update/:id' element={<SalaryGradeUpdate />} />
                         <Route path='/salary-grade/status/:id' element={<SalaryGradeStatusUpdate />} />
+
+
+                        {/* Policy */}
+                        <Route path='/policy' element={<Policies />} />
+                        <Route path='/policy/:id' element={<PolicyDetails />} />
+                        <Route path='/policy/update/:id' element={<PolicyUpdate />} />
+                        <Route path='/policy/update/status/:id' element={<PolicyStatusUpdate />} />
+
 
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </>
