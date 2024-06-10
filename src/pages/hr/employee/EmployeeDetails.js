@@ -9,16 +9,29 @@ function EmployeeDetails() {
     const [employee, setEmployee] = useState({})
 
     useEffect(() => {
-        async function getSingleEmployee() {
-            try {
-                const res = await axios.get(`http://localhost:1337/api/v1/employee/${id}`)
-                setEmployee(res.data.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
         getSingleEmployee()
     }, [id])
+
+    async function getSingleEmployee() {
+        try {
+            const res = await axios.get(`http://localhost:1337/api/v1/employee/${id}`)
+            setEmployee(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    async function getPolicyListById() {
+        try {
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
 
     return (<>
         <h1>Employee Details</h1>
@@ -43,6 +56,13 @@ function EmployeeDetails() {
         <h2>marital_status: {employee.marital_status}</h2>
         <h2>religion: {employee.religion}</h2>
         <h2>blood_group: {employee.blood_group}</h2>
+        <h2>religion: {employee.religion}</h2>
+        <h2>number_of_children: {employee.number_of_children}</h2>
+        <h2>spouse_name: {employee.spouse_name}</h2>
+        <h2>spouse_dob: {employee.spouse_dob}</h2>
+        <h2>spouse_profession: {employee.spouse_profession}</h2>
+        <h2>marriage_date: {employee.marriage_date}</h2>
+        <h2>passport_issue_date: {employee.passport_issue_date}</h2>
         <h1>departmentInfo :</h1>
         <h2>Department Name: {employee.department ? employee.department.name : 'Loading...'}</h2>
         <h2>Designation Name: {employee.designation ? employee.designation.name : 'Loading...'}</h2>
