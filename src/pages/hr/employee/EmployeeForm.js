@@ -32,7 +32,11 @@ function EmployeeForm({ getEmployeeList }) {
         dptId: '',
         desId: '',
         sgId: '',
-        checkboxPolicy: []
+        checkboxPolicy: [],
+        documentCode: '',
+        documentName: '',
+        documentType: '',
+        documentLink: ''
 
     }
 
@@ -126,7 +130,8 @@ function EmployeeForm({ getEmployeeList }) {
                 gender: formState.gender, marital_status: formState.maritalStatus, nationality: formState.nationality, designation: formState.desId, department: formState.dptId, salary_grade: formState.sgId,
                 status: 1, passport_issue_date: formState.passportIssueDate, marriage_date: formState.marriageDate, spouse_profession: formState.spouseProfession,
                 spouse_dob: formState.spouseDob, spouse_name: formState.spouseName, number_of_children: formState.numberOfChildren, blood_group: formState.bloodGroup,
-                religion: formState.religion
+                religion: formState.religion, document_code: formState.documentCode, document_name: formState.documentName, documentLink: formState.documentLink,
+                document_type: formState.documentType
             }
 
             const saveEmployeeData = await axios.post('http://localhost:1337/api/v1/employee/create', empData)
@@ -137,7 +142,10 @@ function EmployeeForm({ getEmployeeList }) {
                 policy: policyID
             }))
 
+            // Add Data Employee Policy Table
             await Promise.all(policyData.map((data) => axios.post('http://localhost:1337/api/v1/employee-policy/create', data)))
+
+            // Add Data in Document Table
             getEmployeeList();
 
             // Reset form fields
@@ -465,6 +473,43 @@ function EmployeeForm({ getEmployeeList }) {
                     ))}
                 </div>
 
+                <h4>Document Add</h4>
+                <div className="form-group">
+                    <label>Document Code</label>
+                    <input type="text"
+                        placeholder="Enter Document Code"
+                        onChange={handleChange}
+                        name="documentCode"
+                        value={formState.documentCode}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Document Name</label>
+                    <input type="text"
+                        placeholder="Enter Document Name"
+                        onChange={handleChange}
+                        name="documentName"
+                        value={formState.documentName}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Document Link</label>
+                    <input type="text"
+                        placeholder="Enter Document Link"
+                        onChange={handleChange}
+                        name="documentLink"
+                        value={formState.documentLink}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Document Type</label>
+                    <input type="text"
+                        placeholder="Enter Document Code"
+                        onChange={handleChange}
+                        name="documentType"
+                        value={formState.documentType}
+                    />
+                </div>
                 <button type="submit">Submit</button>
             </form >
         </>
