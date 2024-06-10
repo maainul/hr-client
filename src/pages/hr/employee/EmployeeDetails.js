@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import axios from "axios"
 
 
@@ -9,33 +9,29 @@ function EmployeeDetails() {
     const [employee, setEmployee] = useState({})
     const [policyDetails, setPolicyDetails] = useState([])
 
-    useEffect(() => {
-        getSingleEmployee()
-        getPolicyListById()
-    }, [id])
-
-    async function getSingleEmployee() {
+    const getSingleEmployee = useCallback(async () => {
         try {
             const res = await axios.get(`http://localhost:1337/api/v1/employee/${id}`)
             setEmployee(res.data.data)
         } catch (error) {
             console.log(error)
         }
-    }
+    }, [id])
 
-
-    async function getPolicyListById() {
+    const getPolicyListById = useCallback(async () => {
         try {
-            const res = await axios.get(`http://localhost:1337/api/v1/employee-policy/by/${id}`)
-            setPolicyDetails(res.data.data)
-            console.log("====>", policyDetails)
+            const res = await axios.get(`http://localhost:1337/api/v1/employee-policy/by/${id}`);
+            console.log(res.data.data);
+            setPolicyDetails(res.data.data);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    }, [id]);
 
-
-
+    useEffect(() => {
+        getSingleEmployee()
+        getPolicyListById()
+    }, [id, getSingleEmployee, getPolicyListById])
 
     return (<>
         <h1>Employee Details</h1>
