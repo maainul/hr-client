@@ -7,9 +7,11 @@ function EmployeeDetails() {
 
     const { id } = useParams()
     const [employee, setEmployee] = useState({})
+    const [policyDetails, setPolicyDetails] = useState([])
 
     useEffect(() => {
         getSingleEmployee()
+        getPolicyListById()
     }, [id])
 
     async function getSingleEmployee() {
@@ -24,7 +26,9 @@ function EmployeeDetails() {
 
     async function getPolicyListById() {
         try {
-
+            const res = await axios.get(`http://localhost:1337/api/v1/employee-policy/by/${id}`)
+            setPolicyDetails(res.data.data)
+            console.log("====>", policyDetails)
         } catch (error) {
             console.log(error)
         }
@@ -64,11 +68,33 @@ function EmployeeDetails() {
         <h2>marriage_date: {employee.marriage_date}</h2>
         <h2>passport_issue_date: {employee.passport_issue_date}</h2>
         <h1>departmentInfo :</h1>
-        <h2>Department Name: {employee.department ? employee.department.name : 'Loading...'}</h2>
-        <h2>Designation Name: {employee.designation ? employee.designation.name : 'Loading...'}</h2>
+        <h2>Department Name: {employee.department ? employee.department.name : 'Not Found'}</h2>
+        <h2>Designation Name: {employee.designation ? employee.designation.name : 'Not Found'}</h2>
         <h2>salaryGradeInfo Name: {employee.salary_grade ? employee.salary_grade.grade_name : 'Not Found'}</h2>
-        <h2>salaryGradeInfo Name: {employee.salary_grade ? employee.salary_grade.min_salary : 'Not Found'}</h2>
-        <h2>salaryGradeInfo Name: {employee.salary_grade ? employee.salary_grade.max_salary : 'Not Found'}</h2>
+        <h2>min_salary: {employee.salary_grade ? employee.salary_grade.min_salary : 'Not Found'}</h2>
+        <h2>max_salary: {employee.salary_grade ? employee.salary_grade.max_salary : 'Not Found'}</h2>
+        <h3>Policy Details</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Policy Name</th>
+                    <th>Policy Benefit</th>
+                    <th>Policy Value</th>
+                    <th>Policy Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {policyDetails.map((element, index) => (
+                    <tr key={index}>
+                        <td>{element.policy.name}</td>
+                        <td>{element.policy.benefit}</td>
+                        <td>{element.policy.value}</td>
+                        <td>{element.policy.status === 1 ? 'Active' : 'Inactive'}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
 
     </>)
 }
