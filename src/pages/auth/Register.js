@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import './AuthForm.css'
 
 function Register() {
 
@@ -29,30 +29,44 @@ function Register() {
     }
 
     return (
-        <div>
-            <h1>Register new User</h1>
-            <form onSubmit={register}>
-                <input
-                    type='text'
-                    placeholder='enter your name'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                />
-                <input
-                    type='password'
-                    placeholder='enter your password'
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                />
-                <input
-                    type='password'
-                    placeholder='enter your password'
-                    onChange={(e) => setPasswordVerify(e.target.value)}
-                    value={passwordVerify}
-                />
-                <button type='submit'>Register</button>
-            </form>
-        </div>
+
+        <>
+            <div className='hero'>
+                <div className='form-box'>
+
+                    <div className='button-box'>
+                        <div className='btn'> </div>
+                        <button type='button' className='toggle-btn'>Register</button>
+                        <Link className='toggle-btn-reg' to="/login" >Login</Link>
+                    </div>
+
+                    <form onSubmit={register} className='input-group'>
+                        <input
+                            type='text'
+                            placeholder='Enter Your User ID'
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            className='input-field'
+                        />
+                        <input
+                            type='password'
+                            placeholder='Enter Your Password'
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            className='input-field'
+                        />
+                        <input
+                            type='password'
+                            placeholder='Enter Confirm Password'
+                            onChange={(e) => setPasswordVerify(e.target.value)}
+                            value={passwordVerify}
+                            className='input-field'
+                        />
+                        <button type='submit' className='submit-btn'>Register</button>
+                    </form>
+                </div>
+            </div>
+        </>
     )
 }
 
