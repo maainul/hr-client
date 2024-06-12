@@ -5,8 +5,6 @@ import AuthContext from '../../context/AuthContext'
 
 function Navbar() {
     const { loggedIn, userPermissions } = useContext(AuthContext);
-
-
     const hasPermission = (resource, action) => {
         let hasPermission = false
         for (let permission of userPermissions) {
@@ -32,7 +30,6 @@ function Navbar() {
             {loggedIn && (
                 <>
                     <Link to="/">Home</Link>
-
                     {hasPermission('employee', 'list') && <Link to="/employee">Employee</Link>}
                     {hasPermission('department', 'list') && <Link to="/departments">Departments</Link>}
                     {hasPermission('division', 'list') && <Link to="/division">Division</Link>}

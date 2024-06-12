@@ -24,8 +24,11 @@ function Employees() {
 
     return (
         <>
+
             <EmployeeForm getEmployeeList={getEmployeeList} />
             <EmployeeList employees={employees} />
+
+
         </>
     )
 }
