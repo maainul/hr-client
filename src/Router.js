@@ -37,6 +37,8 @@ import SalaryGradeStatusUpdate from './pages/hr/salaryGrade/SalaryGradeStatusUpd
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import MainLayout from './pages/layouts/MainLayout';
+import NoSidebarLayout from './pages/layouts/NoSidebarLayout';
+import WithSidebarLayout from './pages/layouts/WithSidebarLayout'
 
 
 function Router() {
@@ -47,15 +49,15 @@ function Router() {
             <Routes>
                 {
                     !loggedIn && (
-                        <>
+                        <Route element={<NoSidebarLayout />}>
                             <Route path="/" element={<AuthPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
-                        </>
+                        </Route>
                     )
                 }
                 {loggedIn && (
-                    <>
+                    <Route element={<WithSidebarLayout />}>
 
                         <Route path='/' element={<MainLayout />} />
 
@@ -113,7 +115,7 @@ function Router() {
 
 
                         <Route path='*' element={<div>Page Not Found</div>} />
-                    </>
+                    </Route>
                 )}
             </Routes>
 
