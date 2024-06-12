@@ -43,34 +43,18 @@ const Sidebar = () => {
                             </div>
                         </li>
 
-                        <li>
-                            <div className='title'>
-                                {hasPermission('unit', 'list') &&
-                                    <Link to="/units" className='link'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Unit</span>
-                                    </Link>}
-                            </div>
-                            <div className='submenu'>
-                                {hasPermission('unit', 'list') &&
-                                    <Link to="/units" className='link submenu-title'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Unit</span>
-                                    </Link>}
-                            </div>
-                        </li>
 
                         <li>
                             <div className='title'>
                                 {hasPermission('department', 'list') &&
-                                    <Link to="/department" className='link'>
+                                    <Link to="/departments" className='link'>
                                         <i class='bx bx-home-circle'></i>
                                         <span class="name">Department</span>
                                     </Link>}
                             </div>
                             <div className='submenu'>
                                 {hasPermission('unit', 'list') &&
-                                    <Link to="/department" className='link submenu-title'>
+                                    <Link to="/departments" className='link submenu-title'>
                                         <i class='bx bx-home-circle'></i>
                                         <span class="name">Department</span>
                                     </Link>}
