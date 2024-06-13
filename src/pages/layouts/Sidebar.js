@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Sidebar.css'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/AuthContext';
 import LogoutBtn from './../auth/LogoutBtn';
+import axios from 'axios';
 const Sidebar = () => {
 
     const { loggedIn, userPermissions } = useContext(AuthContext);
+    const [menuList, setMenuList] = useState([])
     const hasPermission = (resource, action) => {
         let hasPermission = false
         for (let permission of userPermissions) {
@@ -17,52 +19,46 @@ const Sidebar = () => {
         return hasPermission
     }
 
+    async function getMenuList() {
+        try {
+            const res = await axios.get("http://localhost:1337/api/v1/menu/list")
+            setMenuList(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getMenuList()
+    }, [])
 
 
     return (
         <>
             {loggedIn && (
                 <div className='sidebar'>
-                    <Link to="/" className='logo-box'> <i class="bx bxl-xing"></i> <div class="logo-name">BexImCo</div></Link>
+                    <Link to="/" className='logo-box'> <i className="bx bxl-xing"></i> <div className="logo-name">BexImCo</div></Link>
 
                     <ul className='sidebar-list'>
-                        <li>
-                            <div className='title'>
-                                {hasPermission('employee', 'list') &&
-                                    <Link to="/employee" className='link'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Employee</span>
-                                    </Link>}
-                            </div>
-                            <div className='submenu'>
-                                {hasPermission('employee', 'list') &&
-                                    <Link to="/employee" className='link submenu-title'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Employee</span>
-                                    </Link>}
-                            </div>
-                        </li>
+                        {Array.isArray(menuList) && menuList.map((ml) => (
+                            <li className="dropdown active" key={ml._id}>
+                                <div className="title">
+                                    <div className="link">
+                                        <i className="bx bx-plug" />
+                                        <span className="name">{ml.menuTitle}</span>
+                                    </div>
+                                    <i className="bx bxs-chevron-down" />
+                                </div>
+                                <div className="submenu">
+                                    {Array.isArray(ml.submenu) && ml.submenu.map((subItem) => (
+                                        <Link to={subItem.url} className='link'>{subItem.label}</Link>
+                                    ))}
+                                </div>
+                            </li>
 
-
-                        <li>
-                            <div className='title'>
-                                {hasPermission('department', 'list') &&
-                                    <Link to="/departments" className='link'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Department</span>
-                                    </Link>}
-                            </div>
-                            <div className='submenu'>
-                                {hasPermission('unit', 'list') &&
-                                    <Link to="/departments" className='link submenu-title'>
-                                        <i class='bx bx-home-circle'></i>
-                                        <span class="name">Department</span>
-                                    </Link>}
-                            </div>
-                        </li>
-
-                        <LogoutBtn />
+                        ))}
                     </ul>
+                    <LogoutBtn />
                 </div>
             )}
         </>
