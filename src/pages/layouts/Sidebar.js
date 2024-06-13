@@ -8,6 +8,8 @@ const Sidebar = () => {
 
     const { loggedIn, userPermissions } = useContext(AuthContext);
     const [menuList, setMenuList] = useState([])
+    const [activeMenuItem, setActiveMenuItem] = useState(null)
+
     const hasPermission = (resource, action) => {
         let hasPermission = false
         for (let permission of userPermissions) {
@@ -32,16 +34,20 @@ const Sidebar = () => {
         getMenuList()
     }, [])
 
+    const handleMenuItemClick = (menuItemId) => {
+        setActiveMenuItem(prevMenuItem => (prevMenuItem === menuItemId ? null : menuItemId));
+    }
 
     return (
         <>
             {loggedIn && (
-                <div className='sidebar'>
-                    <Link to="/" className='logo-box'> <i className="bx bxl-xing"></i> <div className="logo-name">BexImCo</div></Link>
+                <div className={`sidebar`}>
+
+                    <Link to="/" className='logo-box'> <i className="bx bxl-xing"></i> <div className="logo-name">BexImCo</div> <span className='hidebar'>X</span></Link>
 
                     <ul className='sidebar-list'>
                         {Array.isArray(menuList) && menuList.map((ml) => (
-                            <li className="dropdown active" key={ml._id}>
+                            <li key={ml._id} className={`dropdown ${activeMenuItem === ml._id ? 'active' : ''}`} onClick={() => handleMenuItemClick(ml._id)}>
                                 <div className="title">
                                     <div className="link">
                                         <i className="bx bx-plug" />
@@ -51,7 +57,7 @@ const Sidebar = () => {
                                 </div>
                                 <div className="submenu">
                                     {Array.isArray(ml.submenu) && ml.submenu.map((subItem) => (
-                                        <Link to={subItem.url} className='link'>{subItem.label}</Link>
+                                        <Link to={subItem.url} className='link' key={subItem._id}>{subItem.label}</Link>
                                     ))}
                                 </div>
                             </li>

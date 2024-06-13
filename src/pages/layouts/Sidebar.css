@@ -33,6 +33,12 @@ body {
     position: fixed;
     transition: all 0.5s ease;
     background-color: var(--color_Dark1);
+
+}
+
+.hidebar {
+    color: red;
+    margin-left: 40px;
 }
 
 .logo-box {
@@ -57,7 +63,7 @@ body {
 
 
 .logo-name {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
 }
 
@@ -65,7 +71,7 @@ body {
 /* -------------- Sidebar-list-------------- */
 .sidebar-list {
     height: 100%;
-    padding: 30px 0 150px 0;
+    padding: 10px 0 150px 0;
     overflow: hidden;
 }
 
@@ -105,17 +111,17 @@ body {
 }
 
 .sidebar-list li .title i {
-    height: 50px;
+    height: 40px;
     text-align: center;
     min-width: 78px;
     line-height: 50px;
     color: var(--color_Light1);
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .sidebar-list li .title .name {
     color: var(--color_Light1);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -141,7 +147,7 @@ body {
 
 .submenu .link {
     color: var(--color_Light2);
-    font-size: 15px;
+    font-size: 13px;
     padding: 5px 0;
     transition: all 0.5s ease;
 }
@@ -153,6 +159,68 @@ body {
 .submenu-title {
     display: none;
 }
+
+
+/*------------------ CLOSE ---------------------- */
+.sidebar.close {
+    width: 78px;
+
+}
+
+.sidebar.close .logo-box i {
+    transform: rotate(360deg);
+}
+
+.sidebar.close .logo-name,
+.sidebar.close .title .name,
+.sidebar.close .title .bxs-chevron-down {
+    display: none;
+}
+
+.sidebar.close .sidebar-list {
+    overflow: visible;
+}
+
+.sidebar.close .sidebar-list li {
+    position: relative;
+}
+
+
+.sidebar.close .sidebar-list li .submenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 100%;
+    margin-top: 0;
+    padding: 10px 20px;
+    top: -10px;
+    border-radius: 0 6px 6px 0;
+    height: max-content;
+    width: max-content;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s ease;
+
+}
+
+.sidebar.close .sidebar-list li:hover .submenu {
+    opacity: 1;
+    top: 0;
+    pointer-events: initial;
+    background-color: var(--color_Dark2);
+}
+
+.sidebar.close .submenu-title {
+    display: block;
+    font-style: 18px;
+    color: var(--color_Light1);
+}
+
+.sidebar.close~.home {
+    left: 78px;
+    width: calc(100% - 78px);
+}
+
 
 
 /*-------------- HOME ---------------------- */
@@ -175,13 +243,13 @@ body {
 
 
 .home .toggle-sidebar i {
-    font-size: 35px;
+    font-size: 30px;
     color: var(--color_Dark1);
     margin-left: 15px;
 }
 
 .home .toggle-sidebar .text {
-    font-size: 25px;
+    font-size: 20px;
     color: var(--color_Dark1);
     font-weight: 600;
 }
