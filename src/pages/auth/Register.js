@@ -9,7 +9,7 @@ function Register() {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordVerify, setPasswordVerify] = useState('')
-
+    const [message, setMessage] = useState('')
     const { getLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -25,6 +25,7 @@ function Register() {
             navigate("/")
         } catch (error) {
             console.log(error)
+            setMessage(error.response.data.error[0].message)
         }
     }
 
@@ -48,6 +49,7 @@ function Register() {
                             value={name}
                             className='input-field'
                         />
+                        <p className='errorMessage'>{message}</p>
                         <input
                             type='password'
                             placeholder='Enter Your Password'

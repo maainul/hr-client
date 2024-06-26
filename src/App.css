@@ -52,3 +52,9 @@ nav .button:hover {
 .main-dash {
     margin-left: 280px;
 }
+
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+}

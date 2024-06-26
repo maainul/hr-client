@@ -17,7 +17,8 @@ function Login() {
         e.preventDefault();
         try {
             const registerData = { name, password }
-            await axios.post('http://localhost:1337/api/v1/auth/login', registerData)
+            const res = await axios.post('http://localhost:1337/api/v1/auth/login', registerData)
+            console.log(res)
             await getLoggedIn()
             navigate("/")
         } catch (error) {
@@ -43,6 +44,7 @@ function Login() {
                             value={name}
                             className='input-field'
                         />
+                        <p></p>
                         <input
                             type='password'
                             placeholder='Enter Your Password'

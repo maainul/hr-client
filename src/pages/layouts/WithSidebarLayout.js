@@ -7,7 +7,6 @@ const WithSidebarLayout = () => {
         <div className="main-layout">
             <Sidebar />
             <main className="main-dash">
-
                 <div className="main-content">
                     <Outlet />
                 </div>

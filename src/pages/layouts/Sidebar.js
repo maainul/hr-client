@@ -9,18 +9,18 @@ const Sidebar = () => {
     const { loggedIn, userPermissions } = useContext(AuthContext);
     const [menuList, setMenuList] = useState([])
     const [activeMenuItem, setActiveMenuItem] = useState(null)
-
-    const hasPermission = (resource, action) => {
-        let hasPermission = false
-        for (let permission of userPermissions) {
-            if (permission.resource === resource && permission.action === action) {
-                hasPermission = true
-                break
+    /*
+        const hasPermission = (resource, action) => {
+            let hasPermission = false
+            for (let permission of userPermissions) {
+                if (permission.resource === resource && permission.action === action) {
+                    hasPermission = true
+                    break
+                }
             }
+            return hasPermission
         }
-        return hasPermission
-    }
-
+    */
     async function getMenuList() {
         try {
             const res = await axios.get("http://localhost:1337/api/v1/menu/list")
@@ -63,8 +63,8 @@ const Sidebar = () => {
                             </li>
 
                         ))}
+                        <LogoutBtn />
                     </ul>
-                    <LogoutBtn />
                 </div>
             )}
         </>
