@@ -39,6 +39,9 @@ import Register from './pages/auth/Register'
 import MainLayout from './pages/layouts/MainLayout';
 import NoSidebarLayout from './pages/layouts/NoSidebarLayout';
 import WithSidebarLayout from './pages/layouts/WithSidebarLayout'
+import Menus from './pages/hr/menu/Menus'
+import MenuDetails from './pages/hr/menu/MenuDetails'
+import MenuUpdate from './pages/hr/menu/MenuUpdate'
 
 
 function Router() {
@@ -113,6 +116,10 @@ function Router() {
                         <Route path='/employee/update/:id' element={<EmployeeUpdate />} />
                         <Route path='/employee/update/status/:id' element={<EmployeeStatusUpdate />} />
 
+                        {/* Menu */}
+                        <Route path='/menu' element={<Menus />} />
+                        <Route path='/menu/:id' element={<MenuDetails />} />
+                        <Route path='/menu/update/:id' element={<MenuUpdate />} />
 
                         <Route path='*' element={<div>Page Not Found</div>} />
                     </Route>
