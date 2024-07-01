@@ -27,6 +27,9 @@ function GroupDetails() {
         <h2>ID: {id}</h2>
         <h2>Name: {group.name}</h2>
         <h2>Code: {group.code}</h2>
+        <h3>Backend URL Permissions</h3>
+        <hr />
+        <br />
         <table border="1">
             <thead>
                 <tr>

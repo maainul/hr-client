@@ -23,6 +23,9 @@ function UserList({ users }) {
               Update Status
             </Link>
           </td>
+          <td>
+            <Link to={`/auth/user/update/${usr._id}`}>Add Menu</Link>
+          </td>
         </tr>
       );
     });

@@ -58,3 +58,9 @@ nav .button:hover {
     font-size: 14px;
     font-weight: 600;
 }
+
+.group-flex {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
