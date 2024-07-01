@@ -43,7 +43,7 @@ import Menus from "./pages/hr/menu/Menus";
 import MenuDetails from "./pages/hr/menu/MenuDetails";
 import MenuUpdate from "./pages/hr/menu/MenuUpdate";
 import Users from "./pages/hr/users/Users";
-import UserForm from "./pages/hr/users/UserForm";
+import UserForm from "./pages/auth/users/UserForm";
 
 function Router() {
   const { loggedIn } = useContext(AuthContext);

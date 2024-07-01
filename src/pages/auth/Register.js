@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/AuthContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './AuthForm.css'
 
 function Register() {
@@ -38,7 +38,6 @@ function Register() {
                     <div className='button-box'>
                         <div className='btn'> </div>
                         <button type='button' className='toggle-btn'>Register</button>
-                        <Link className='toggle-btn-reg' to="/login" >Login</Link>
                     </div>
 
                     <form onSubmit={register} className='input-group'>
@@ -64,6 +63,7 @@ function Register() {
                             value={passwordVerify}
                             className='input-field'
                         />
+
                         <button type='submit' className='submit-btn'>Register</button>
                     </form>
                 </div>

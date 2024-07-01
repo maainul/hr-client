@@ -12,7 +12,7 @@ function UserForm() {
   async function saveUser(e) {
     e.preventDefault();
     try {
-      const registerData = { name, password, passwordVerify, groups };
+      const registerData = { name, password, passwordVerify, group: groups };
       await axios.post(
         "http://localhost:1337/api/v1/auth/register",
         registerData

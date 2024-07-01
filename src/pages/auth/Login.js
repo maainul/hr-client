@@ -30,12 +30,6 @@ function Login() {
         <>
             <div className='hero'>
                 <div className='form-box'>
-                    <div className='button-box'>
-                        <div className='btn'> </div>
-                        <button type='button' className='toggle-btn'>Login</button>
-                        <Link className='toggle-btn-reg' to="/register" >Register</Link>
-                    </div>
-
                     <form onSubmit={login} className='input-group'>
                         <input
                             type='text'
@@ -44,7 +38,6 @@ function Login() {
                             value={name}
                             className='input-field'
                         />
-                        <p></p>
                         <input
                             type='password'
                             placeholder='Enter Your Password'
