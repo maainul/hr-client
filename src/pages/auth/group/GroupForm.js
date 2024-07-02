@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 
 function GroupForm({ getGroupList }) {
@@ -72,7 +71,7 @@ function GroupForm({ getGroupList }) {
     async function saveGroup(e) {
         e.preventDefault()
         try {
-            const groupData = { name, code, permissions }
+            const groupData = { name, code, permissions, menus: selectedMenus }
             await axios.post('http://localhost:1337/api/v1/auth/group/create', groupData)
             getGroupList()
             setCode('')
@@ -117,10 +116,7 @@ function GroupForm({ getGroupList }) {
                     value={code}
                 />
                 <div className="group-flex">
-
                     <div>
-
-
                         {/* Permissions Data */}
                         <h2>Select Permissions</h2>
                         {availablePermissions.map(permission => (

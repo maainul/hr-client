@@ -7,13 +7,17 @@ function GroupDetails() {
 
     const { id } = useParams()
     const [group, setGroup] = useState({
-        name: '', code: '', permissions: []
+        name: '', code: '', permissions: [],
     })
+
+    const [menus, setMenus] = useState([])
+
 
     useEffect(() => {
         async function getSingleGroup() {
             try {
                 const res = await axios.get(`http://localhost:1337/api/v1/auth/group/${id}`)
+                setMenus(res.data.getGrp.menus)
                 setGroup(res.data.getGrp)
             } catch (error) {
                 console.log(error)
@@ -45,9 +49,25 @@ function GroupDetails() {
                     </tr>
                 ))}
             </tbody>
-
-
         </table >
+
+        <div>
+            {menus.map((menu) => (
+                <div key={menu._id}>
+                    <h3>{menu.menuTitle}</h3>
+                    <ul>
+                        {menu.submenu.map((sub) => (
+                            <>
+                                <li key={sub._id}>LABEL : {sub.label}</li>
+                                <li>URL: {sub.url}</li>
+                                <li>ICON:{sub.icon}</li>
+                            </>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+
 
     </>)
 }
