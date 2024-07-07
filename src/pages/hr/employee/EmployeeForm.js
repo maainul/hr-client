@@ -195,7 +195,7 @@ function EmployeeForm({ getEmployeeList }) {
                         </div>
                         <div className="form-group">
                             <label className="text-sm pb-1">Present Address</label>
-                            <input type="text"
+                            <textarea type="text"
                                 name="presentAddress"
                                 placeholder="Enter Present Address"
                                 onChange={handleChange}
@@ -205,11 +205,12 @@ function EmployeeForm({ getEmployeeList }) {
                         </div>
                         <div className="form-group">
                             <label className="text-sm pb-1">Permanent Address</label>
-                            <input type="text"
+                            <textarea type="text"
                                 placeholder="Enter permenet Address"
-                                onChange={handleChange} className="input_sm"
+                                onChange={handleChange} className="input_sm h-24"
                                 name="permanentAddress"
                                 value={formState.permanentAddress}
+                                rows="4"
                             />
                         </div>
                         <div className="form-group">
@@ -256,7 +257,7 @@ function EmployeeForm({ getEmployeeList }) {
                         </div>
 
                         <div className="form-group">
-                            <label>Emergency Contact Number 2</label>
+                            <label className="text-sm pb-1">Emergency Contact Number 2</label>
                             <input type="text"
                                 placeholder="Enter employee Emergency Contact 2"
                                 onChange={handleChange}
@@ -267,7 +268,7 @@ function EmployeeForm({ getEmployeeList }) {
                         </div>
 
                         <div className="form-group">
-                            <label>National ID</label>
+                            <label className="text-sm pb-1">National ID</label>
                             <input type="text"
                                 placeholder="Enter National ID"
                                 onChange={handleChange}
@@ -277,7 +278,7 @@ function EmployeeForm({ getEmployeeList }) {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Bank Account</label>
+                            <label className="text-sm pb-1">Bank Account</label>
                             <input type="text"
                                 placeholder="Enter Bank Account"
                                 onChange={handleChange}
@@ -370,7 +371,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
                                 </div>
                                 <select
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                     value={formState.gender}
                                     onChange={handleChange}
                                     required
@@ -395,7 +396,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     name="maritalStatus"
                                     value={formState.maritalStatus}
                                     onChange={handleChange}
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                 >
                                     <option value="">Select Marital Status</option>
                                     <option value="Single">Single</option>
@@ -416,7 +417,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     value={formState.bloodGroup}
                                     onChange={handleChange}
                                     name="bloodGroup"
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                 >
                                     <option value="">Select Blood Group</option>
                                     <option value="O+">O+</option>
@@ -437,7 +438,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     value={formState.religion}
                                     onChange={handleChange}
                                     name="religion"
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                 >
                                     <option value="">Select Religion</option>
                                     <option value="Muslim">Muslim</option>
@@ -471,7 +472,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     onChange={handleChange}
                                     required
                                     name="dptId"
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                 >
                                     <option value="">Select Department</option>
                                     {departments.map((dpt) => (
@@ -493,7 +494,7 @@ function EmployeeForm({ getEmployeeList }) {
                                     onChange={handleChange}
                                     required
                                     name="desId"
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
 
                                 >
                                     <option value="">Select Designation</option>
@@ -531,7 +532,7 @@ function EmployeeForm({ getEmployeeList }) {
                                 </div>
 
                                 <select
-                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                     value={formState.sgId}
                                     onChange={handleChange}
                                     required
