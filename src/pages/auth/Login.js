@@ -30,6 +30,9 @@ function Login() {
             <div className='flex justify-center items-center min-h-screen bg-gradient-to-b from-white to-gray-200 hover:shadow-2xl'>
                 <div className='mx-auto bg-white flex flex-col w-[480px] p-10 rounded-lg my-auto'>
                     <form onSubmit={login} className='input-group'>
+                        <div className='text-center'>
+                            <i class="ri-login-circle-line text-accent text-6xl"></i>
+                        </div>
                         <div className='mb-5'>
                             <input
                                 type='text'
