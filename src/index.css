@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input_sm {
+    @apply w-full border border-gray-300 rounded-lg px-4 font-light h-10 text-sm focus:outline-blue-400
+}
+
+.btn_sm {
+    @apply bg-accent text-white px-8 py-2 rounded-full text-sm hover:bg-accent-secondary hover:transition-all hover:duration-500
+}
