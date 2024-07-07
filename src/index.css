@@ -9,3 +9,7 @@
 .btn_sm {
     @apply bg-accent text-white px-8 py-2 rounded-full text-sm hover:bg-accent-secondary hover:transition-all hover:duration-500
 }
+
+.dashboard_card {
+    @apply bg-white w-full shadow-md rounded-xl hover:shadow-custom1 p-2 hover:cursor-pointer hover:bg-gray-50 hover:translate-y-[-5px] hover:duration-300
+}

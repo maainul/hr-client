@@ -42,9 +42,7 @@ const Sidebar = () => {
         <>
             {loggedIn && (
                 <div className={`sidebar`}>
-
                     <Link to="/" className='logo-box'> <i className="bx bxl-xing"></i> <div className="logo-name">BexImCo</div> <span className='hidebar'>X</span></Link>
-
                     <ul className='sidebar-list'>
                         {Array.isArray(menuList) && menuList.map((ml) => (
                             <li key={ml._id} className={`dropdown ${activeMenuItem === ml._id ? 'active' : ''}`} onClick={() => handleMenuItemClick(ml._id)}>
