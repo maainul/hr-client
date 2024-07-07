@@ -158,305 +158,401 @@ function EmployeeForm({ getEmployeeList }) {
 
     return (
         <>
-            <h2>Employee Form</h2>
-            <form onSubmit={saveEmployee}>
-                <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text"
-                        name="fullName"
-                        placeholder="Enter employee Full Name"
-                        onChange={handleChange}
-                        value={formState.fullName}
-                    />
-                </div>
+            <div className="ml-48 bg-gray-200 min-h-screen flex justify-center items-center">
+                <form onSubmit={saveEmployee} className="bg-white shadow-lg p-6 rounded-lg ">
+                    <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 mt-8 ">
+                        <div>
+                            <label className="text-sm pb-1">Full Name</label>
+                            <input
+                                type='text'
+                                placeholder="User ID"
+                                className="input_sm"
+                                name="fullName"
+                                onChange={handleChange}
+                                value={formState.fullName}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="text"
-                        name="email"
-                        placeholder="Enter Email"
-                        onChange={handleChange}
-                        value={formState.email}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Phone Number</label>
-                    <input type="text"
-                        placeholder="Enter Phone Number"
-                        onChange={handleChange}
-                        name="phone"
-                        value={formState.phone}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Present Address</label>
-                    <input type="text"
-                        name="presentAddress"
-                        placeholder="Enter Present Address"
-                        onChange={handleChange}
-                        value={formState.presentAddress}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Permanent Address</label>
-                    <input type="text"
-                        placeholder="Enter permenet Address"
-                        onChange={handleChange}
-                        name="permanentAddress"
-                        value={formState.permanentAddress}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Date of Joining</label>
-                    <input type="date"
-                        placeholder="Enter Joining Date"
-                        onChange={handleChange}
-                        name="dateOfJoining"
-                        value={formState.dateOfJoining}
-                    />
-                </div>
+                        <div>
+                            <label className="text-sm pb-1">Email</label>
+                            <input type="text"
+                                name="email"
+                                className="input_sm"
+                                placeholder="Enter Email"
+                                onChange={handleChange}
+                                value={formState.email}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Phone Number</label>
+                            <input type="text"
+                                placeholder="Enter Phone Number"
+                                onChange={handleChange}
+                                name="phone"
+                                className="input_sm"
+                                value={formState.phone}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Present Address</label>
+                            <input type="text"
+                                name="presentAddress"
+                                placeholder="Enter Present Address"
+                                onChange={handleChange}
+                                className="input_sm"
+                                value={formState.presentAddress}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Permanent Address</label>
+                            <input type="text"
+                                placeholder="Enter permenet Address"
+                                onChange={handleChange} className="input_sm"
+                                name="permanentAddress"
+                                value={formState.permanentAddress}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Date of Joining</label>
+                            <input type="date"
+                                placeholder="Enter Joining Date"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="dateOfJoining"
+                                value={formState.dateOfJoining}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Date Of Birth</label>
-                    <input type="date"
-                        placeholder="Enter Date Of Birth"
-                        onChange={handleChange}
-                        name="dateOfBirth"
-                        value={formState.dateOfBirth}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Date Of Birth</label>
+                            <input type="date"
+                                placeholder="Enter Date Of Birth"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="dateOfBirth"
+                                value={formState.dateOfBirth}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Emergency Contact Name</label>
-                    <input type="text"
-                        placeholder="Enter Emergency Contact Name"
-                        onChange={handleChange}
-                        name="emergencyContactName"
-                        value={formState.emergencyContactName}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Emergency Contact Number 1</label>
-                    <input type="text"
-                        placeholder="Enter employee Emergency Contact 1"
-                        onChange={handleChange}
-                        name="emergencyContactNumber1"
-                        value={formState.emergencyContactNumber1}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Emergency Contact Name</label>
+                            <input type="text"
+                                placeholder="Enter Emergency Contact Name"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="emergencyContactName"
+                                value={formState.emergencyContactName}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Emergency Contact Number 1</label>
+                            <input type="text"
+                                placeholder="Enter employee Emergency Contact 1"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="emergencyContactNumber1"
+                                value={formState.emergencyContactNumber1}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Emergency Contact Number 2</label>
-                    <input type="text"
-                        placeholder="Enter employee Emergency Contact 2"
-                        onChange={handleChange}
-                        name="emergencyContactNumber2"
-                        value={formState.emergencyContactNumber2}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label>Emergency Contact Number 2</label>
+                            <input type="text"
+                                placeholder="Enter employee Emergency Contact 2"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="emergencyContactNumber2"
+                                value={formState.emergencyContactNumber2}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>National ID</label>
-                    <input type="text"
-                        placeholder="Enter National ID"
-                        onChange={handleChange}
-                        name="nationalID"
-                        value={formState.nationalID}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Bank Account</label>
-                    <input type="text"
-                        placeholder="Enter Bank Account"
-                        onChange={handleChange}
-                        name="bankAccount"
-                        value={formState.bankAccount}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label>National ID</label>
+                            <input type="text"
+                                placeholder="Enter National ID"
+                                onChange={handleChange}
+                                name="nationalID"
+                                className="input_sm"
+                                value={formState.nationalID}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Bank Account</label>
+                            <input type="text"
+                                placeholder="Enter Bank Account"
+                                onChange={handleChange}
+                                name="bankAccount"
+                                value={formState.bankAccount}
+                                className="input_sm"
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Bank Name</label>
-                    <input type="text"
-                        placeholder="Enter Bank Name"
-                        onChange={handleChange}
-                        name="bankName"
-                        value={formState.bankName}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Number of Children</label>
-                    <input type="number"
-                        placeholder="Enter Number Of Children"
-                        onChange={handleChange}
-                        name="numberOfChildren"
-                        value={formState.numberOfChildren}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Bank Name</label>
+                            <input type="text"
+                                placeholder="Enter Bank Name"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="bankName"
+                                value={formState.bankName}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Number of Children</label>
+                            <input type="number"
+                                placeholder="Enter Number Of Children"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="numberOfChildren"
+                                value={formState.numberOfChildren}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Spouse Name</label>
-                    <input type="text"
-                        placeholder="Enter Spouse Name"
-                        onChange={handleChange}
-                        name="spouseName"
-                        value={formState.spouseName}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Spouse Name</label>
+                            <input type="text"
+                                placeholder="Enter Spouse Name"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="spouseName"
+                                value={formState.spouseName}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Spouse DOB</label>
-                    <input type="date"
-                        placeholder="Enter Spouse DOB"
-                        onChange={handleChange}
-                        name="spouseDob"
-                        value={formState.spouseDob}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Spouse DOB</label>
+                            <input type="date"
+                                placeholder="Enter Spouse DOB"
+                                onChange={handleChange}
+                                name="spouseDob"
+                                className="input_sm"
+                                value={formState.spouseDob}
+                            />
+                        </div>
 
 
 
-                <div className="form-group">
-                    <label>Spouse Profession</label>
-                    <input type="date"
-                        placeholder="Enter Spouse Profession"
-                        onChange={handleChange}
-                        name="spouseProfession"
-                        value={formState.spouseProfession}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Marriage Date</label>
-                    <input type="date"
-                        placeholder="Enter Marriage Date"
-                        onChange={handleChange}
-                        name="marriageDate"
-                        value={formState.marriageDate}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Passport Issue  Date</label>
-                    <input type="date"
-                        placeholder="Enter Marriage Date"
-                        onChange={handleChange}
-                        name="passportIssueDate"
-                        value={formState.passportIssueDate}
-                    />
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Spouse Profession</label>
+                            <input type="date"
+                                placeholder="Enter Spouse Profession"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="spouseProfession"
+                                value={formState.spouseProfession}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Marriage Date</label>
+                            <input type="date"
+                                placeholder="Enter Marriage Date"
+                                onChange={handleChange}
+                                name="marriageDate"
+                                className="input_sm"
+                                value={formState.marriageDate}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Passport Issue  Date</label>
+                            <input type="date"
+                                placeholder="Enter Marriage Date"
+                                onChange={handleChange}
+                                className="input_sm"
+                                name="passportIssueDate"
+                                value={formState.passportIssueDate}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <label>Gender</label>
-                    <select
-                        name="gender"
-                        value={formState.gender}
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Gender</label>
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+                                <select
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    value={formState.gender}
+                                    onChange={handleChange}
+                                    required
+                                    name="gender"
+                                >
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
 
-                <div className="form-group">
-                    <label>Marital Status</label>
-                    <select
-                        name="maritalStatus"
-                        value={formState.maritalStatus}
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Marital Status</option>
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                        <option value="Divorced">Divorced</option>
-                        <option value="Widowed">Widowed</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Blood Group</label>
-                    <select
-                        value={formState.bloodGroup}
-                        onChange={handleChange}
-                        name="bloodGroup"
-                    >
-                        <option value="">Select Blood Group</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Religion</label>
-                    <select
-                        value={formState.religion}
-                        onChange={handleChange}
-                        name="religion"
-                    >
-                        <option value="">Select Religion</option>
-                        <option value="Muslim">Muslim</option>
-                        <option value="Hindu">Hindu</option>
-                        <option value="Christan">Christan</option>
-                        <option value="Shikh">Shikh</option>
-                    </select>
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Marital Status</label>
 
-                <div className="form-group">
-                    <label>Nationality</label>
-                    <input type="text"
-                        name="nationality"
-                        placeholder="Enter Nationality"
-                        onChange={handleChange}
-                        value={formState.nationality}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Department</label>
-                    <select
-                        value={formState.dptId}
-                        onChange={handleChange}
-                        required
-                        name="dptId"
-                    >
-                        <option value="">Select Department</option>
-                        {departments.map((dpt) => (
-                            <option key={dpt._id} value={dpt._id}>{dpt.name}</option>
-                        ))}
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+                                <select
+                                    name="maritalStatus"
+                                    value={formState.maritalStatus}
+                                    onChange={handleChange}
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                >
+                                    <option value="">Select Marital Status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Blood Group</label>
 
-                    </select>
-                </div>
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+                                <select
+                                    value={formState.bloodGroup}
+                                    onChange={handleChange}
+                                    name="bloodGroup"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                >
+                                    <option value="">Select Blood Group</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Religion</label>
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
 
-                <div className="form-group">
-                    <label>Designation</label>
-                    <select
-                        value={formState.desId}
-                        onChange={handleChange}
-                        required
-                        name="desId"
-                    >
-                        <option value="">Select Designation</option>
-                        {designations.map((des) => (
-                            <option key={des._id} value={des._id} >{des.name}</option>
-                        ))}
-                    </select>
-                </div>
+                                <select
+                                    value={formState.religion}
+                                    onChange={handleChange}
+                                    name="religion"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                >
+                                    <option value="">Select Religion</option>
+                                    <option value="Muslim">Muslim</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Christan">Christan</option>
+                                    <option value="Shikh">Shikh</option>
+                                </select>
+                            </div>
+                        </div>
 
-                <div className="form-group">
-                    <label>Salary Grade</label>
-                    <select
-                        value={formState.sgId}
-                        onChange={handleChange}
-                        required
-                        name="sgId"
-                    >
-                        <option value="">Select Salary Grades</option>
-                        {salaryGrades.map((des) => (
-                            <option key={des._id} value={des._id} >{des.grade_name}</option>
-                        ))}
-                    </select>
-                </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Nationality</label>
+                            <input type="text"
+                                name="nationality"
+                                placeholder="Enter Nationality"
+                                onChange={handleChange}
+                                className="input_sm"
+                                value={formState.nationality}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Department</label>
 
-                <div className="form-group">
-                    <label>Policy</label>
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+
+                                <select
+                                    value={formState.dptId}
+                                    onChange={handleChange}
+                                    required
+                                    name="dptId"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                >
+                                    <option value="">Select Department</option>
+                                    {departments.map((dpt) => (
+                                        <option key={dpt._id} value={dpt._id}>{dpt.name}</option>
+                                    ))}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Designation</label>
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+                                <select
+                                    value={formState.desId}
+                                    onChange={handleChange}
+                                    required
+                                    name="desId"
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+
+                                >
+                                    <option value="">Select Designation</option>
+                                    {designations.map((des) => (
+                                        <option key={des._id} value={des._id} >{des.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label className="text-sm pb-1">Salary Grade</label>
+                            {/* <div class="select relative flex items-center">
+                            <div class="absolute right-4">
+                                <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                            </div>
+                            <select
+                                value={formState.sgId}
+                                onChange={handleChange}
+                                required
+                                name="sgId"
+                                className="appearance-none outline-none h-full w-full bg-transparent px-4"
+                            >
+                                <option value="">Select Salary Grades</option>
+                                {salaryGrades.map((des) => (
+                                    <option key={des._id} value={des._id} >{des.grade_name}</option>
+                                ))}
+                            </select>
+                        </div> */}
+
+                            <div class="select relative flex items-center border py-2 rounded-lg">
+
+                                <div class="absolute right-4">
+                                    <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                </div>
+
+                                <select
+                                    class="appearance-none outline-none h-full w-full bg-transparent px-4"
+                                    value={formState.sgId}
+                                    onChange={handleChange}
+                                    required
+                                    name="sgId"
+                                >
+                                    <option value="">Select Salary Grades</option>
+                                    {salaryGrades.map((des) => (
+                                        <option key={des._id} value={des._id} >{des.grade_name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* <div className="form-group">
+                        <label>Policy</label>
+                        <div className="select relative flex items-center">
+                            {/* icons */}
+                        {/* <div className="absolute right-4">
+                        <i class="ri-arrow-down-s-line text-[20px] text-primary"></i>
+                    </div>
+
                     {policies.map(pol => (
                         <div key={pol._id}>
                             <label>
@@ -471,47 +567,58 @@ function EmployeeForm({ getEmployeeList }) {
                             </label>
                         </div>
                     ))}
-                </div>
+            </div> */}
+                        {/* </div >  */}
 
-                <h4>Document Add</h4>
-                <div className="form-group">
-                    <label>Document Code</label>
-                    <input type="text"
-                        placeholder="Enter Document Code"
-                        onChange={handleChange}
-                        name="documentCode"
-                        value={formState.documentCode}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Document Name</label>
-                    <input type="text"
-                        placeholder="Enter Document Name"
-                        onChange={handleChange}
-                        name="documentName"
-                        value={formState.documentName}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Document Link</label>
-                    <input type="text"
-                        placeholder="Enter Document Link"
-                        onChange={handleChange}
-                        name="documentLink"
-                        value={formState.documentLink}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Document Type</label>
-                    <input type="text"
-                        placeholder="Enter Document Code"
-                        onChange={handleChange}
-                        name="documentType"
-                        value={formState.documentType}
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form >
+
+                        {/* <h4>Document Add</h4>
+                    <div className="form-group">
+                        <label>Document Code</label>
+                        <input type="text"
+                            placeholder="Enter Document Code"
+                            onChange={handleChange}
+                            name="documentCode"
+                            className="input_sm"
+                            value={formState.documentCode}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Document Name</label>
+                        <input type="text"
+                            placeholder="Enter Document Name"
+                            onChange={handleChange}
+                            name="documentName"
+                            className="input_sm"
+                            value={formState.documentName}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Document Link</label>
+                        <input type="text"
+                            placeholder="Enter Document Link"
+                            onChange={handleChange}
+                            name="documentLink"
+                            className="input_sm"
+                            value={formState.documentLink}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Document Type</label>
+                        <input type="text"
+                            placeholder="Enter Document Code"
+                            onChange={handleChange}
+                            name="documentType"
+                            className="input_sm"
+                            value={formState.documentType}
+                        /> */}
+                        {/* </div> */}
+                    </div>
+                    <div className="text-center">
+
+                        <button type="submit" className="btn_sm mt-5 w-[200px]">Submit</button>
+                    </div>
+                </form >
+            </div >
         </>
     )
 }
