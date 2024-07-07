@@ -17,7 +17,7 @@ function Login() {
         e.preventDefault();
         try {
             const registerData = { name, password }
-            const res = await axios.post('http://localhost:1337/api/v1/auth/login', registerData)
+            await axios.post('http://localhost:1337/api/v1/auth/login', registerData)
             await getLoggedIn()
             navigate("/")
         } catch (error) {
@@ -40,7 +40,7 @@ function Login() {
                             />
                             {errorMessage.some(error => error.label === 'name' || error.label === 'userNotFound') && (
                                 <div className="text-red-500 text-sm mt-1">
-                                    {errorMessage.find(error => error.label === 'name' || error.label === 'userNotFound' || error.label === 'wrongCred').message}
+                                    {errorMessage.find(error => error.label === 'name' || error.label === 'userNotFound').message}
                                 </div>
                             )}
                         </div>
@@ -52,9 +52,9 @@ function Login() {
                                 value={password}
                                 className="input_sm"
                             />
-                            {errorMessage.some(error => error.label === 'password' || error.label === 'wrongCred') && (
+                            {errorMessage.find(error => error.label === 'wrongCred') && (
                                 <div className="text-red-500 text-sm mt-1">
-                                    {errorMessage.find(error => error.label === 'password' || error.label === 'wrongCred').message}
+                                    {errorMessage.find(error => error.label === 'wrongCred').message}
                                 </div>
                             )}
                         </div>
