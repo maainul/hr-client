@@ -145,6 +145,7 @@ function Router() {
             <Route path="/menu/:id" element={<MenuDetails />} />
             <Route path="/menu/update/:id" element={<MenuUpdate />} />
 
+            {/* Users */}
             <Route path="/users" element={<Users />} />
             <Route path="/user/create" element={<UserForm />} />
             <Route path="*" element={<div>Page Not Found</div>} />

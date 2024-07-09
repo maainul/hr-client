@@ -155,10 +155,9 @@ function EmployeeForm({ getEmployeeList }) {
         }
     }
 
-
     return (
         <>
-            <div className="ml-48 bg-gray-200 min-h-screen flex justify-center items-center">
+            <div className="min-h-screen flex justify-center items-center">
                 <form onSubmit={saveEmployee} className="bg-white shadow-lg p-6 rounded-lg ">
                     <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 mt-8 ">
                         <div>
