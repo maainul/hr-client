@@ -60,7 +60,7 @@ const Sidebar = () => {
           <ul className=" flex flex-col gap-y-2 mt-10 relative">
             {Array.isArray(menuList) &&
               menuList.map((ml) => (
-                <li>
+                <li key={ml._id}>
                   <div className="flex items-center gap-x-4 text-sm px-2 bg-white text-accent font-semibold h-12 hover:cursor-pointer hover:bg-white hover:shadow-lg  hover:rounded-lg">
                     <i class="ri-verified-badge-line"></i>
                     <span className="text-left">{ml.menuTitle}</span>
