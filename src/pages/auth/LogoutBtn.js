@@ -17,7 +17,7 @@ function LogoutBtn() {
     }
 
     return (
-        <button onClick={logout} className='button'>Logout</button>
+        <button onClick={logout} className='button'> <i class="ri-logout-circle-line text-red-400 text-4xl hover:text-red-500 hover:cursor-pointer "></i></button>
     )
 }
 
