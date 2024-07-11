@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserList from "./UserList";
 
-
 function Users() {
   const [users, setUsers] = useState([]);
 
@@ -23,7 +22,6 @@ function Users() {
 
   return (
     <>
-      <h1>Users</h1>
       <UserList users={users} />
     </>
   );

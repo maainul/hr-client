@@ -1,42 +1,14 @@
-import { Link } from "react-router-dom"
+import { Table } from "../../../components/Table/Table";
 
+const columns = [
+  { field: "name", title: "name" },
+  { field: "benefit", title: "Benefit" },
+  { field: "value", title: "Value" },
+  { field: "status", title: "status" },
+];
 
 function PolicyList({ policies }) {
-
-    function renderPolicy() {
-        return policies.map((dpt, i) => {
-            return (
-                <tr key={i}>
-                    <td>{dpt.name}</td>
-                    <td>{dpt.benefit}</td>
-                    <td>{dpt.value}</td>
-                    <td>{dpt.status}</td>
-                    <td><Link to={`/policy/${dpt._id}`}>View</Link></td>
-                    <td><Link to={`/policy/update/${dpt._id}`}>Edit</Link></td>
-                    <td><Link to={`/policy/update/status/${dpt._id}`}>Update Status</Link></td>
-                </tr>
-            )
-        })
-    }
-
-    return (
-        <>
-            <h2>Policy List</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Benefit</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {renderPolicy()}
-                </tbody>
-            </table>
-        </>
-    )
+  return <Table columns={columns} data={policies} />;
 }
 
-export default PolicyList
+export default PolicyList;
