@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function PolicyForm({ getPolicyList }) {
   const [name, setName] = useState();
@@ -15,8 +16,10 @@ function PolicyForm({ getPolicyList }) {
         "http://localhost:1337/api/v1/policy/create",
         customerData
       );
+      toast.success('Policy added successfully')
       getPolicyList();
     } catch (error) {
+      toast.error('Error in add Policy')
       console.log(error);
     }
   }

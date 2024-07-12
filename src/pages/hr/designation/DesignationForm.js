@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function DesignationForm({ getDesignationList }) {
   const [name, setName] = useState();
@@ -13,8 +14,10 @@ function DesignationForm({ getDesignationList }) {
         "http://localhost:1337/api/v1/designation/create",
         designationData
       );
+      toast.success('Designation Added Successfully')
       await getDesignationList();
     } catch (error) {
+      toast.error('Error in Designation Add')
       console.log(error);
     }
   }

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import EmployeeForm from "./EmployeeForm"
 import EmployeeList from "./EmployeeList"
 
+
+
 function Employees() {
 
     const [employees, setEmployees] = useState([])
@@ -21,14 +23,15 @@ function Employees() {
     }, [])
 
 
+    const notify = () => {
+        toast.success("First Toast")
+    }
 
     return (
         <>
 
             <EmployeeForm getEmployeeList={getEmployeeList} />
             <EmployeeList employees={employees} />
-
-
         </>
     )
 }

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import FormHeading from "../../../components/FormHeading"
+import { toast } from "react-toastify"
 
 
 function DepartmentForm({ getDepartmentList }) {
@@ -14,8 +15,11 @@ function DepartmentForm({ getDepartmentList }) {
         try {
             const customerData = { name, dptCode, status: 1 }
             await axios.post('http://localhost:1337/api/v1/department/create', customerData)
+            toast.success('Department Added Successfully')
             getDepartmentList()
+
         } catch (error) {
+            toast.success('Error in Add Department')
             console.log(error)
         }
     }

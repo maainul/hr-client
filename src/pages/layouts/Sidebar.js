@@ -6,7 +6,18 @@ import LogoutBtn from "./../auth/LogoutBtn";
 import axios from "axios";
 const Sidebar = () => {
   const { loggedIn, userPermissions } = useContext(AuthContext);
+
+
+  console.log("############## User Permissions ###################")
+  console.log(userPermissions)
+  console.log("##############User Permissions  ###################")
   const [menuList, setMenuList] = useState([]);
+
+
+  console.log("############## Menu List ###################")
+  console.log(menuList)
+  console.log("############## Menu List  ###################")
+
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   /*
         const hasPermission = (resource, action) => {
@@ -42,7 +53,7 @@ const Sidebar = () => {
   return (
     <>
       {loggedIn && (
-        <div className="min-h-screen w-[300px] bg-slate-50 rounded-lg shadow-xl border-r-[2px] border-accent-secondary overflow-y-scroll h-screen">
+        <div className="h-full bg-slate-50 rounded-lg shadow-xl border-r-[2px] border-accent-secondary overflow-y-scroll">
           {/* logo and Company Header */}
           <div className="flex-shrink-0">
             <div className="logo-and-heading text-accent flex items-center justify-between h-20 bg-cyan-50 rounded-lg px-4">

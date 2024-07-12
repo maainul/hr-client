@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function UnitForm({ getUnitList }) {
   const [name, setName] = useState("");
@@ -30,8 +31,10 @@ function UnitForm({ getUnitList }) {
     try {
       const unitData = { name, status: 1, division: code };
       await axios.post("http://localhost:1337/api/v1/unit/create", unitData);
+      toast.success('Unit Added Successfully')
       getUnitList();
     } catch (error) {
+      toast.error('Error in Add Unit')
       console.error("Error saving unit:", error);
     }
   }

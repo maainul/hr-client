@@ -7,6 +7,7 @@ function AuthContextProvider(props) {
     const [loggedIn, setLoggedIn] = useState(undefined);
     const [userID, setUserID] = useState(undefined);
     const [userPermissions, setUserPermissions] = useState([])
+    const [userMenus, setUserMenus] = useState([])
 
     async function getLoggedIn() {
         const loggedInRes = await axios.get('http://localhost:1337/api/v1/auth/loggedin');

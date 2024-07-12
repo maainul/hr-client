@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function MenuForm({ getMenuList }) {
   const [menuTitle, setMenuTitle] = useState();
@@ -14,8 +15,10 @@ function MenuForm({ getMenuList }) {
       const submenu = [{ icon, label, url }];
       const menuData = { menuTitle, submenu };
       await axios.post("http://localhost:1337/api/v1/menu/create", menuData);
+      toast.success('Menu Added Successfully')
       getMenuList();
     } catch (error) {
+      toast.error('Error in Menu Add')
       console.log(error);
     }
   }

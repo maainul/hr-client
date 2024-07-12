@@ -9,9 +9,9 @@ import TableCheckBoxTD from "./TableCheckBoxTD";
 import TD from "./TD";
 export const Table = ({ columns, data }) => {
   return (
-    <div class="relative overflow-x-auto sm:rounded-lg  bg-white shadow-lg mt-4 p-4">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 border border-l-2 border-r-2">
+    <div class="relative overflow-x-auto sm:rounded-lg  bg-white shadow-lg mt-4 p-4 w-full">
+      <table class="text-sm text-left rtl:text-right text-gray-500 ">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100  border border-l-2 border-r-2">
           <tr>
             <th scope="col" class="p-4"></th>
             {columns.map((col) => (
@@ -24,7 +24,7 @@ export const Table = ({ columns, data }) => {
           {data.map((item, index) => (
             <tr
               key={index}
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              class="bg-white border-b   hover:bg-gray-50 "
             >
               <TableCheckBoxTD />
               {columns.map((col) => (

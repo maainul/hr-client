@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function SalaryGradeForm({ getSalaryGradeList }) {
   const [name, setName] = useState();
@@ -20,8 +21,10 @@ function SalaryGradeForm({ getSalaryGradeList }) {
         "http://localhost:1337/api/v1/salary-grade/create",
         salData
       );
+      toast.success('Salary Grade Added Successfully')
       getSalaryGradeList();
     } catch (error) {
+      toast.error('Error in Add Salary Grade')
       console.log(error);
     }
   }

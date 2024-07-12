@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
+import { toast } from "react-toastify";
 
 function DivisionForm({ getDivisionList }) {
   const [name, setName] = useState();
@@ -11,8 +12,10 @@ function DivisionForm({ getDivisionList }) {
     try {
       const divData = { name, code, status: 1 };
       await axios.post("http://localhost:1337/api/v1/division/create", divData);
+      toast.success('Division Added Successfully')
       getDivisionList();
     } catch (error) {
+      toast.success('Error in Add Division')
       console.log(error);
     }
   }
