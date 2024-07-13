@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DepartmentForm from "./DepartmentForm";
 import DepartmentList from "./DepartmentList";
+import Modal from "../../../components/Modal";
+import AddIcon from "../../../components/Icon/AddIcon";
 
 function Departments() {
   const [departments, setDepartments] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   async function getDepartmentList() {
     try {
@@ -24,7 +27,10 @@ function Departments() {
 
   return (
     <>
-      <DepartmentForm getDepartmentList={getDepartmentList} />
+      <AddIcon onClick={() => setShowForm(true)} />
+      <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
+        <DepartmentForm getDepartmentList={getDepartmentList} />
+      </Modal>
       <DepartmentList departments={departments} />
     </>
   );
