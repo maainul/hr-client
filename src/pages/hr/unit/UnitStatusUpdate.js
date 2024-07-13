@@ -21,7 +21,7 @@ function UnitStatusUpdate() {
     useEffect(() => {
         async function getSingleUnit() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/unit/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}unit/${id}`)
                 setStatus(res.data.data.status)
                 setName(res.data.data.name)
 
@@ -36,7 +36,7 @@ function UnitStatusUpdate() {
         e.preventDefault()
         try {
             const customerData = { status, id }
-            await axios.put(`http://localhost:1337/api/v1/unit/status`, customerData)
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}unit/status`, customerData)
             navigate("/units")
         } catch (error) {
             console.log(error)

@@ -24,7 +24,9 @@ function DivisionUpdate() {
     useEffect(() => {
         async function getSingleDivision() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/division/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}division/${id}`
+                );
                 setName(res.data.data.name)
                 setCode(res.data.data.code)
                 setStatus(res.data.data.status)
@@ -40,7 +42,10 @@ function DivisionUpdate() {
         e.preventDefault()
         try {
             const customerData = { name, status, code }
-            await axios.put(`http://localhost:1337/api/v1/division/${id}`, customerData)
+            await axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}division/${id}`,
+              customerData
+            );
             navigate("/divisions")
         } catch (error) {
             console.log(error)

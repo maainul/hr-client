@@ -24,7 +24,9 @@ function DepartmentUpdate() {
     useEffect(() => {
         async function getSingleDepartment() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/department/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}department/${id}`
+                );
                 setName(res.data.data.name)
                 setDptCode(res.data.data.dptCode)
                 setStatus(res.data.data.status)

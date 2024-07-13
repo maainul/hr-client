@@ -9,7 +9,9 @@ function Divisions() {
 
     async function getDivisionList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/division/list")
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}division/list`
+            );
             setDivisions(res.data.data)
         } catch (error) {
             console.log(error)

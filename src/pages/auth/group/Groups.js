@@ -9,7 +9,7 @@ function Groups() {
 
     async function getGroupList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/auth/group/list")
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/group/list`)
             setGroups(res.data.plist)
         } catch (error) {
             console.log(error)

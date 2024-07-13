@@ -20,7 +20,7 @@ function Register() {
         try {
 
             const registerData = { name, password, passwordVerify }
-            await axios.post('http://localhost:1337/api/v1/auth/register', registerData)
+            await axios.post('${process.env.REACT_APP_BACKEND_URL}auth/register', registerData)
             await getLoggedIn()
             navigate("/")
         } catch (error) {

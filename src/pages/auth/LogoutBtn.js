@@ -11,7 +11,7 @@ function LogoutBtn() {
     const navigate = useNavigate()
 
     async function logout() {
-        await axios.get('http://localhost:1337/api/v1/auth/logout')
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/logout`)
         await getLoggedIn()
         navigate("/")
     }

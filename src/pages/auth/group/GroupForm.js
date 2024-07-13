@@ -15,7 +15,7 @@ function GroupForm({ getGroupList }) {
     async function fetchPermissions() {
       try {
         const res = await axios.get(
-          "http://localhost:1337/api/v1/auth/permission/list"
+          `${process.env.REACT_APP_BACKEND_URL}auth/permission/list`
         );
         setAvailablePermissions(res.data.plist);
       } catch (error) {
@@ -28,7 +28,7 @@ function GroupForm({ getGroupList }) {
   useEffect(() => {
     async function getMenuList() {
       try {
-        const res = await axios.get("http://localhost:1337/api/v1/menu/list");
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}menu/list`);
         setMenus(res.data.data);
       } catch (error) {
         console.log(error);
@@ -73,7 +73,7 @@ function GroupForm({ getGroupList }) {
     try {
       const groupData = { name, code, permissions, menus: selectedMenus };
       await axios.post(
-        "http://localhost:1337/api/v1/auth/group/create",
+        `${process.env.REACT_APP_BACKEND_URL}auth/group/create`,
         groupData
       );
       getGroupList();

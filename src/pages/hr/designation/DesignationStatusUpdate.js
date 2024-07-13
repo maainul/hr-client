@@ -20,7 +20,9 @@ function DesignationStatusUpdate() {
     useEffect(() => {
         async function getSingleDesignation() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/designation/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}designation/${id}`
+                );
                 setStatus(res.data.data.status)
 
             } catch (error) {
@@ -34,7 +36,10 @@ function DesignationStatusUpdate() {
         e.preventDefault()
         try {
             const desgData = { status }
-            await axios.put(`http://localhost:1337/api/v1/designation/${id}`, desgData)
+            await axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}designation/${id}`,
+              desgData
+            );
             navigate("/designations")
         } catch (error) {
             console.log(error)

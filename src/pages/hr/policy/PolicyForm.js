@@ -13,7 +13,7 @@ function PolicyForm({ getPolicyList }) {
     try {
       const customerData = { name, benefit, value, status: 1 };
       await axios.post(
-        "http://localhost:1337/api/v1/policy/create",
+        `${process.env.REACT_APP_BACKEND_URL}policy/create`,
         customerData
       );
       toast.success('Policy added successfully')

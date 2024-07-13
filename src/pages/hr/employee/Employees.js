@@ -11,7 +11,9 @@ function Employees() {
 
     async function getEmployeeList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/employee/list")
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}employee/list`
+            );
             setEmployees(res.data.data)
         } catch (error) {
             console.log(error)

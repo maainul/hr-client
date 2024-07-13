@@ -4,14 +4,11 @@ import UnitList from "./UnitList"
 import { useEffect, useState } from "react"
 
 function Units() {
-
-    console.log("###################")
-
     const [units, setUnits] = useState([])
 
     async function getUnitList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/unit/list")
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}unit/list`)
             setUnits(res.data.data)
         } catch (error) {
             console.log(error)

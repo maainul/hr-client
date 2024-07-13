@@ -9,7 +9,7 @@ function Menus() {
 
     async function getMenuList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/menu/list")
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}menu/list`)
             setMenus(res.data.data)
         } catch (error) {
             console.log(error)

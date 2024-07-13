@@ -11,7 +11,9 @@ function DepartmentDetails() {
     useEffect(() => {
         async function getSingleDepartment() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/department/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}department/${id}`
+                );
                 setDepartment(res.data.data)
             } catch (error) {
                 console.log(error)

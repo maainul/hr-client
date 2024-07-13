@@ -14,7 +14,10 @@ function DepartmentForm({ getDepartmentList }) {
         e.preventDefault()
         try {
             const customerData = { name, dptCode, status: 1 }
-            await axios.post('http://localhost:1337/api/v1/department/create', customerData)
+            await axios.post(
+              `${process.env.REACT_APP_BACKEND_URL}department/create`,
+              customerData
+            );
             toast.success('Department Added Successfully')
             getDepartmentList()
 

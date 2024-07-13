@@ -18,7 +18,7 @@ function SalaryGradeForm({ getSalaryGradeList }) {
         status: 1,
       };
       await axios.post(
-        "http://localhost:1337/api/v1/salary-grade/create",
+        `${process.env.REACT_APP_BACKEND_URL}salary-grade/create`,
         salData
       );
       toast.success('Salary Grade Added Successfully')

@@ -17,7 +17,7 @@ function Login() {
         e.preventDefault();
         try {
             const registerData = { name, password }
-            await axios.post('http://localhost:1337/api/v1/auth/login', registerData)
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/login`, registerData)
             await getLoggedIn()
             navigate("/")
         } catch (error) {

@@ -24,7 +24,7 @@ function MenuUpdate() {
     useEffect(() => {
         async function getSingleMenu() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/menu/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}menu/${id}`)
                 setName(res.data.data.name)
                 setDptCode(res.data.data.dptCode)
                 setStatus(res.data.data.status)
@@ -40,7 +40,7 @@ function MenuUpdate() {
         e.preventDefault()
         try {
             const customerData = { name, dptCode, status }
-            await axios.put(`http://localhost:1337/api/v1/menu/${id}`, customerData)
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}menu/${id}`, customerData)
             navigate("/menus")
         } catch (error) {
             console.log(error)

@@ -20,7 +20,7 @@ function EmployeeStatusUpdate() {
     useEffect(() => {
         async function getSingleEmployee() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/employee/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}employee/${id}`)
                 setStatus(res.data.data.status)
 
             } catch (error) {
@@ -34,7 +34,10 @@ function EmployeeStatusUpdate() {
         e.preventDefault()
         try {
             const customerData = { status }
-            await axios.put(`http://localhost:1337/api/v1/employee/${id}`, customerData)
+            await axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}employee/${id}`,
+              customerData
+            );
             navigate("/employees")
         } catch (error) {
             console.log(error)

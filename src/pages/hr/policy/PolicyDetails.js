@@ -11,7 +11,7 @@ function PolicyDetails() {
     useEffect(() => {
         async function getSinglePolicy() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/policy/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}policy/${id}`)
                 setPolicy(res.data.data)
             } catch (error) {
                 console.log(error)

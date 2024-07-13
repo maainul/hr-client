@@ -20,7 +20,9 @@ function DivisionStatusUpdate() {
     useEffect(() => {
         async function getSingleDivision() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/division/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}division/${id}`
+                );
                 setStatus(res.data.data.status)
 
             } catch (error) {
@@ -34,7 +36,10 @@ function DivisionStatusUpdate() {
         e.preventDefault()
         try {
             const divData = { status, id }
-            await axios.put(`http://localhost:1337/api/v1/division/status`, divData)
+            await axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}division/status`,
+              divData
+            );
             navigate("/divisions")
         } catch (error) {
             console.log(error)

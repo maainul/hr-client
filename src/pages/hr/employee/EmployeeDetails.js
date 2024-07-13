@@ -11,7 +11,9 @@ function EmployeeDetails() {
 
     const getSingleEmployee = useCallback(async () => {
         try {
-            const res = await axios.get(`http://localhost:1337/api/v1/employee/${id}`)
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}employee/${id}`
+            );
             setEmployee(res.data.data)
         } catch (error) {
             console.log(error)
@@ -20,7 +22,9 @@ function EmployeeDetails() {
 
     const getPolicyListById = useCallback(async () => {
         try {
-            const res = await axios.get(`http://localhost:1337/api/v1/employee-policy/by/${id}`);
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}employee-policy/by/${id}`
+            );
             console.log(res.data.data);
             setPolicyDetails(res.data.data);
         } catch (error) {

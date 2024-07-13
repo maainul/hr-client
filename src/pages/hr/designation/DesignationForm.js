@@ -11,7 +11,7 @@ function DesignationForm({ getDesignationList }) {
     try {
       const designationData = { name, status: 1 };
       await axios.post(
-        "http://localhost:1337/api/v1/designation/create",
+        `${process.env.REACT_APP_BACKEND_URL}designation/create`,
         designationData
       );
       toast.success('Designation Added Successfully')

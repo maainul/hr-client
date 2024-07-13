@@ -13,7 +13,7 @@ function UnitForm({ getUnitList }) {
   async function getDptList() {
     try {
       setLoading(true); // Set loading to true before starting fetch
-      const res = await axios.get("http://localhost:1337/api/v1/division/list");
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}division/list`);
       setDptList(res.data.data); // Assume the data is in res.data.data
       setLoading(false); // Set loading to false after fetch
     } catch (error) {
@@ -30,7 +30,7 @@ function UnitForm({ getUnitList }) {
     e.preventDefault();
     try {
       const unitData = { name, status: 1, division: code };
-      await axios.post("http://localhost:1337/api/v1/unit/create", unitData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}unit/create`, unitData);
       toast.success('Unit Added Successfully')
       getUnitList();
     } catch (error) {

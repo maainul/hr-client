@@ -15,7 +15,7 @@ function GroupUpdate() {
     useEffect(() => {
         async function fetchPermissions() {
             try {
-                const res = await axios.get('http://localhost:1337/api/v1/auth/permission/list')
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/permission/list`)
                 setAvailablePermissions(res.data.plist)
             } catch (error) {
                 console.log(error)
@@ -27,7 +27,7 @@ function GroupUpdate() {
     useEffect(() => {
         async function getSingleGroup() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/auth/group/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/group/${id}`)
 
                 setCode(res.data.getGrp.code)
                 setName(res.data.getGrp.name)
@@ -43,7 +43,7 @@ function GroupUpdate() {
         e.preventDefault()
         try {
             const groupData = { name, code, permissions } // Include any other necessary data
-            await axios.put(`http://localhost:1337/api/v1/auth/group/${id}`, groupData)
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}auth/group/${id}`, groupData)
             navigate("/groups")
         } catch (error) {
             console.log(error)

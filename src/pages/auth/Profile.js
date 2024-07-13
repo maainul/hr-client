@@ -10,7 +10,7 @@ function Profile() {
     useEffect(() => {
         async function getProfileInfo() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/auth/profile/${userID}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/profile/${userID}`)
                 console.log(res.data.data)
                 setProfileInfo(res.data.data)
             } catch (error) {

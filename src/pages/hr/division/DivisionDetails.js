@@ -11,7 +11,9 @@ function DivisionDetails() {
     useEffect(() => {
         async function getSingleDivision() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/division/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}division/${id}`
+                );
                 setDivision(res.data.data)
             } catch (error) {
                 console.log(error)

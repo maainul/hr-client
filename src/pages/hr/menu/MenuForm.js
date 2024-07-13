@@ -14,7 +14,7 @@ function MenuForm({ getMenuList }) {
     try {
       const submenu = [{ icon, label, url }];
       const menuData = { menuTitle, submenu };
-      await axios.post("http://localhost:1337/api/v1/menu/create", menuData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}menu/create`, menuData);
       toast.success('Menu Added Successfully')
       getMenuList();
     } catch (error) {

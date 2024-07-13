@@ -88,7 +88,9 @@ function EmployeeForm({ getEmployeeList }) {
     // Fetch Department list for dropdown list
     async function getDptList() {
         try {
-            const res = await axios.get('http://localhost:1337/api/v1/department/list')
+            const res = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}department/list`
+            );
             setDepartments(res.data.data)
         } catch (error) {
             console.log("Error Fetching department")
@@ -99,7 +101,9 @@ function EmployeeForm({ getEmployeeList }) {
     // Fetch Designation list for dropdown list
     async function getDesList() {
         try {
-            const res = await axios.get('http://localhost:1337/api/v1/designation/list')
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}designation/list`
+            );
             setDesignations(res.data.data)
         } catch (error) {
             console.log("Error Fetching Designation")
@@ -111,7 +115,9 @@ function EmployeeForm({ getEmployeeList }) {
     async function getSalaryGradeList() {
         try {
 
-            const res = await axios.get('http://localhost:1337/api/v1/salary-grade/list')
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}salary-grade/list`
+            );
             setSalaryGrades(res.data.data)
         } catch (error) {
             console.log("Error Fetching Designation")
@@ -123,7 +129,9 @@ function EmployeeForm({ getEmployeeList }) {
     async function getPolicyList() {
         try {
 
-            const res = await axios.get('http://localhost:1337/api/v1/policy/list')
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}policy/list`
+            );
             setPolicy(res.data.data)
         } catch (error) {
             console.log("Error Fetching Designation")
@@ -165,7 +173,10 @@ function EmployeeForm({ getEmployeeList }) {
                 //document_type: formState.documentType
             }
 
-            const saveEmployeeData = await axios.post('http://localhost:1337/api/v1/employee/create', empData)
+            const saveEmployeeData = await axios.post(
+              `${process.env.REACT_APP_BACKEND_URL}employee/create`,
+              empData
+            );
             const employeeID = saveEmployeeData.data.newEmployee._id
             console.log("saved empolyee ==>", saveEmployeeData.data)
             console.log("saved empolyee ==>", employeeID)

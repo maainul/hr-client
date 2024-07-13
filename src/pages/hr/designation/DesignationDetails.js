@@ -11,7 +11,9 @@ function DesignationDetails() {
     useEffect(() => {
         async function getSingleDesignation() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/designation/${id}`)
+                const res = await axios.get(
+                  `${process.env.REACT_APP_BACKEND_URL}designation/${id}`
+                );
                 setDesignation(res.data.data)
             } catch (error) {
                 console.log(error)

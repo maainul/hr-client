@@ -9,7 +9,7 @@ function SalaryGrades() {
 
     async function getSalaryGradeList() {
         try {
-            const res = await axios.get("http://localhost:1337/api/v1/salary-grade/list")
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}salary-grade/list`)
             setSalaryGrades(res.data.data)
         } catch (error) {
             console.log(error)

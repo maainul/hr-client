@@ -14,7 +14,7 @@ function UnitDetails() {
     useEffect(() => {
         async function getSingleUnit() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/unit/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}unit/${id}`)
                 setName(res.data.data.name)
                 setStatus(res.data.data.status)
                 setDivisionName(res.data.data.division.name)

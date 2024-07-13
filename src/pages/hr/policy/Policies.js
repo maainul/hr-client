@@ -8,7 +8,7 @@ function Policies() {
 
   async function getPolicyList() {
     try {
-      const res = await axios.get("http://localhost:1337/api/v1/policy/list");
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}policy/list`);
       setPolicy(res.data.data);
     } catch (error) {
       console.log(error);

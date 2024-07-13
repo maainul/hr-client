@@ -11,7 +11,10 @@ function DivisionForm({ getDivisionList }) {
     e.preventDefault();
     try {
       const divData = { name, code, status: 1 };
-      await axios.post("http://localhost:1337/api/v1/division/create", divData);
+      await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}division/create`,
+        divData
+      );
       toast.success('Division Added Successfully')
       getDivisionList();
     } catch (error) {

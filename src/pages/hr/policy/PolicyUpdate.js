@@ -25,7 +25,7 @@ function PolicyUpdate() {
     useEffect(() => {
         async function getSinglePolicy() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/policy/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}policy/${id}`)
                 setName(res.data.data.name)
                 setBenefit(res.data.data.benefit)
                 setValue(res.data.data.value)
@@ -42,7 +42,7 @@ function PolicyUpdate() {
         e.preventDefault()
         try {
             const customerData = { name, benefit, value, status }
-            await axios.put(`http://localhost:1337/api/v1/policy/${id}`, customerData)
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}policy/${id}`, customerData)
             navigate("/policy")
         } catch (error) {
             console.log(error)

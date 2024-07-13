@@ -16,7 +16,7 @@ function GroupDetails() {
     useEffect(() => {
         async function getSingleGroup() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/auth/group/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/group/${id}`)
                 setMenus(res.data.getGrp.menus)
                 setGroup(res.data.getGrp)
             } catch (error) {

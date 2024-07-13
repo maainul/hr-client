@@ -9,7 +9,9 @@ function Designations() {
 
     async function getDesignationList() {
         try {
-            const res = await axios.get('http://localhost:1337/api/v1/designation/list')
+            const res = await axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}designation/list`
+            );
             setDesignation(res.data.data)
         } catch (error) {
             console.log(error)

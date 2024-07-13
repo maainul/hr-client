@@ -25,7 +25,7 @@ function SalaryGradeUpdate() {
     useEffect(() => {
         async function getSingleSalaryGrade() {
             try {
-                const res = await axios.get(`http://localhost:1337/api/v1/salary-grade/${id}`)
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}salary-grade/${id}`)
                 setName(res.data.data.grade_name)
                 setMinSalary(res.data.data.min_salary)
                 setMaxSalary(res.data.data.max_salary)
@@ -42,7 +42,7 @@ function SalaryGradeUpdate() {
         e.preventDefault()
         try {
             const salData = { grade_name: name, min_salary: minSalary, max_salary: maxSalary, status: status }
-            await axios.put(`http://localhost:1337/api/v1/salary-grade/${id}`, salData)
+            await axios.put(`${process.env.REACT_APP_BACKEND_URL}salary-grade/${id}`, salData)
             navigate("/salary-grade")
         } catch (error) {
             console.log(error)
