@@ -7,16 +7,14 @@ import axios from "axios";
 const Sidebar = () => {
   const { loggedIn, userPermissions } = useContext(AuthContext);
 
-
-  console.log("############## User Permissions ###################")
-  console.log(userPermissions)
-  console.log("##############User Permissions  ###################")
+  console.log("############## User Permissions ###################");
+  console.log(userPermissions);
+  console.log("##############User Permissions  ###################");
   const [menuList, setMenuList] = useState([]);
 
-
-  console.log("############## Menu List ###################")
-  console.log(menuList)
-  console.log("############## Menu List  ###################")
+  console.log("############## Menu List ###################");
+  console.log(menuList);
+  console.log("############## Menu List  ###################");
 
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   /*
@@ -57,13 +55,17 @@ const Sidebar = () => {
           {/* logo and Company Header */}
           <div className="flex-shrink-0">
             <div className="logo-and-heading text-accent flex items-center justify-between h-20 bg-cyan-50 rounded-lg px-4">
-              <i className="bx bxl-xing text-3xl hover:cursor-pointer hover:text-accent-secondary"></i>
-              <div className="logo-name text-accent text-4xl">
-                {" "}
-                <p className="text-2xl hover:cursor-pointer hover:text-accent-secondary ">
-                  Beximco
-                </p>
-              </div>
+              <Link to={"/"}>
+                <i className="bx bxl-xing text-3xl hover:cursor-pointer hover:text-accent-secondary"></i>
+              </Link>
+              <Link to={"/"}>
+                <div className="logo-name text-accent text-4xl">
+                  {" "}
+                  <p className="text-2xl hover:cursor-pointer hover:text-accent-secondary ">
+                    Beximco
+                  </p>
+                </div>
+              </Link>
               <i class="ri-close-line text-2xl hover:cursor-pointer hover:text-red-400"></i>
             </div>
           </div>
