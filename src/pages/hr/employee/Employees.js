@@ -22,11 +22,6 @@ function Employees() {
         getEmployeeList()
     }, [])
 
-
-    const notify = () => {
-        toast.success("First Toast")
-    }
-
     return (
         <>
 
