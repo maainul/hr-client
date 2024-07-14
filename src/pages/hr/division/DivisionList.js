@@ -6,7 +6,7 @@ const columns = [
   { field: "status", title: "Status" },
 ];
 
-function DivisionList({ data, paginationConstant, setPage, setLimit,upToPageTotalData }) {
+function DivisionList({ data, paginationConstant, setPage, setLimit }) {
   return (
     <Table
       columns={columns}

@@ -4,34 +4,40 @@ import DepartmentForm from "./DepartmentForm";
 import DepartmentList from "./DepartmentList";
 import Modal from "../../../components/Modal";
 import AddIcon from "../../../components/Icon/AddIcon";
+import usePaginationData from "../../../hooks/usePaginationData";
+import Loading from "../../../components/Loading";
 
 function Departments() {
-  const [departments, setDepartments] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
-  async function getDepartmentList() {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}department/list`
-      );
-      console.log(res);
-      setDepartments(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const {
+    data,
+    paginationConstant,
+    loading,
+    error,
+    setPage,
+    setLimit,
+    refetch,
+  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}department/list`);
 
-  useEffect(() => {
-    getDepartmentList();
-  }, []);
+  if (loading) return <Loading />;
+  if (error) return <div>error....</div>;
 
   return (
     <>
+      {/* Add Form Icon */}
       <AddIcon onClick={() => setShowForm(true)} />
+      {/* Modal Form */}
       <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
-        <DepartmentForm getDepartmentList={getDepartmentList} />
+        <DepartmentForm getDepartmentList={refetch} />
       </Modal>
-      <DepartmentList departments={departments} />
+      {/* Data List */}
+      <DepartmentList
+        data={data}
+        paginationConstant={paginationConstant}
+        setPage={setPage}
+        setLimit={setLimit}
+      />
     </>
   );
 }

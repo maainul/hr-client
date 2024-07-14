@@ -5,8 +5,16 @@ const columns = [
   { field: "status", title: "Status" },
 ];
 
-function DesignationList({ designations }) {
-  return <Table columns={columns} data={designations} />
+function DesignationList({ data, paginationConstant, setPage, setLimit }) {
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      paginationConstant={paginationConstant}
+      setPage={setPage}
+      setLimit={setLimit}
+    />
+  );
 }
 
-export default DesignationList
+export default DesignationList;
