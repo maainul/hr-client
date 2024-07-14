@@ -1,36 +1,42 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import DivisionForm from "./DivisionForm";
 import DivisionList from "./DivisionList";
 import Modal from "../../../components/Modal";
 import AddIcon from "../../../components/Icon/AddIcon";
+import usePaginationData from "../../../hooks/usePaginationData";
+import Loading from "../../../components/Loading";
 
 function Divisions() {
-  const [divisions, setDivisions] = useState([]);
   const [open, setOpen] = useState(false);
+  const {
+    data,
+    paginationConstant,
+    loading,
+    error,
+    setPage,
+    setLimit,
+    refetch,
+  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}division/list`);
 
-  async function getDivisionList() {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}division/list`
-      );
-      setDivisions(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  if (loading) return <Loading />;
 
-  useEffect(() => {
-    getDivisionList();
-  }, []);
+  if (error) return <div>error...</div>;
 
   return (
     <>
+      {/* Add Form Icon */}
       <AddIcon onClick={() => setOpen(true)} />
+      {/* Modal Form */}
       <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <DivisionForm getDivisionList={getDivisionList} />
+        <DivisionForm getDivisionList={refetch} />
       </Modal>
-      <DivisionList divisions={divisions} />
+      {/* Data List and Pagination */}
+      <DivisionList
+        data={data}
+        paginationConstant={paginationConstant}
+        setPage={setPage}
+        setLimit={setLimit}
+      />
     </>
   );
 }

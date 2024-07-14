@@ -6,9 +6,16 @@ const columns = [
   { field: "status", title: "Status" },
 ];
 
-
-function DivisionList({ divisions }) {
-  return (<Table columns={columns} data={divisions} />);
+function DivisionList({ data, paginationConstant, setPage, setLimit,upToPageTotalData }) {
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      paginationConstant={paginationConstant}
+      setPage={setPage}
+      setLimit={setLimit}
+    />
+  );
 }
 
 export default DivisionList;
