@@ -1,35 +1,37 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import SalaryGradeForm from "./SalaryGradeForm";
 import SalaryGradeList from "./SalaryGradeList";
 import AddIcon from "../../../components/Icon/AddIcon";
 import Modal from "../../../components/Modal";
+import usePaginationData from "../../../hooks/usePaginationData";
+import Loading from "../../../components/Loading";
 
 function SalaryGrades() {
-  const [salaryGrades, setSalaryGrades] = useState([]);
   const [open, setOpen] = useState(false);
-  async function getSalaryGradeList() {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}salary-grade/list`
-      );
-      setSalaryGrades(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getSalaryGradeList();
-  }, []);
+  const {
+    data,
+    paginationConstant,
+    loading,
+    error,
+    setPage,
+    setLimit,
+    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}salary-grade/list`)
+  if (loading) return <Loading />
+  if (error) return <div>error....</div>
 
   return (
     <>
       <AddIcon onClick={() => setOpen(true)} />
       <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <SalaryGradeForm getSalaryGradeList={getSalaryGradeList} />
+        <SalaryGradeForm getSalaryGradeList={refetch} />
       </Modal>
-      <SalaryGradeList salaryGrades={salaryGrades} />
+      <SalaryGradeList
+        data={data}
+        paginationConstant={paginationConstant}
+        setPage={setPage}
+        setLimit={setLimit}
+      />
     </>
   );
 }

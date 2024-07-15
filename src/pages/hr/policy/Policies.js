@@ -1,35 +1,38 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PolicyForm from "./PolicyForm";
 import PolicyList from "./PolicyList";
 import Modal from "../../../components/Modal";
 import AddIcon from "../../../components/Icon/AddIcon";
+import Loading from "../../../components/Loading";
+import usePaginationData from "../../../hooks/usePaginationData";
 
 function Policies() {
-  const [policies, setPolicy] = useState([]);
   const [open, setOpen] = useState(false);
-  async function getPolicyList() {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}policy/list`
-      );
-      setPolicy(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const {
+    data,
+    paginationConstant,
+    loading,
+    error,
+    setPage,
+    setLimit,
+    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}policy/list`)
 
-  useEffect(() => {
-    getPolicyList();
-  }, []);
+
+  if (loading) return <Loading />
+  if (error) return <div>error....</div>
 
   return (
     <>
       <AddIcon onClick={() => setOpen(true)} />
       <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <PolicyForm getPolicyList={getPolicyList} />
+        <PolicyForm getPolicyList={refetch} />
       </Modal>
-      <PolicyList policies={policies} />
+      <PolicyList
+        data={data}
+        paginationConstant={paginationConstant}
+        setPage={setPage}
+        setLimit={setLimit}
+      />
     </>
   );
 }

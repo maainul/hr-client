@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import { Table } from "../../../components/Table/Table";
 
 const columns = [
@@ -6,8 +6,12 @@ const columns = [
   { field: "status", title: "Status" },
 ];
 
-function UnitList({ units }) {
-  return <Table columns={columns} data={units} />;
+function UnitList({ data, paginationConstant, setPage, setLimit }) {
+  return <Table columns={columns}
+    data={data}
+    paginationConstant={paginationConstant}
+    setPage={setPage}
+    setLimit={setLimit} />;
 }
 
 export default UnitList;

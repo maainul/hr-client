@@ -10,9 +10,16 @@ const columns = [
 ]
 
 
-function EmployeeList({ employees }) {
+function EmployeeList({ data, paginationConstant, setPage, setLimit }) {
     return (
-        <Table columns={columns} data={employees} />
+        <Table
+            columns={columns}
+            data={data}
+            paginationConstant={paginationConstant}
+            setPage={setPage}
+            setLimit={setLimit}
+
+        />
     )
 }
 

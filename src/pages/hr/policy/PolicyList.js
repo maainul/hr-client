@@ -7,8 +7,14 @@ const columns = [
   { field: "status", title: "status" },
 ];
 
-function PolicyList({ policies }) {
-  return <Table columns={columns} data={policies} />;
+function PolicyList({ data, paginationConstant, setPage, setLimit }) {
+  return <Table
+    columns={columns}
+    data={data}
+    paginationConstant={paginationConstant}
+    setPage={setPage}
+    setLimit={setLimit}
+  />;
 }
 
 export default PolicyList;

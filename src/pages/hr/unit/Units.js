@@ -1,36 +1,36 @@
-import axios from "axios";
 import UnitForm from "./UnitForm";
 import UnitList from "./UnitList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../../../components/Modal";
 import AddIcon from "../../../components/Icon/AddIcon";
+import usePaginationData from "../../../hooks/usePaginationData";
+import Loading from "../../../components/Loading";
 
 function Units() {
-  const [units, setUnits] = useState([]);
   const [open, setOpen] = useState(false);
+  const {
+    data,
+    paginationConstant,
+    loading,
+    error,
+    setPage,
+    setLimit,
+    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}unit/list`)
 
-  async function getUnitList() {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}unit/list`
-      );
-      setUnits(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getUnitList();
-  }, []);
+  if (loading) return <Loading />
+  if (error) return <div>error....</div>
 
   return (
     <>
       <AddIcon onClick={() => setOpen(true)} />
       <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <UnitForm getUnitList={getUnitList} />
+        <UnitForm getUnitList={refetch} />
       </Modal>
-      <UnitList units={units} />
+      <UnitList
+        data={data}
+        paginationConstant={paginationConstant}
+        setPage={setPage}
+        setLimit={setLimit} />
     </>
   );
 }

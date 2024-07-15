@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Th from "./Th";
 import EditIcon from "../../components/Icon/EditIcon";
 import DeleteIcon from "../../components/Icon/DeleteIcon";

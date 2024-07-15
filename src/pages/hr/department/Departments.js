@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DepartmentForm from "./DepartmentForm";
 import DepartmentList from "./DepartmentList";
 import Modal from "../../../components/Modal";
