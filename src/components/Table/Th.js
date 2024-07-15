@@ -1,12 +1,12 @@
 import React from "react";
 import TableSearch from "../TableSearch";
 
-const Th = ({ title }) => {
+const Th = ({ title, setSearch }) => {
   return (
-    <th scope="col" class="px-6 py-3 border">
+    <th scope="col" className="px-6 py-3 border">
       <div className="flex flex-col ">
         <div className="flex justify-start">
-          <span className=" mb-2">{title}</span>
+          <span className="mb-2">{title}</span>
           <a href="#">
             <svg
               className="w-3 h-3 ms-1.5 hover:text-gray-400"
@@ -19,7 +19,7 @@ const Th = ({ title }) => {
             </svg>
           </a>
         </div>
-        <TableSearch field={title} />
+        <TableSearch field={title} setSearch={setSearch} /> {/* Pass setSearch to TableSearch */}
       </div>
     </th>
   );

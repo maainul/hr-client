@@ -7,7 +7,7 @@ const columns = [
   { field: "status", title: "Status" },
 ];
 
-function DepartmentList({ data, paginationConstant, setPage, setLimit }) {
+function DepartmentList({ data, paginationConstant, setPage, setLimit, setSearch }) {
   return (
     <Table
       columns={columns}
@@ -15,6 +15,7 @@ function DepartmentList({ data, paginationConstant, setPage, setLimit }) {
       paginationConstant={paginationConstant}
       setPage={setPage}
       setLimit={setLimit}
+      setSearch={setSearch} // Pass setSearch to Table
     />
   );
 }

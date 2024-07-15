@@ -1,28 +1,37 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const usePaginationData = (endPoint, initialPage = 1, initialLimit = 5) => {
+const usePaginationData = (endPoint, search) => {
   const [data, setData] = useState([]);
   const [paginationConstant, setPaginationConstant] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(initialPage);
-  const [limit, setLimit] = useState(initialLimit);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${endPoint}?page=${page}&limit=${limit}`);
-        console.log(res.data);
+        const res = await axios.get(endPoint, {
+          params: {
+            page,
+            limit,
+            search
+          }
+        });
+        console.log("######### departments###########")
+        console.log(res)
+        console.log("######### departments ###########")
         setData(res.data.data);
         setPaginationConstant({
           currentPageData: res.data.currentPageData,
           totalData: res.data.totalData,
           totalNumberOfPages: res.data.totalNumberOfPages,
           upToPageTotalData: res.data.upToPageTotalData,
-          start:res.data.start
+          start: res.data.start
         });
+        setLoading(false);
       } catch (error) {
         setError(error);
       } finally {
@@ -30,7 +39,7 @@ const usePaginationData = (endPoint, initialPage = 1, initialLimit = 5) => {
       }
     };
     fetchData();
-  }, [endPoint, page, limit]);
+  }, [endPoint, page, limit, search]);
 
   return {
     data,

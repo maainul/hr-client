@@ -8,6 +8,7 @@ import Loading from "../../../components/Loading";
 
 function Departments() {
   const [showForm, setShowForm] = useState(false);
+  const [search, setSearch] = useState('');
 
   const {
     data,
@@ -17,7 +18,7 @@ function Departments() {
     setPage,
     setLimit,
     refetch,
-  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}department/list`);
+  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}department/list`, search);
 
   if (loading) return <Loading />;
   if (error) return <div>error....</div>;
@@ -36,6 +37,7 @@ function Departments() {
         paginationConstant={paginationConstant}
         setPage={setPage}
         setLimit={setLimit}
+        setSearch={setSearch} // Pass setSearch to DepartmentList
       />
     </>
   );
