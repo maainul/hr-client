@@ -16,7 +16,7 @@ function Divisions() {
     setPage,
     setLimit,
     refetch,
-  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}division/list`);
+  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}division/list`,1,10);
 
   if (loading) return <Loading />;
 

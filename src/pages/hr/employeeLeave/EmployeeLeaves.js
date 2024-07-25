@@ -8,14 +8,12 @@ import EmployeeLeaveForm from "./EmployeeLeaveForm";
 
 function EmployeeLeaves() {
     const [showForm, setShowForm] = useState(false);
-    const {
-        data,
-        paginationConstant,
-        loading,
-        error,
-        setPage,
-        setLimit,
-    } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee-leave/list`)
+    const { data, paginationConstant, loading, error, setPage, setLimit } =
+      usePaginationData(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave/list`,
+        1,
+        10
+      );
 
 
     if (loading) return <Loading />

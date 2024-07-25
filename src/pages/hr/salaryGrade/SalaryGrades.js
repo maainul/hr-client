@@ -16,7 +16,12 @@ function SalaryGrades() {
     error,
     setPage,
     setLimit,
-    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}salary-grade/list`)
+    refetch,
+  } = usePaginationData(
+    `${process.env.REACT_APP_BACKEND_URL}salary-grade/list`,
+    1,
+    10
+  );
   if (loading) return <Loading />
   if (error) return <div>error....</div>
 

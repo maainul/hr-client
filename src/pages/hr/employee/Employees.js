@@ -10,7 +10,7 @@ function Employees() {
         error,
         setPage,
         setLimit,
-    } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee/list`)
+    } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee/list`,1,10)
 
     if (loading) return <Loading />
     if (error) return <div>error....</div>

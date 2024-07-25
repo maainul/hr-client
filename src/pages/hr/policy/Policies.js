@@ -15,7 +15,12 @@ function Policies() {
     error,
     setPage,
     setLimit,
-    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}policy/list`)
+    refetch,
+  } = usePaginationData(
+    `${process.env.REACT_APP_BACKEND_URL}policy/list`,
+    1,
+    10
+  );
 
 
   if (loading) return <Loading />

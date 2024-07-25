@@ -16,10 +16,15 @@ function Designations() {
     error,
     setPage,
     setLimit,
-    refetch } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}designation/list`)
+    refetch,
+  } = usePaginationData(
+    `${process.env.REACT_APP_BACKEND_URL}designation/list`,
+    1,
+    10
+  );
 
-  if (loading) return <Loading />
-  if (error) return <div>error....</div>
+  if (loading) return <Loading />;
+  if (error) return <div>error....</div>;
 
   return (
     <>

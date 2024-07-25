@@ -12,7 +12,9 @@ function Menus() {
   async function getMenuList() {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}menu/list`
+        `${process.env.REACT_APP_BACKEND_URL}menu/list`,
+        1,
+        10
       );
       setMenus(res.data.data);
     } catch (error) {

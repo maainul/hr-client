@@ -12,13 +12,15 @@ function DivisionForm({ getDivisionList }) {
     try {
       const divData = { name, code, status: 1 };
       await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}division/create`,
+        `${process.env.REACT_APP_BACKEND_URL}division/create`,
         divData
       );
-      toast.success('Division Added Successfully')
+      toast.success("Division Added Successfully");
       getDivisionList();
+      setName("");
+      setCode("");
     } catch (error) {
-      toast.success('Error in Add Division')
+      toast.error("Error in Add Division");
       console.log(error);
     }
   }
