@@ -1,8 +1,8 @@
-import EmployeeList from "./EmployeeList"
-import usePaginationData from "../../../hooks/usePaginationData"
 import Loading from "../../../components/Loading"
+import usePaginationData from "../../../hooks/usePaginationData"
+import EmployeeLeaveBalanceList from "./EmployeeLeaveBalanceList"
 
-function Employees() {
+function EmployeeLeaveBalances() {
     const {
         data,
         paginationConstant,
@@ -10,14 +10,15 @@ function Employees() {
         error,
         setPage,
         setLimit,
-    } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee/list`)
+    } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/list`)
+
 
     if (loading) return <Loading />
     if (error) return <div>error....</div>
 
     return (
         <>
-            <EmployeeList
+            <EmployeeLeaveBalanceList
                 data={data}
                 paginationConstant={paginationConstant}
                 setPage={setPage}
@@ -27,4 +28,4 @@ function Employees() {
     )
 }
 
-export default Employees
+export default EmployeeLeaveBalances

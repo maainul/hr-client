@@ -2,12 +2,16 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import FormSectionHeading from "../../../components/FormSectionHeading"
+import FormValidationErrorMsg from './../../../components/FormValidationErrorMsg';
 
 
-function EmployeeForm({ getEmployeeList }) {
+function EmployeeForm() {
 
     const initialState = {
+        employeeID: '',
         fullName: '',
+        fatherName: '',
+        motherName: '',
         email: '',
         phone: '',
         presentAddress: '',
@@ -35,12 +39,22 @@ function EmployeeForm({ getEmployeeList }) {
         desId: '',
         sgId: '',
         checkboxPolicy: [],
-        documentCode: '',
-        documentName: '',
-        documentType: '',
-        documentLink: ''
+        document_name: '',
+        longdescription: '',
+        shortdescription: '',
+        document_link: '',
+        document_type: '',
+        issued_date: '',
+        expiry_date: '',
+        basic: 0,
+        houseRent: 0,
+        medicalAllowance: 0,
+        specialAllowance: 0,
+        totalLeave: 0,
+        leaveTypeId: ''
 
     }
+    const [formState, setFormState] = useState(initialState)
 
     // Expand 
     const [expandedEmployeeInfo, setExpandedEmployeeInfo] = useState(true)
@@ -48,6 +62,17 @@ function EmployeeForm({ getEmployeeList }) {
     const [address, setAddress] = useState(true)
     const [contacts, setContacts] = useState(true)
     const [beximcoRelatedData, setBexiocoRelatedData] = useState(true)
+    const [policyRelatedData, setPolicyRelatedData] = useState(true)
+    const [documentRelatedData, setDocumentRelatedData] = useState(true)
+    const [salaryRelatedData, setSalaryRelatedData] = useState(true)
+    const [leaveRelatedData, setLeaveRelatedData] = useState(true)
+
+    const [errorMsg, setErrorMsg] = useState([])
+    const [leaveTypes, setLeaveType] = useState([])
+    const [departments, setDepartments] = useState([])
+    const [designations, setDesignations] = useState([])
+    const [salaryGrades, setSalaryGrades] = useState([])
+    const [policies, setPolicy] = useState([])
 
 
     const toggleEmployeeInfo = () => {
@@ -70,18 +95,29 @@ function EmployeeForm({ getEmployeeList }) {
         setBexiocoRelatedData(!beximcoRelatedData)
     }
 
-    // State to store department
-    const [formState, setFormState] = useState(initialState)
-    const [departments, setDepartments] = useState([])
-    const [designations, setDesignations] = useState([])
-    const [salaryGrades, setSalaryGrades] = useState([])
-    const [policies, setPolicy] = useState([])
+    const togglePolicyRelatedData = () => {
+        setPolicyRelatedData(!policyRelatedData)
+    }
+
+    const toggledocumentRelatedData = () => {
+        setDocumentRelatedData(!documentRelatedData)
+    }
+
+    const toggleSalaryRelatedData = () => {
+        setSalaryRelatedData(!salaryRelatedData)
+    }
+
+    const toggleLeaveRelatedData = () => {
+        setLeaveRelatedData(!leaveRelatedData)
+    }
+
 
     useEffect(() => {
         getDptList()
         getDesList()
         getPolicyList()
         getSalaryGradeList()
+        getLeaveTypeList()
     }, [])
 
 
@@ -89,7 +125,7 @@ function EmployeeForm({ getEmployeeList }) {
     async function getDptList() {
         try {
             const res = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}department/list`
+                `${process.env.REACT_APP_BACKEND_URL}department/list`
             );
             setDepartments(res.data.data)
         } catch (error) {
@@ -97,12 +133,11 @@ function EmployeeForm({ getEmployeeList }) {
         }
     }
 
-
     // Fetch Designation list for dropdown list
     async function getDesList() {
         try {
             const res = await axios.get(
-              `${process.env.REACT_APP_BACKEND_URL}designation/list`
+                `${process.env.REACT_APP_BACKEND_URL}designation/list`
             );
             setDesignations(res.data.data)
         } catch (error) {
@@ -110,13 +145,12 @@ function EmployeeForm({ getEmployeeList }) {
         }
     }
 
-
     // Fetch Salary Grade list for dropdown list
     async function getSalaryGradeList() {
         try {
 
             const res = await axios.get(
-              `${process.env.REACT_APP_BACKEND_URL}salary-grade/list`
+                `${process.env.REACT_APP_BACKEND_URL}salary-grade/list`
             );
             setSalaryGrades(res.data.data)
         } catch (error) {
@@ -124,19 +158,32 @@ function EmployeeForm({ getEmployeeList }) {
         }
     }
 
-
     // Fetch Policy list for dropdown list
     async function getPolicyList() {
         try {
 
             const res = await axios.get(
-              `${process.env.REACT_APP_BACKEND_URL}policy/list`
+                `${process.env.REACT_APP_BACKEND_URL}policy/list`
             );
             setPolicy(res.data.data)
         } catch (error) {
             console.log("Error Fetching Designation")
         }
     }
+
+    // Fetch Employee list for dropdown list
+    async function getLeaveTypeList() {
+        try {
+            const res = await axios.get(
+                `${process.env.REACT_APP_BACKEND_URL}leave-type/list`
+            );
+            setLeaveType(res.data.data)
+        } catch (error) {
+            console.log("Error Fetching department")
+        }
+    }
+
+
 
     // Handle Checkbox Change
     const handlePolicyOnChange = (policyID) => {
@@ -150,7 +197,6 @@ function EmployeeForm({ getEmployeeList }) {
         })
     }
 
-
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormState(prevState => ({ ...prevState, [name]: value }))
@@ -161,35 +207,58 @@ function EmployeeForm({ getEmployeeList }) {
         try {
 
             const empData = {
-                full_name: formState.fullName, email: formState.email, phone: formState.phone, present_address: formState.presentAddress,
+                employeeID: formState.employeeID, full_name: formState.fullName, father_name: formState.fatherName, mother_name: formState.motherName, email: formState.email, phone: formState.phone, present_address: formState.presentAddress,
                 permanent_address: formState.permanentAddress, date_of_joining: formState.dateOfJoining,
                 date_of_birth: formState.dateOfBirth, emergency_contact_name: formState.emergencyContactName, emergency_contact_number_1: formState.emergencyContactNumber1,
                 emergency_contact_number_2: formState.emergencyContactNumber2, national_id: formState.nationalID, bank_account: formState.bankAccount, bank_name: formState.bankName,
                 gender: formState.gender, marital_status: formState.maritalStatus, nationality: formState.nationality, designation: formState.desId, department: formState.dptId, salary_grade: formState.sgId,
                 status: 1, passport_issue_date: formState.passportIssueDate, marriage_date: formState.marriageDate, spouse_profession: formState.spouseProfession,
                 spouse_dob: formState.spouseDob, spouse_name: formState.spouseName, number_of_children: formState.numberOfChildren, blood_group: formState.bloodGroup,
-                religion: formState.religion,
-                //document_code: formState.documentCode, document_name: formState.documentName, documentLink: formState.documentLink,
-                //document_type: formState.documentType
+                religion: formState.religion
             }
 
             const saveEmployeeData = await axios.post(
-              `${process.env.REACT_APP_BACKEND_URL}employee/create`,
-              empData
+                `${process.env.REACT_APP_BACKEND_URL}employee/create`,
+                empData
             );
             const employeeID = saveEmployeeData.data.newEmployee._id
-            console.log("saved empolyee ==>", saveEmployeeData.data)
-            console.log("saved empolyee ==>", employeeID)
-            // const policyData = formState.checkboxPolicy.map((policyID) => ({
-            //     employee: employeeID,
-            //     policy: policyID
-            // }))
+            const policyData = formState.checkboxPolicy.map((policyID) => ({
+                employee: employeeID,
+                policy: policyID
+            }))
 
             // Add Data Employee Policy Table
-            //await Promise.all(policyData.map((data) => axios.post('http://localhost:1337/api/v1/employee-policy/create', data)))
+            await Promise.all(policyData.map((data) => axios.post(`${process.env.REACT_APP_BACKEND_URL}employee-policy/create`, data)))
+            const documentData = {
+                document_name: formState.document_name,
+                longdescription: formState.longdescription,
+                shortdescription: formState.shortdescription,
+                document_link: formState.document_link,
+                document_type: formState.document_type,
+                issued_date: formState.issued_date,
+                expiry_date: formState.expiry_date,
+                status: 1
+            }
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}document/create`, documentData)
 
-            // Add Data in Document Table
-            //getEmployeeList();
+            // salary added for employee
+            const salaryData = {
+                employee: employeeID,
+                basic: formState.basic,
+                houseRent: formState.houseRent,
+                medicalAllowance: formState.medicalAllowance,
+                specialAllowance: formState.specialAllowance,
+            }
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}employee-salary/create`, salaryData)
+
+            // Leave data added
+            const leaveData = {
+                employee: employeeID,
+                leaveType: formState.leaveTypeId,
+                totalLeave: formState.totalLeave
+            }
+
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`, leaveData)
 
             // Reset form fields
             toast.success('Employee Saved Successfully')
@@ -197,7 +266,7 @@ function EmployeeForm({ getEmployeeList }) {
 
         } catch (error) {
             toast.error('Error While Add Employee')
-            console.log(error)
+            setErrorMsg(error.response.data.error)
         }
     }
 
@@ -212,19 +281,55 @@ function EmployeeForm({ getEmployeeList }) {
                             <FormSectionHeading title="Employee Info" />
                         </div>
                         {expandedEmployeeInfo && (
-                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 my-4 ">
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
+                                <div>
+                                    <label className="text-sm pb-1">Employee ID</label>
+                                    <input
+                                        type='text'
+                                        placeholder="Enter Employee ID"
+                                        className="input_sm"
+                                        name="employeeID"
+                                        onChange={handleChange}
+                                        value={formState.employeeID}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'employeeID'} />
+                                </div>
                                 <div>
                                     <label className="text-sm pb-1">Full Name</label>
                                     <input
                                         type='text'
-                                        placeholder="User ID"
+                                        placeholder="Enter Full Name"
                                         className="input_sm"
                                         name="fullName"
                                         onChange={handleChange}
                                         value={formState.fullName}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'full_name'} />
                                 </div>
-
+                                <div>
+                                    <label className="text-sm pb-1">Father Name</label>
+                                    <input
+                                        type='text'
+                                        placeholder="Enter Father Name"
+                                        className="input_sm"
+                                        name="fatherName"
+                                        onChange={handleChange}
+                                        value={formState.fatherName}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'father_name'} />
+                                </div>
+                                <div>
+                                    <label className="text-sm pb-1">Mother Name</label>
+                                    <input
+                                        type='text'
+                                        placeholder="Enter Mother Name"
+                                        className="input_sm"
+                                        name="motherName"
+                                        onChange={handleChange}
+                                        value={formState.motherName}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'mother_name'} />
+                                </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">National ID</label>
                                     <input type="text"
@@ -234,6 +339,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.nationalID}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'national_id'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Date Of Birth</label>
@@ -244,6 +350,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="dateOfBirth"
                                         value={formState.dateOfBirth}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'date_of_birth'} />
                                 </div>
 
                                 <div className="form-group">
@@ -286,6 +393,7 @@ function EmployeeForm({ getEmployeeList }) {
                                             <option value="Widowed">Widowed</option>
                                         </select>
                                     </div>
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'marital_status'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Religion</label>
@@ -307,6 +415,7 @@ function EmployeeForm({ getEmployeeList }) {
                                             <option value="Shikh">Shikh</option>
                                         </select>
                                     </div>
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'religion'} />
                                 </div>
 
                                 <div className="form-group">
@@ -318,6 +427,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.nationality}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'nationality'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Bank Account</label>
@@ -328,6 +438,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         value={formState.bankAccount}
                                         className="input_sm"
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'bank_account'} />
                                 </div>
 
                                 <div className="form-group">
@@ -339,6 +450,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="bankName"
                                         value={formState.bankName}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'bank_name'} />
                                 </div>
 
                                 <div className="form-group">
@@ -350,6 +462,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="passportIssueDate"
                                         value={formState.passportIssueDate}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'passport_issue_date'} />
                                 </div>
 
                                 <div className="form-group">
@@ -372,6 +485,7 @@ function EmployeeForm({ getEmployeeList }) {
                                             <option value="AB-">AB-</option>
                                         </select>
                                     </div>
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'blood_group'} />
                                 </div>
                             </div>
                         )}
@@ -382,9 +496,7 @@ function EmployeeForm({ getEmployeeList }) {
                             <FormSectionHeading title="Spouse and Children" />
                         </div>
                         {expandedSpouseChildren && (
-                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 my-4 ">
-
-
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Number of Children</label>
                                     <input type="number"
@@ -394,6 +506,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="numberOfChildren"
                                         value={formState.numberOfChildren}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'number_of_children'} />
                                 </div>
 
                                 <div className="form-group">
@@ -405,6 +518,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="spouseName"
                                         value={formState.spouseName}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'spouse_name'} />
                                 </div>
 
                                 <div className="form-group">
@@ -416,19 +530,21 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.spouseDob}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'spouse_dob'} />
                                 </div>
 
 
 
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Spouse Profession</label>
-                                    <input type="date"
+                                    <input type="text"
                                         placeholder="Enter Spouse Profession"
                                         onChange={handleChange}
                                         className="input_sm"
                                         name="spouseProfession"
                                         value={formState.spouseProfession}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'spouse_profession'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Marriage Date</label>
@@ -439,6 +555,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.marriageDate}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'marriage_date'} />
                                 </div>
                             </div>
                         )}
@@ -459,6 +576,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.presentAddress}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'present_address'} />
                                 </div>
                                 <div className="form-group w-full">
                                     <label className="text-sm pb-1">Permanent Address</label>
@@ -469,16 +587,18 @@ function EmployeeForm({ getEmployeeList }) {
                                         value={formState.permanentAddress}
                                         rows="4"
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'permanent_address'} />
                                 </div>
 
                             </div>
                         )}
+
                         {/*Address Form End  */}
                         <div className="cursor-pointer" onClick={toggleContact}>
                             <FormSectionHeading title="Contacts" />
                         </div>
                         {contacts && (
-                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 my-4 ">
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
                                 <div>
                                     <label className="text-sm pb-1">Email</label>
                                     <input type="text"
@@ -488,6 +608,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         onChange={handleChange}
                                         value={formState.email}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'email'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Phone Number</label>
@@ -498,6 +619,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         className="input_sm"
                                         value={formState.phone}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'phone'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Emergency Contact Name</label>
@@ -508,6 +630,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="emergencyContactName"
                                         value={formState.emergencyContactName}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'emergency_contact_name'} />
                                 </div>
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Emergency Contact Number 1</label>
@@ -518,6 +641,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="emergencyContactNumber1"
                                         value={formState.emergencyContactNumber1}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'emergency_contact_number_1'} />
                                 </div>
 
                                 <div className="form-group">
@@ -529,15 +653,18 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="emergencyContactNumber2"
                                         value={formState.emergencyContactNumber2}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'emergency_contact_number_2'} />
                                 </div>
                             </div>
                         )}
                         {/* Address Form End */}
+
+                        {/* Beximco Related Data Start */}
                         <div className="cursor-pointer" onClick={toggleBeximcoRelatedData}>
                             <FormSectionHeading title="Beximco Related Data" />
                         </div>
                         {beximcoRelatedData && (
-                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3 my-4 ">
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Date of Joining</label>
                                     <input type="date"
@@ -547,6 +674,7 @@ function EmployeeForm({ getEmployeeList }) {
                                         name="dateOfJoining"
                                         value={formState.dateOfJoining}
                                     />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'date_of_joining'} />
                                 </div>
 
                                 <div className="form-group">
@@ -597,30 +725,10 @@ function EmployeeForm({ getEmployeeList }) {
 
                                 <div className="form-group">
                                     <label className="text-sm pb-1">Salary Grade</label>
-                                    {/* <div class="select relative flex items-center">
-                            <div class="absolute right-4">
-                                <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
-                            </div>
-                            <select
-                                value={formState.sgId}
-                                onChange={handleChange}
-                                required
-                                name="sgId"
-                                className="appearance-none outline-none h-full w-full bg-transparent px-4"
-                            >
-                                <option value="">Select Salary Grades</option>
-                                {salaryGrades.map((des) => (
-                                    <option key={des._id} value={des._id} >{des.grade_name}</option>
-                                ))}
-                            </select>
-                        </div> */}
-
                                     <div class="select relative flex items-center border py-2 rounded-lg">
-
                                         <div class="absolute right-4">
                                             <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
                                         </div>
-
                                         <select
                                             class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
                                             value={formState.sgId}
@@ -635,79 +743,240 @@ function EmployeeForm({ getEmployeeList }) {
                                         </select>
                                     </div>
                                 </div>
-
-                                {/* <div className="form-group">
-                        <label>Policy</label>
-                        <div className="select relative flex items-center">
-                            {/* icons */}
-                                {/* <div className="absolute right-4">
-                        <i class="ri-arrow-down-s-line text-[20px] text-primary"></i>
-                    </div>
-
-                    {policies.map(pol => (
-                        <div key={pol._id}>
-                            <label>
-                                <input
-                                    name="sgId"
-                                    type="checkbox"
-                                    value={pol._id}
-                                    checked={formState.checkboxPolicy.includes(pol._id)}
-                                    onChange={() => handlePolicyOnChange(pol._id)}
-                                />
-                                {pol.name} - {pol.benefit} - {pol.value}
-                            </label>
-                        </div>
-                    ))}
-            </div> */}
-                                {/* </div >  */}
-
-
-                                {/* <h4>Document Add</h4>
-                    <div className="form-group">
-                        <label>Document Code</label>
-                        <input type="text"
-                            placeholder="Enter Document Code"
-                            onChange={handleChange}
-                            name="documentCode"
-                            className="input_sm"
-                            value={formState.documentCode}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Document Name</label>
-                        <input type="text"
-                            placeholder="Enter Document Name"
-                            onChange={handleChange}
-                            name="documentName"
-                            className="input_sm"
-                            value={formState.documentName}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Document Link</label>
-                        <input type="text"
-                            placeholder="Enter Document Link"
-                            onChange={handleChange}
-                            name="documentLink"
-                            className="input_sm"
-                            value={formState.documentLink}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Document Type</label>
-                        <input type="text"
-                            placeholder="Enter Document Code"
-                            onChange={handleChange}
-                            name="documentType"
-                            className="input_sm"
-                            value={formState.documentType}
-                        /> */}
-                                {/* </div> */}
                             </div>
                         )}
-                    </div>
-                    <div className="text-center">
 
+                        {/* Beximco Policy For Employee Form Start */}
+                        <div className="cursor-pointer" onClick={togglePolicyRelatedData}>
+                            <FormSectionHeading title="Beximco Policy For Employee" />
+                        </div>
+                        {policyRelatedData &&
+                            (
+                                <div className="form-group">
+                                    {policies.map(pol => (
+                                        <div key={pol._id}>
+                                            <label>
+                                                <input
+                                                    name="sgId"
+                                                    type="checkbox"
+                                                    value={pol._id}
+                                                    checked={formState.checkboxPolicy.includes(pol._id)}
+                                                    onChange={() => handlePolicyOnChange(pol._id)}
+                                                />
+                                                {pol.name} - {pol.benefit} - {pol.value}
+                                            </label>
+                                        </div>
+                                    ))}
+                                </div>
+                            )
+                        }
+                        {/* Beximco Policy For Employee Form End */}
+                        {/* Document Info Start */}
+                        <div className="cursor-pointer mt-4" onClick={toggledocumentRelatedData}>
+                            <FormSectionHeading title="Document Info" />
+                        </div>
+                        {documentRelatedData && (
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
+
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document Name</label>
+                                    <input type="text"
+                                        placeholder="Enter Document Name"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="document_name"
+                                        value={formState.document_name}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'document_name'} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document Long Description</label>
+                                    <input type="text"
+                                        placeholder="Enter Document Long Description"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="longdescription"
+                                        value={formState.longdescription}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'longdescription'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document short description</label>
+                                    <input type="text"
+                                        placeholder="Enter Document Short Description"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="shortdescription"
+                                        value={formState.shortdescription}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'shortdescription'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document short description</label>
+                                    <input type="text"
+                                        placeholder="Enter Document Link"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="document_link"
+                                        value={formState.document_link}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'document_link'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document Issue Date</label>
+                                    <input type="date"
+                                        placeholder="Enter Document Issue Date"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="issued_date"
+                                        value={formState.issued_date}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'issued_date'} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document Expiry Date</label>
+                                    <input type="date"
+                                        placeholder="Enter Document Expiry Date"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="expiry_date"
+                                        value={formState.expiry_date}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'expiry_date'} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Document Type</label>
+
+                                    <div class="select relative flex items-center border py-2 rounded-lg">
+                                        <div class="absolute right-4">
+                                            <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                        </div>
+                                        <select
+                                            value={formState.document_type}
+                                            onChange={handleChange}
+                                            required
+                                            name="document_type"
+                                            class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
+                                        >
+                                            <option value="">Select Document Type</option>
+                                            <option value="Resume">Resume</option>
+                                            <option value="Certificate">Certificate</option>
+                                            <option value="CoverLetter">CoverLetter</option>
+                                            <option value="NID">NID</option>
+                                            <option value="TIN">TIN</option>
+                                            <option value="BirthCertificate">BirthCertificate</option>
+                                            <option value="CompanyPDF">CompanyPDF</option>
+                                            <option value="SOP">SOP</option>
+                                            <option value="CompanyAnnouncement">CompanyAnnouncement</option>
+                                        </select>
+                                    </div>
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'document_type'} />
+                                </div>
+                            </div>
+                        )
+                        }
+                        {/* Document Info Form End */}
+
+                        <div className="cursor-pointer mt-4" onClick={toggleSalaryRelatedData}>
+                            <FormSectionHeading title="Salary Info" />
+                        </div>
+
+                        {salaryRelatedData && (
+                            <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Basic</label>
+                                    <input type="number"
+                                        placeholder="Enter Basic"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="basic"
+                                        value={formState.basic}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'basic'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">House Rent</label>
+                                    <input type="number"
+                                        placeholder="Enter House Rent"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="houseRent"
+                                        value={formState.houseRent}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'houseRent'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Medical Allowance</label>
+                                    <input type="number"
+                                        placeholder="Enter medical Allowance"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="medicalAllowance"
+                                        value={formState.medicalAllowance}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'medicalAllowance'} />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-sm pb-1">Special Allowance</label>
+                                    <input type="number"
+                                        placeholder="Enter special Allowance"
+                                        onChange={handleChange}
+                                        className="input_sm"
+                                        name="specialAllowance"
+                                        value={formState.specialAllowance}
+                                    />
+                                    <FormValidationErrorMsg errorMsg={errorMsg} label={'specialAllowance'} />
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="cursor-pointer mt-4" onClick={toggleLeaveRelatedData}>
+                            <FormSectionHeading title="Employee Leave" />
+                        </div>
+                        {leaveRelatedData && (
+                            <div>
+                                <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
+                                    <div className="form-group">
+                                        <label className="text-sm pb-1">Salary Grade</label>
+                                        <div class="select relative flex items-center border py-2 rounded-lg">
+                                            <div class="absolute right-4">
+                                                <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                                            </div>
+                                            <select
+                                                class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
+                                                value={formState.leaveTypeId}
+                                                onChange={handleChange}
+                                                required
+                                                name="leaveTypeId"
+                                            >
+                                                <option value="">Select Leave Type</option>
+                                                {leaveTypes.map((des) => (
+                                                    <option key={des._id} value={des._id} >{des.name}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="text-sm pb-1">Total Leave</label>
+                                        <input type="number"
+                                            placeholder="Enter special Allowance"
+                                            onChange={handleChange}
+                                            className="input_sm"
+                                            name="totalLeave"
+                                            value={formState.totalLeave}
+                                        />
+                                        <FormValidationErrorMsg errorMsg={errorMsg} label={'totalLeave'} />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+
+                    </div>
+                    < div className="text-center">
                         <button type="submit" className="btn_sm mt-5 w-[200px]">Submit</button>
                     </div>
                 </form >

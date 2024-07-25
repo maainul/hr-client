@@ -44,6 +44,14 @@ import MenuDetails from "./pages/hr/menu/MenuDetails";
 import MenuUpdate from "./pages/hr/menu/MenuUpdate";
 import Users from "./pages/auth/users/Users";
 import UserForm from "./pages/auth/users/UserForm";
+import EmployeeForm from "./pages/hr/employee/EmployeeForm";
+import LeaveTypes from "./pages/hr/leaveType/LeaveTypes";
+import LeaveTypeDetails from './pages/hr/leaveType/LeaveTypeDetails';
+import LeaveTypeUpdate from './pages/hr/leaveType/LeaveTypeUpdate';
+import EmployeeLeaves from './pages/hr/employeeLeave/EmployeeLeaves';
+import EmployeeLeaveDetails from './pages/hr/employeeLeave/EmployeeLeaveDetails';
+import EmployeeLeaveUpdate from "./pages/hr/employeeLeave/EmployeeLeaveUpdate";
+import EmployeeLeaveBalances from './pages/hr/employeeLeaveBalance/EmployeeLeaveBalances';
 
 function Router() {
   const { loggedIn } = useContext(AuthContext);
@@ -133,6 +141,7 @@ function Router() {
 
             {/* Employee */}
             <Route path="/employee" element={<Employees />} />
+            <Route path="/employee/add" element={<EmployeeForm />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
             <Route path="/employee/update/:id" element={<EmployeeUpdate />} />
             <Route
@@ -149,6 +158,19 @@ function Router() {
             <Route path="/users" element={<Users />} />
             <Route path="/user/create" element={<UserForm />} />
             <Route path="*" element={<div>Page Not Found</div>} />
+
+            {/* Leave Type */}
+            <Route path="/leave-type" element={<LeaveTypes />} />
+            <Route path="/leave-type/:id" element={<LeaveTypeDetails />} />
+            <Route path="/leave-type/update/:id" element={<LeaveTypeUpdate />} />
+
+            {/* Leave Type */}
+            <Route path="/employee-leave" element={<EmployeeLeaves />} />
+            <Route path="/leave-type/:id" element={<EmployeeLeaveDetails />} />
+            <Route path="/leave-type/update/:id" element={<EmployeeLeaveUpdate />} />
+
+            <Route path="/employee-leave-balance" element={<EmployeeLeaveBalances />} />
+
           </Route>
         )}
       </Routes>

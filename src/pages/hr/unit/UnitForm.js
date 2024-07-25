@@ -57,7 +57,7 @@ function UnitForm({ getUnitList }) {
                 className="input_sm"
               />
 
-              {/* <select
+              <select
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 required // Add required attribute for validation
@@ -68,7 +68,7 @@ function UnitForm({ getUnitList }) {
                     {dpt.name}
                   </option>
                 ))}
-              </select> */}
+              </select>
 
               <div class="select relative flex items-center border py-2 rounded-lg">
                 <div class="absolute right-4">

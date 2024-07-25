@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const usePaginationData = (endPoint, search) => {
+const usePaginationData = (endPoint) => {
   const [data, setData] = useState([]);
   const [paginationConstant, setPaginationConstant] = useState({});
   const [loading, setLoading] = useState(true);
@@ -16,13 +16,9 @@ const usePaginationData = (endPoint, search) => {
         const res = await axios.get(endPoint, {
           params: {
             page,
-            limit,
-            search
+            limit
           }
         });
-        console.log("######### departments###########")
-        console.log(res)
-        console.log("######### departments ###########")
         setData(res.data.data);
         setPaginationConstant({
           currentPageData: res.data.currentPageData,
@@ -39,7 +35,7 @@ const usePaginationData = (endPoint, search) => {
       }
     };
     fetchData();
-  }, [endPoint, page, limit, search]);
+  }, [endPoint, page, limit]);
 
   return {
     data,

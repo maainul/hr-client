@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .input_sm {
-    @apply w-full border border-gray-300 rounded-lg px-4 font-light h-10 text-sm focus:outline-accent
+    @apply w-full border border-gray-300 rounded-lg px-3 font-light h-8 text-sm focus:outline-accent
 }
 
 .btn_sm {

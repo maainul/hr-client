@@ -38,21 +38,24 @@ export const Table = ({
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
-              <tr key={index} className="bg-white border-b hover:bg-gray-50">
-                <TableCheckBoxTD />
-                {columns.map((col) => (
-                  <TD key={col.field} data={item[col.field]} />
-                ))}
-                <td className="px-6 py-1 border">
-                  <div className="flex gap-x-2">
-                    <EditIcon />
-                    <DeleteIcon />
-                    <ViewIcon />
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {data.length >= 1 && (
+              data.map((item, index) => (
+                <tr key={index} className="bg-white border-b hover:bg-gray-50">
+                  <TableCheckBoxTD />
+                  {columns.map((col) => (
+                    <TD key={col.field} data={item[col.field]} />
+                  ))}
+                  <td className="px-6 py-1 border">
+                    <div className="flex gap-x-2">
+                      <EditIcon />
+                      <DeleteIcon />
+                      <ViewIcon />
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )
+            }
           </tbody>
         </table>
       </div>
