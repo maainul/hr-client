@@ -1,9 +1,4 @@
 import { Link } from "react-router-dom";
-import TableCheckBox from "../../../components/TableCheckBox";
-import TableSearch from "../../../components/TableSearch";
-import EditIcon from "../../../components/EditIcon";
-import DeleteIcon from "../../../components/DeleteIcon";
-import ViewIcon from "../../../components/ViewIcon";
 
 function UserList({ users }) {
   function renderGroup(groups) {

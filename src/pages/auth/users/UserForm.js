@@ -15,7 +15,7 @@ function UserForm() {
     try {
       const registerData = { name, password, passwordVerify, group: groups };
       await axios.post(
-        "http://localhost:1337/api/v1/auth/register",
+        `${process.env.REACT_APP_BACKEND_URL}auth/register`,
         registerData
       );
     } catch (error) {
@@ -39,7 +39,7 @@ function UserForm() {
     async function getGroupList() {
       try {
         const res = await axios.get(
-          "http://localhost:1337/api/v1/auth/group/list"
+          `${process.env.REACT_APP_BACKEND_URL}auth/group/list`
         );
         setGroupList(res.data.plist);
       } catch (error) {
