@@ -1,6 +1,7 @@
 import { Table } from "../../../components/Table/Table"
 
 const columns = [
+    { field: "employeeID", title: "Employee ID" },
     { field: "employee", title: "Employee Name" },
     { field: "leaveType", title: "Leave Type" },
     { field: "totalLeave", title: "Total Leave" },

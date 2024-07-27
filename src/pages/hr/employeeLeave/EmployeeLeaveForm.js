@@ -3,6 +3,7 @@ import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import FormHeading from "../../../components/FormHeading";
 import FormValidationErrorMsg from "../../../components/FormValidationErrorMsg";
+import usePaginationData from './../../../hooks/usePaginationData';
 
 
 function EmployeeLeaveForm() {
@@ -23,39 +24,8 @@ function EmployeeLeaveForm() {
     // Expand 
     const [errorMsg, setErrorMsg] = useState([])
     const [formState, setFormState] = useState(initialState)
-    const [employees, setEmployee] = useState([])
-    const [leaveTypes, setLeaveType] = useState([])
-
-    useEffect(() => {
-        getEmpList()
-        getLeaveTypeList()
-    }, [])
-
-    // Fetch Employee list for dropdown list
-    async function getEmpList() {
-        try {
-            const res = await axios.get(
-                `${process.env.REACT_APP_BACKEND_URL}employee/list`
-            );
-            setEmployee(res.data.data)
-        } catch (error) {
-            console.log("Error Fetching department")
-        }
-    }
-
-
-    // Fetch leave list for dropdown list
-    async function getLeaveTypeList() {
-        try {
-            const res = await axios.get(
-                `${process.env.REACT_APP_BACKEND_URL}leave-type/list`
-            );
-            setLeaveType(res.data.data)
-        } catch (error) {
-            console.log("Error Fetching department")
-        }
-    }
-
+    const { data: employees } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}employee/list`)
+    const { data: leaveTypes } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}leave-type/list`)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -80,12 +50,12 @@ function EmployeeLeaveForm() {
                 `${process.env.REACT_APP_BACKEND_URL}employee-leave/create`,
                 empLeave
             );
-            console.log(res)
+            console.log("res=====>", res)
             toast.success('Employee leave added Saved Successfully')
             setFormState(initialState)
 
         } catch (error) {
-            console.log(error.response.data.error)
+            console.log("error.response.data.error=====>", error.response.data.error)
             toast.error('Error While Add Employee Leave')
             setErrorMsg(error.response.data.error)
         }
@@ -107,7 +77,7 @@ function EmployeeLeaveForm() {
                                     className="input_sm"
                                     name="start_date"
                                 />
-                                <FormValidationErrorMsg errorMsg={errorMsg} label={'employeeID'} />
+                                <FormValidationErrorMsg errorMsg={errorMsg} label={'start_date'} />
                             </div>
                             <div className="pt-2">
                                 <label className="text-sm">End Date</label>
@@ -118,6 +88,7 @@ function EmployeeLeaveForm() {
                                     className="input_sm"
                                     name="end_date"
                                 />
+                                <FormValidationErrorMsg errorMsg={errorMsg} label={'end_date'} />
                             </div>
                         </div>
                         <div className="pt-2">
@@ -129,6 +100,7 @@ function EmployeeLeaveForm() {
                                 className="input_sm"
                                 name="numberOfDays"
                             />
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'numberOfDays'} />
                         </div>
                         <div className="pt-2">
                             <label className="text-sm pb-1">Employee</label>
@@ -150,6 +122,7 @@ function EmployeeLeaveForm() {
                                     ))}
                                 </select>
                             </div>
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'employee'} />
                         </div>
                         <div className="pt-2">
                             <label className="text-sm pb-1">Leave Type</label>
@@ -169,8 +142,8 @@ function EmployeeLeaveForm() {
                                         <option key={emp._id} value={emp._id}>{emp.name}-{emp.leave_limit}</option>
                                     ))}
                                 </select>
-
                             </div>
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'leaveType'} />
                         </div>
 
                         <div className="pt-2">
@@ -182,6 +155,7 @@ function EmployeeLeaveForm() {
                                 className="input_sm"
                                 name="supervisorEmail"
                             />
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'supervisorEmail'} />
                         </div>
 
                         <div className="pt-2">
@@ -193,6 +167,7 @@ function EmployeeLeaveForm() {
                                 className="input_sm"
                                 name="dptHeadEmail"
                             />
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'dptHeadEmail'} />
                         </div>
 
                         <div className="pt-2">
@@ -204,6 +179,7 @@ function EmployeeLeaveForm() {
                                 className="input_sm"
                                 name="purpose"
                             />
+                            <FormValidationErrorMsg errorMsg={errorMsg} label={'purpose'} />
                         </div>
                     </div>
                     <div className="justify-center flex">

@@ -50,8 +50,15 @@ function EmployeeForm() {
     medicalAllowance: 0,
     specialAllowance: 0,
     totalLeave: 0,
-    leaveTypeId: "",
+    totalLeave1: 0,
+    totalLeave2: 0,
+    totalLeave3: 0,
+    leaveTypeId1: "",
+    leaveTypeId2: "",
+    leaveID3: "",
   };
+
+
   const [formState, setFormState] = useState(initialState);
 
   // Expand
@@ -226,16 +233,48 @@ function EmployeeForm() {
         salaryData
       );
 
-      // Leave data added
-      const leaveData = {
+      // Leave data 1 added
+      const leaveData1 = {
         employee: employeeID,
-        leaveType: formState.leaveTypeId,
-        totalLeave: formState.totalLeave,
+        leaveType: formState.leaveTypeId1,
+        totalLeave: formState.totalLeave1,
+        totalLeaveTaken: 0,
+        leaveBalance: formState.totalLeave1,
+        leavePending: 0,
       };
 
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
-        leaveData
+        leaveData1
+      );
+      // Leave data 2 added
+      const leaveData2 = {
+        employee: employeeID,
+        leaveType: formState.leaveTypeId2,
+        totalLeave: formState.totalLeave2,
+        totalLeaveTaken: 0,
+        leaveBalance: formState.totalLeave2,
+        leavePending: 0,
+      };
+
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
+        leaveData2
+      );
+
+      // Leave data 3 added
+      const leaveData3 = {
+        employee: employeeID,
+        leaveType: formState.leaveID3,
+        totalLeave: formState.totalLeave3,
+        totalLeaveTaken: 0,
+        leaveBalance: formState.totalLeave3,
+        leavePending: 0,
+      };
+
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
+        leaveData3
       );
 
       // Reset form fields
@@ -1067,45 +1106,123 @@ function EmployeeForm() {
               <FormSectionHeading title="Employee Leave" />
             </div>
             {leaveRelatedData && (
-              <div>
-                <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-4 my-4 ">
-                  <div className="form-group">
-                    <label className="text-sm pb-1">Salary Grade</label>
-                    <div class="select relative flex items-center border py-2 rounded-lg">
-                      <div class="absolute right-4">
-                        <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
-                      </div>
-                      <select
-                        class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
-                        value={formState.leaveTypeId}
-                        onChange={handleChange}
-                        required
-                        name="leaveTypeId"
-                      >
-                        <option value="">Select Leave Type</option>
-                        {leaveTypes.map((des) => (
-                          <option key={des._id} value={des._id}>
-                            {des.name}
-                          </option>
-                        ))}
-                      </select>
+
+              <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-6 my-4 ">
+                <div className="form-group">
+                  <label className="text-sm pb-1">Leave Data</label>
+                  <div class="select relative flex items-center border py-2 rounded-lg">
+                    <div class="absolute right-4">
+                      <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
                     </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="text-sm pb-1">Total Leave</label>
-                    <input
-                      type="number"
-                      placeholder="Enter special Allowance"
+                    <select
+                      class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
+                      value={formState.leaveTypeId1}
                       onChange={handleChange}
-                      className="input_sm"
-                      name="totalLeave"
-                      value={formState.totalLeave}
-                    />
-                    <FormValidationErrorMsg
-                      errorMsg={errorMsg}
-                      label={"totalLeave"}
-                    />
+                      required
+                      name="leaveTypeId1"
+                    >
+                      <option value="">Select Leave Type</option>
+                      {leaveTypes.map((lti) => (
+                        <option key={lti._id} value={lti._id}>
+                          {lti.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
+                </div>
+                <div className="form-group">
+                  <label className="text-sm pb-1">Total Leave</label>
+                  <input
+                    type="number"
+                    placeholder="Enter special Allowance"
+                    onChange={handleChange}
+                    className="input_sm"
+                    name="totalLeave1"
+                    value={formState.totalLeave1}
+                  />
+                  <FormValidationErrorMsg
+                    errorMsg={errorMsg}
+                    label={"totalLeave"}
+                  />
+                </div>
+                {/* type : 2 */}
+
+                <div className="form-group">
+                  <label className="text-sm pb-1">Salary Grade</label>
+                  <div class="select relative flex items-center border py-2 rounded-lg">
+                    <div class="absolute right-4">
+                      <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                    </div>
+                    <select
+                      class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
+                      value={formState.leaveTypeId2}
+                      onChange={handleChange}
+                      required
+                      name="leaveTypeId2"
+                    >
+                      <option value="">Select Leave Type</option>
+                      {leaveTypes.map((lti) => (
+                        <option key={lti._id} value={lti._id}>
+                          {lti.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="text-sm pb-1">Total Leave</label>
+                  <input
+                    type="number"
+                    placeholder="Enter special Allowance"
+                    onChange={handleChange}
+                    className="input_sm"
+                    name="totalLeave2"
+                    value={formState.totalLeave2}
+                  />
+                  <FormValidationErrorMsg
+                    errorMsg={errorMsg}
+                    label={"totalLeave"}
+                  />
+                </div>
+
+                {/* type : 3 */}
+
+                <div className="form-group">
+                  <label className="text-sm pb-1">Salary Grade</label>
+                  <div class="select relative flex items-center border py-2 rounded-lg">
+                    <div class="absolute right-4">
+                      <i class="ri-arrow-down-s-line text-[26px] text-primary"></i>
+                    </div>
+                    <select
+                      class="appearance-none outline-none h-full w-full bg-transparent px-4 text-sm"
+                      value={formState.leaveID3}
+                      onChange={handleChange}
+                      required
+                      name="leaveID3"
+                    >
+                      <option value="">Select Leave Type</option>
+                      {leaveTypes.map((lti) => (
+                        <option key={lti._id} value={lti._id}>
+                          {lti.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="text-sm pb-1">Total Leave</label>
+                  <input
+                    type="number"
+                    placeholder="Enter Total Leave"
+                    onChange={handleChange}
+                    className="input_sm"
+                    name="totalLeave3"
+                    value={formState.totalLeave3}
+                  />
+                  <FormValidationErrorMsg
+                    errorMsg={errorMsg}
+                    label={"totalLeave"}
+                  />
                 </div>
               </div>
             )}
@@ -1115,8 +1232,8 @@ function EmployeeForm() {
               Submit
             </button>
           </div>
-        </form>
-      </div>
+        </form >
+      </div >
     </>
   );
 }
