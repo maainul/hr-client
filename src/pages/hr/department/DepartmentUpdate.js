@@ -42,7 +42,10 @@ function DepartmentUpdate() {
         e.preventDefault()
         try {
             const customerData = { name, dptCode, status }
-            await axios.put(`http://localhost:1337/api/v1/department/${id}`, customerData)
+            await axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}department/${id}`,
+              customerData
+            );
             navigate("/departments")
         } catch (error) {
             console.log(error)
