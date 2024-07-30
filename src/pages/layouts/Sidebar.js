@@ -7,14 +7,14 @@ import axios from "axios";
 const Sidebar = () => {
   const { loggedIn, userPermissions } = useContext(AuthContext);
 
-  console.log("############## User Permissions ###################");
-  console.log(userPermissions);
-  console.log("##############User Permissions  ###################");
+  // console.log("############## User Permissions ###################");
+  // console.log(userPermissions);
+  // console.log("##############User Permissions  ###################");
   const [menuList, setMenuList] = useState([]);
 
-  console.log("############## Menu List ###################");
-  console.log(menuList);
-  console.log("############## Menu List  ###################");
+  // console.log("############## Menu List ###################");
+  // console.log(menuList);
+  // console.log("############## Menu List  ###################");
 
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   /*

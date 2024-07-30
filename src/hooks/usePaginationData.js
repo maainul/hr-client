@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const usePaginationData = (endPoint,p,l) => {
+const usePaginationData = (endPoint, p, l) => {
   const [data, setData] = useState([]);
   const [paginationConstant, setPaginationConstant] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(p);
   const [limit, setLimit] = useState(l);
-
+  console.log(endPoint);
   useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchData = async () => {

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FormSectionHeading from "../../../components/FormSectionHeading";
-import FormValidationErrorMsg from "./../../../components/FormValidationErrorMsg";
+import FormValidationErrorMsg from "../../../components/FormValidationErrorMsg";
 import usePaginationData from "../../../hooks/usePaginationData";
 
 function EmployeeForm() {
@@ -57,6 +57,7 @@ function EmployeeForm() {
     leaveTypeId2: "",
     leaveID3: "",
   };
+
 
   const [formState, setFormState] = useState(initialState);
 
@@ -126,6 +127,8 @@ function EmployeeForm() {
     `${process.env.REACT_APP_BACKEND_URL}leave-type/list`
   );
 
+
+
   // Handle Checkbox Change
   const handlePolicyOnChange = (policyID) => {
     setFormState((prevState) => {
@@ -146,113 +149,142 @@ function EmployeeForm() {
     setFormState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-async function saveEmployee(e) {
-  e.preventDefault();
-  try {
-    const empData = {
-      employeeID: formState.employeeID,
-      full_name: formState.fullName,
-      father_name: formState.fatherName,
-      mother_name: formState.motherName,
-      email: formState.email,
-      phone: formState.phone,
-      present_address: formState.presentAddress,
-      permanent_address: formState.permanentAddress,
-      date_of_joining: formState.dateOfJoining,
-      date_of_birth: formState.dateOfBirth,
-      emergency_contact_name: formState.emergencyContactName,
-      emergency_contact_number_1: formState.emergencyContactNumber1,
-      emergency_contact_number_2: formState.emergencyContactNumber2,
-      national_id: formState.nationalID,
-      bank_account: formState.bankAccount,
-      bank_name: formState.bankName,
-      gender: formState.gender,
-      marital_status: formState.maritalStatus,
-      nationality: formState.nationality,
-      designation: formState.desId,
-      department: formState.dptId,
-      salary_grade: formState.sgId,
-      status: 1,
-      passport_issue_date: formState.passportIssueDate,
-      marriage_date: formState.marriageDate,
-      spouse_profession: formState.spouseProfession,
-      spouse_dob: formState.spouseDob,
-      spouse_name: formState.spouseName,
-      number_of_children: formState.numberOfChildren,
-      blood_group: formState.bloodGroup,
-      religion: formState.religion,
-    };
+  async function saveEmployee(e) {
+    e.preventDefault();
+    try {
+      const empData = {
+        employeeID: formState.employeeID,
+        full_name: formState.fullName,
+        father_name: formState.fatherName,
+        mother_name: formState.motherName,
+        email: formState.email,
+        phone: formState.phone,
+        present_address: formState.presentAddress,
+        permanent_address: formState.permanentAddress,
+        date_of_joining: formState.dateOfJoining,
+        date_of_birth: formState.dateOfBirth,
+        emergency_contact_name: formState.emergencyContactName,
+        emergency_contact_number_1: formState.emergencyContactNumber1,
+        emergency_contact_number_2: formState.emergencyContactNumber2,
+        national_id: formState.nationalID,
+        bank_account: formState.bankAccount,
+        bank_name: formState.bankName,
+        gender: formState.gender,
+        marital_status: formState.maritalStatus,
+        nationality: formState.nationality,
+        designation: formState.desId,
+        department: formState.dptId,
+        salary_grade: formState.sgId,
+        status: 1,
+        passport_issue_date: formState.passportIssueDate,
+        marriage_date: formState.marriageDate,
+        spouse_profession: formState.spouseProfession,
+        spouse_dob: formState.spouseDob,
+        spouse_name: formState.spouseName,
+        number_of_children: formState.numberOfChildren,
+        blood_group: formState.bloodGroup,
+        religion: formState.religion,
+      };
 
-    const documentData = {
-      document_name: formState.document_name,
-      longdescription: formState.longdescription,
-      shortdescription: formState.shortdescription,
-      document_link: formState.document_link,
-      document_type: formState.document_type,
-      issued_date: formState.issued_date,
-      expiry_date: formState.expiry_date,
-      status: 1,
-    };
+      const saveEmployeeData = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee/create`,
+        empData
+      );
+      const employeeID = saveEmployeeData.data.newEmployee._id;
+      const policyData = formState.checkboxPolicy.map((policyID) => ({
+        employee: employeeID,
+        policy: policyID,
+      }));
 
-    const salaryData = {
-      basic: formState.basic,
-      houseRent: formState.houseRent,
-      medicalAllowance: formState.medicalAllowance,
-      specialAllowance: formState.specialAllowance,
-    };
+      // Add Data Employee Policy Table
+      await Promise.all(
+        policyData.map((data) =>
+          axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}employee-policy/create`,
+            data
+          )
+        )
+      );
+      const documentData = {
+        document_name: formState.document_name,
+        longdescription: formState.longdescription,
+        shortdescription: formState.shortdescription,
+        document_link: formState.document_link,
+        document_type: formState.document_type,
+        issued_date: formState.issued_date,
+        expiry_date: formState.expiry_date,
+        status: 1,
+      };
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}document/create`,
+        documentData
+      );
 
-    const leaveData = [
-      {
+      // salary added for employee
+      const salaryData = {
+        employee: employeeID,
+        basic: formState.basic,
+        houseRent: formState.houseRent,
+        medicalAllowance: formState.medicalAllowance,
+        specialAllowance: formState.specialAllowance,
+      };
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-salary/create`,
+        salaryData
+      );
+
+      // Leave data 1 added
+      const leaveData1 = {
+        employee: employeeID,
         leaveType: formState.leaveTypeId1,
         totalLeave: formState.totalLeave1,
         totalLeaveTaken: 0,
         leaveBalance: formState.totalLeave1,
         leavePending: 0,
-      },
-      {
+      };
+
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
+        leaveData1
+      );
+      // Leave data 2 added
+      const leaveData2 = {
+        employee: employeeID,
         leaveType: formState.leaveTypeId2,
         totalLeave: formState.totalLeave2,
         totalLeaveTaken: 0,
         leaveBalance: formState.totalLeave2,
         leavePending: 0,
-      },
-      {
+      };
+
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
+        leaveData2
+      );
+
+      // Leave data 3 added
+      const leaveData3 = {
+        employee: employeeID,
         leaveType: formState.leaveID3,
         totalLeave: formState.totalLeave3,
         totalLeaveTaken: 0,
         leaveBalance: formState.totalLeave3,
         leavePending: 0,
-      },
-    ];
+      };
 
-    const policyData = formState.checkboxPolicy.map((policyID) => ({
-      policy: policyID,
-    }));
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}employee-leave-balance/create`,
+        leaveData3
+      );
 
-    const payload = {
-      employeeData: empData,
-      documentData,
-      salaryData,
-      leaveData,
-      policyData,
-    };
-
-    // Step 1: Create Employee
-    const saveEmployeeData = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}employee/create`,
-      payload
-    );
-
-    const employeeID = saveEmployeeData.data.newEmployee._id;
-
-    // Reset form fields
-    toast.success("Employee Saved Successfully");
-    setFormState(initialState);
-  } catch (error) {
-    toast.error("Error While Add Employee");
-    setErrorMsg(error.response.data.error);
+      // Reset form fields
+      toast.success("Employee Saved Successfully");
+      setFormState(initialState);
+    } catch (error) {
+      toast.error("Error While Add Employee");
+      setErrorMsg(error.response.data.error);
+    }
   }
-}
 
   return (
     <>
@@ -1074,6 +1106,7 @@ async function saveEmployee(e) {
               <FormSectionHeading title="Employee Leave" />
             </div>
             {leaveRelatedData && (
+
               <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-4 lg:grid-cols-6 my-4 ">
                 <div className="form-group">
                   <label className="text-sm pb-1">Leave Data</label>
@@ -1199,8 +1232,8 @@ async function saveEmployee(e) {
               Submit
             </button>
           </div>
-        </form>
-      </div>
+        </form >
+      </div >
     </>
   );
 }
