@@ -5,34 +5,32 @@ import AuthContext from "../../context/AuthContext";
 import LogoutBtn from "./../auth/LogoutBtn";
 import axios from "axios";
 const Sidebar = () => {
-  const { loggedIn, userPermissions } = useContext(AuthContext);
-
-  // console.log("############## User Permissions ###################");
-  // console.log(userPermissions);
-  // console.log("##############User Permissions  ###################");
+  const { loggedIn } = useContext(AuthContext);
   const [menuList, setMenuList] = useState([]);
+  const [userGroup, setUserGroup] = useState("TestNew");
+  async function getUserRole() {
+    try {
+      const res = await axios.get(
+        "http://localhost:1337/api/v1/auth/profile/66ab2e74ae956645b0035ec9"
+      );
 
-  // console.log("############## Menu List ###################");
-  // console.log(menuList);
-  // console.log("############## Menu List  ###################");
+      // Log the entire response to inspect the structure
+      console.log("Response Data:", res.data.data.group[0].code);
+      // setUserGroup(res.data.data.group[0].name);
+      // setUserGroup(res.data.data.group[0].name);
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+    }
+  }
 
-  const [activeMenuItem, setActiveMenuItem] = useState(null);
-  /*
-        const hasPermission = (resource, action) => {
-            let hasPermission = false
-            for (let permission of userPermissions) {
-                if (permission.resource === resource && permission.action === action) {
-                    hasPermission = true
-                    break
-                }
-            }
-            return hasPermission
-        }
-    */
   async function getMenuList() {
     try {
-      const res = await axios.get("http://localhost:1337/api/v1/menu/list");
-      setMenuList(res.data.data);
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}auth/group/list`,
+        { params: { userGroup } }
+      );
+      console.log(res.data.plist[0].subMenus);
+      setMenuList(res.data.plist[0].subMenus);
     } catch (error) {
       console.log(error);
     }
@@ -40,13 +38,8 @@ const Sidebar = () => {
 
   useEffect(() => {
     getMenuList();
+    getUserRole();
   }, []);
-
-  const handleMenuItemClick = (menuItemId) => {
-    setActiveMenuItem((prevMenuItem) =>
-      prevMenuItem === menuItemId ? null : menuItemId
-    );
-  };
 
   return (
     <>
@@ -73,10 +66,10 @@ const Sidebar = () => {
           <ul className=" flex flex-col gap-y-2 mt-10 relative">
             {Array.isArray(menuList) &&
               menuList.map((ml) => (
-                <li key={ml._id}>
+                <li key={ml.menuID}>
                   <div className="flex items-center gap-x-4 text-sm px-4 bg-white text-accent font-semibold h-12 hover:cursor-pointer hover:bg-white hover:shadow-lg  hover:rounded-lg">
                     <i class="ri-verified-badge-line"></i>
-                    <span className="text-left">{ml.menuTitle}</span>
+                    <span className="text-left">{ml.label}</span>
                     <i class="ri-arrow-down-s-line absolute right-2 "></i>
                   </div>
 
@@ -100,60 +93,11 @@ const Sidebar = () => {
               ))}
           </ul>
 
-          {/* <div className="bottom-5 absolute left-14">
-            <LogoutBtn />
-          </div> */}
-
           <div className="flex-shrink-0 p-4 ml-14">
             <LogoutBtn />
           </div>
         </div>
       )}
-
-      {/* 
-       {loggedIn && (
-        <div className="min-h-screen w-[240px] bg-gray-900">
-          <Link to="/" className="logo-box">
-            {" "}
-            <i className="bx bxl-xing"></i>{" "}
-            <div className="logo-name">BexImCo</div>{" "}
-            <span className="hidebar">X</span>
-          </Link>
-          <ul className="sidebar-list">
-            {Array.isArray(menuList) &&
-              menuList.map((ml) => (
-                <li
-                  key={ml._id}
-                  className={`dropdown ${
-                    activeMenuItem === ml._id ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick(ml._id)}
-                >
-                  <div className="title">
-                    <div className="link">
-                      <i className="bx bx-plug" />
-                      <span className="name">{ml.menuTitle}</span>
-                    </div>
-                    <i className="bx bxs-chevron-down" />
-                  </div>
-                  <div className="submenu">
-                    {Array.isArray(ml.submenu) &&
-                      ml.submenu.map((subItem) => (
-                        <Link
-                          to={subItem.url}
-                          className="link"
-                          key={subItem._id}
-                        >
-                          {subItem.label}
-                        </Link>
-                      ))}
-                  </div>
-                </li>
-              ))}
-            <LogoutBtn />
-          </ul>
-        </div>
-      )} */}
     </>
   );
 };
