@@ -15,8 +15,8 @@ const Sidebar = () => {
       );
 
       // Log the entire response to inspect the structure
-      console.log("Response Data:", res.data.data.group[0].code);
-      // setUserGroup(res.data.data.group[0].name);
+      // console.log("Response Data:", res.data.data.group[0].code);
+      setUserGroup(res.data.data.group[0].name);
       // setUserGroup(res.data.data.group[0].name);
     } catch (error) {
       console.error("Error fetching user role:", error);
@@ -29,8 +29,29 @@ const Sidebar = () => {
         `${process.env.REACT_APP_BACKEND_URL}auth/group/list`,
         { params: { userGroup } }
       );
-      console.log(res.data.plist[0].subMenus);
-      setMenuList(res.data.plist[0].subMenus);
+      const subMenus = res.data.plist[0].subMenus;
+      const menuObject = {};
+      subMenus.forEach((subItem) => {
+        const { menuID } = subItem;
+        if (!menuObject[menuID._id]) {
+          menuObject[menuID._id] = {
+            _id: menuID._id,
+            menuTitle: menuID.menuTitle,
+            icon: menuID.icon,
+            subMenus: [],
+          };
+        }
+
+        menuObject[menuID._id].subMenus.push({
+          _id: subItem._id,
+          label: subItem.label,
+          url: subItem.url,
+          icon: subItem.icon,
+        });
+      });
+
+      const menuList = Object.values(menuObject);
+      setMenuList(menuList);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +65,7 @@ const Sidebar = () => {
   return (
     <>
       {loggedIn && (
-        <div className="h-full bg-slate-50 rounded-lg shadow-xl border-r-[2px] border-accent-secondary overflow-y-scroll">
+        <div className=" bg-slate-50 rounded-lg shadow-xl border-r-[2px] border-accent-secondary overflow-y-scroll min-h-screen">
           {/* logo and Company Header */}
           <div className="flex-shrink-0">
             <div className="logo-and-heading text-accent flex items-center justify-between h-20 bg-cyan-50 rounded-lg px-4">
@@ -63,26 +84,25 @@ const Sidebar = () => {
             </div>
           </div>
           {/* List */}
-          <ul className=" flex flex-col gap-y-2 mt-10 relative">
+          <ul className="flex flex-col gap-y-2 mt-10 relative">
             {Array.isArray(menuList) &&
-              menuList.map((ml) => (
-                <li key={ml.menuID}>
-                  <div className="flex items-center gap-x-4 text-sm px-4 bg-white text-accent font-semibold h-12 hover:cursor-pointer hover:bg-white hover:shadow-lg  hover:rounded-lg">
-                    <i class="ri-verified-badge-line"></i>
-                    <span className="text-left">{ml.label}</span>
-                    <i class="ri-arrow-down-s-line absolute right-2 "></i>
+              menuList.map((menuItem) => (
+                <li key={menuItem._id}>
+                  <div className="flex items-center gap-x-4 text-sm px-4 bg-white text-accent font-semibold h-12 hover:cursor-pointer hover:bg-white hover:shadow-lg hover:rounded-lg">
+                    <i className={menuItem.icon}></i>
+                    <span className="text-left">{menuItem.menuTitle}</span>
+                    <i className="ri-arrow-down-s-line absolute right-2"></i>
                   </div>
 
                   {/* SUBMENU */}
                   <div className="">
                     <ul>
-                      {Array.isArray(ml.submenu) &&
-                        ml.submenu.map((subItem) => (
+                      {Array.isArray(menuItem.subMenus) &&
+                        menuItem.subMenus.map((subItem) => (
                           <Link
                             to={subItem.url}
                             key={subItem._id}
-                            className="text-sm px-12 flex flex-col gap-2
-                             hover:cursor-pointer hover:bg-accent-tertiary  hover:shadow-md h-8 items-start pt-2"
+                            className="text-sm px-12 flex flex-col gap-2 hover:cursor-pointer hover:bg-accent-tertiary hover:shadow-md h-8 items-start pt-2"
                           >
                             {subItem.label}
                           </Link>
@@ -93,7 +113,7 @@ const Sidebar = () => {
               ))}
           </ul>
 
-          <div className="flex-shrink-0 p-4 ml-14">
+          <div className=" bottom-2 absolute left-20">
             <LogoutBtn />
           </div>
         </div>
