@@ -5,23 +5,8 @@ import AuthContext from "../../context/AuthContext";
 import LogoutBtn from "./../auth/LogoutBtn";
 import axios from "axios";
 const Sidebar = () => {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, userGroup } = useContext(AuthContext);
   const [menuList, setMenuList] = useState([]);
-  const [userGroup, setUserGroup] = useState("TestNew");
-  async function getUserRole() {
-    try {
-      const res = await axios.get(
-        "http://localhost:1337/api/v1/auth/profile/66ab2e74ae956645b0035ec9"
-      );
-
-      // Log the entire response to inspect the structure
-      // console.log("Response Data:", res.data.data.group[0].code);
-      setUserGroup(res.data.data.group[0].name);
-      // setUserGroup(res.data.data.group[0].name);
-    } catch (error) {
-      console.error("Error fetching user role:", error);
-    }
-  }
 
   async function getMenuList() {
     try {
@@ -59,8 +44,9 @@ const Sidebar = () => {
 
   useEffect(() => {
     getMenuList();
-    getUserRole();
   }, []);
+
+  console.log("=====================>",menuList);
 
   return (
     <>
