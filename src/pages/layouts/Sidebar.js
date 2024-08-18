@@ -7,7 +7,6 @@ import axios from "axios";
 const Sidebar = () => {
   const { loggedIn, userGroup } = useContext(AuthContext);
   const [menuList, setMenuList] = useState([]);
-
   async function getMenuList() {
     try {
       const res = await axios.get(
@@ -45,8 +44,6 @@ const Sidebar = () => {
   useEffect(() => {
     getMenuList();
   }, []);
-
-  console.log("=====================>",menuList);
 
   return (
     <>
