@@ -50,12 +50,12 @@ function EmployeeLeaveForm() {
                 `${process.env.REACT_APP_BACKEND_URL}employee-leave/create`,
                 empLeave
             );
-            console.log("res=====>", res)
+
             toast.success('Employee leave added Saved Successfully')
             setFormState(initialState)
 
         } catch (error) {
-            console.log("error.response.data.error=====>", error.response.data.error)
+            console.log("error.response.data.error", error.response.data.error)
             toast.error('Error While Add Employee Leave')
             setErrorMsg(error.response.data.error)
         }
