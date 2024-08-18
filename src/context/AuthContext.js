@@ -8,30 +8,34 @@ function AuthContextProvider(props) {
   const [userID, setUserID] = useState(null);
   const [userGroup, setUserGroup] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const loggedInRes = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}auth/loggedin`
-        );
-        setLoggedIn(loggedInRes.data.loggedIn);
-        setUserID(loggedInRes.data.userId);
+  async function getLoggedIn() {
+    try {
+      const loggedInRes = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}auth/loggedin`
+      );
+      setLoggedIn(loggedInRes.data.loggedIn);
+      setUserID(loggedInRes.data.userId);
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+    }
+  }
 
-        if (loggedInRes.data.userId) {
-          const res = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}auth/profile/${loggedInRes.data.userId}`
-          );
-          setUserGroup(res.data.data.group[0].code);
-        }
-      } catch (error) {
-        console.error("Error fetching user role:", error);
-      }
-    };
+  async function fetchData(userID) {
+    if (userID) {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}auth/profile/${userID}`
+      );
+      setUserGroup(res.data.data.group[0].code);
+    }
+  }
+
+  useEffect(() => {
+    getLoggedIn();
     fetchData();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ loggedIn, userID, userGroup }}>
+    <AuthContext.Provider value={{ loggedIn, userID, userGroup, getLoggedIn }}>
       {props.children}
     </AuthContext.Provider>
   );

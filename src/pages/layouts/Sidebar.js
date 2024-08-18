@@ -94,11 +94,10 @@ const Sidebar = () => {
                   </div>
                 </li>
               ))}
-          </ul>
-
-          <div className=" bottom-2 absolute left-20">
-            <LogoutBtn />
-          </div>
+            <div className="ml-20">
+              <LogoutBtn />
+            </div>
+          </ul>{" "}
         </div>
       )}
     </>
