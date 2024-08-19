@@ -1,43 +1,61 @@
-import { useState } from "react";
-import DepartmentForm from "./DepartmentForm";
-import DepartmentList from "./DepartmentList";
-import Modal from "../../../components/Modal";
+import axios from "axios";
+import DepartmentList from "../department/DepartmentList";
+import DepartmentForm from "../department/DepartmentForm";
+import { useEffect, useState } from "react";
 import AddIcon from "../../../components/Icon/AddIcon";
-import usePaginationData from "../../../hooks/usePaginationData";
-import Loading from "../../../components/Loading";
+import Modal from "../../../components/Modal";
 
 function Departments() {
+  const [data, setData] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [search, setSearch] = useState('');
+  const [limit, setLimit] = useState(10); // Default limit is 10
+  const [status, setStatus] = useState(1);
 
-  const {
-    data,
-    paginationConstant,
-    loading,
-    error,
-    setPage,
-    setLimit,
-    refetch,
-  } = usePaginationData(`${process.env.REACT_APP_BACKEND_URL}department/list` ,1,10);
+  const [numberOfPages, setNumberOfPages] = useState();
+  const [pageDataCount, setPageDataCount] = useState();
+  const [startPageData, setStartPageData] = useState();
+  const [totalDataCount, setTotalDataCount] = useState();
+  const [upToPageTotalData, setUpToPageTotalData] = useState();
 
-  if (loading) return <Loading />;
-  if (error) return <div>error....</div>;
+  const fetchDpt = async () => {
+    const page = 1;
+    const response = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}department/list?page=${page}&limit=${limit}&status=${status}`
+    );
+    setData(response.data.data);
+    setNumberOfPages(response.data.numberOfPages);
+    setPageDataCount(response.data.pageDataCount);
+    setStartPageData(response.data.startPageData);
+    setTotalDataCount(response.data.totalDataCount);
+    setUpToPageTotalData(response.data.upToPageTotalData);
+  };
+
+  useEffect(() => {
+    fetchDpt();
+  }, [limit, status]);
+
+  const handleLimitChange = (e) => {
+    setLimit(Number(e.target.value));
+  };
+  const handleStatusChange = (e) => {
+    setStatus(Number(e.target.value));
+  };
 
   return (
     <>
-      {/* Add Form Icon */}
       <AddIcon onClick={() => setShowForm(true)} />
-      {/* Modal Form */}
       <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
-        <DepartmentForm getDepartmentList={refetch} />
+        <DepartmentForm refetchData={fetchDpt} />
       </Modal>
-      {/* Data List */}
       <DepartmentList
         data={data}
-        paginationConstant={paginationConstant}
-        setPage={setPage}
-        setLimit={setLimit}
-        setSearch={setSearch} // Pass setSearch to DepartmentList
+        onChangeStatus={handleStatusChange}
+        onLimitChange={handleLimitChange}
+        numberOfPages={numberOfPages}
+        pageDataCount={pageDataCount}
+        startPageData={startPageData}
+        totalDataCount={totalDataCount}
+        upToPageTotalData={upToPageTotalData}
       />
     </>
   );
