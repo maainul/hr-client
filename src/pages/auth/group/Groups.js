@@ -1,35 +1,36 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import GroupForm from "./GroupForm"
-import GroupList from "./GroupList"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import GroupForm from "./GroupForm";
+import GroupList from "./GroupList";
 
 function Groups() {
+  const [groups, setGroups] = useState([]);
 
-    const [groups, setGroups] = useState([])
-
-    async function getGroupList() {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}auth/group/list`)
-            // console.log(res.data.plist[0])
-            setGroups(res.data.plist[0])
-            console.log("Group :", groups)
-        } catch (error) {
-            console.log(error)
-        }
+  async function getGroupList() {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}auth/group/list`
+      );
+      const group = res.data.plist;
+      console.log(group);
+      setGroups(group);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
     }
+  }
 
-    useEffect(() => {
-        getGroupList()
-    }, [])
+  useEffect(() => {
+    getGroupList();
+  }, []);
 
-
-
-    return (
-        <>
-            <GroupForm getGroupList={getGroupList} />
-            <GroupList groups={groups} />
-        </>
-    )
+  return (
+    <>
+      {/* <GroupForm getGroupList={getGroupList} /> */}
+      {groups && <GroupList groups={groups} />}
+      {/* Render groups or a loading state */}
+      {!groups && <p>Loading...</p>}
+    </>
+  );
 }
 
-export default Groups
+export default Groups;
