@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormHeading from "../../../components/FormHeading";
 import { toast } from "react-toastify";
 import usePaginationData from "../../../hooks/usePaginationData";
