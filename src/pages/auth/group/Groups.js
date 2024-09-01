@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import GroupForm from "./GroupForm";
 import GroupList from "./GroupList";
+import AddIcon from "../../../components/Icon/AddIcon";
+import Modal from "../../../components/Modal";
 
 function Groups() {
   const [groups, setGroups] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   async function getGroupList() {
     try {
@@ -25,7 +28,10 @@ function Groups() {
 
   return (
     <>
-      {/* <GroupForm getGroupList={getGroupList} /> */}
+      <AddIcon onClick={() => setShowForm(true)} />
+      <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
+        <GroupForm />
+      </Modal>
       {groups && <GroupList groups={groups} />}
       {/* Render groups or a loading state */}
       {!groups && <p>Loading...</p>}

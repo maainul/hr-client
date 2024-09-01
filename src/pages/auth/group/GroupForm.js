@@ -10,28 +10,15 @@ function GroupForm({ getGroupList }) {
   const [menus, setMenus] = useState([]);
   const [selectedMenus, setSelectedMenus] = useState([]);
 
-  //Fetch Permissions on Component mount
-  useEffect(() => {
-    async function fetchPermissions() {
-      try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}auth/permission/list`
-        );
-        setAvailablePermissions(res.data.plist);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchPermissions();
-  }, []);
-
   useEffect(() => {
     async function getMenuList() {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}menu/list`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}menu/list`
+        );
         setMenus(res.data.data);
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching menu list:", error);
       }
     }
     getMenuList();
@@ -48,26 +35,7 @@ function GroupForm({ getGroupList }) {
     });
   };
 
-  // handle checkbox change for menus
-  const handleMenuOnChange = (menuID) => {
-    setSelectedMenus((prev) => {
-      if (prev.includes(menuID)) {
-        return prev.filter((id) => id !== menuID);
-      } else {
-        return [...prev, menuID];
-      }
-    });
-  };
-  // handle checkbox change for submenus
-  const handleSubmenuOnChange = (submenuID) => {
-    setSelectedMenus((prev) => {
-      if (prev.includes(submenuID)) {
-        return prev.filter((id) => id !== submenuID);
-      } else {
-        return [...prev, submenuID];
-      }
-    });
-  };
+
   async function saveGroup(e) {
     e.preventDefault();
     try {
@@ -84,28 +52,6 @@ function GroupForm({ getGroupList }) {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  function renderSubmenus(submenus) {
-    return submenus.map((submenu, index) => (
-      <div
-        key={index}
-        className="bg-gray-200 p-2 mt-2 m-2 rounded-lg hover:bg-accent-secondary"
-      >
-        <label className="flex gap-4">
-          <input
-            type="checkbox"
-            value={submenu._id}
-            checked={selectedMenus.includes(submenu._id)}
-            onChange={() => handleSubmenuOnChange(submenu._id)}
-          />
-          <div className="flex flex-col">
-            <span>Title : {submenu.label}</span>
-            <span>Url : {submenu.url}</span>
-          </div>
-        </label>
-      </div>
-    ));
   }
 
   return (
@@ -130,51 +76,6 @@ function GroupForm({ getGroupList }) {
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row  w-full gap-y-4 lg:gap-x-4 justify-around mt-10">
-            <div className="flex-1 bg-green-50 rounded-lg p-4">
-              {/* Permissions Data */}
-              <h2 className="bg-accent h-10 pt-2 px-4 rounded-md mb-4">
-                Select Permissions
-              </h2>
-
-              {availablePermissions.map((permission) => (
-                <>
-                  <div key={permission._id} className="hover:cursor-pointer">
-                    <label className=" flex flex-row gap-x-4 hover:cursor-pointer">
-                      <input
-                        type="checkbox"
-                        value={permission._id}
-                        checked={permissions.includes(permission._id)}
-                        onChange={() =>
-                          handlePermissionOnChange(permission._id)
-                        }
-                      />
-                      <div className="mb-1 mt-1 hover:cursor-pointer">
-                        {permission.resource} - {permission.action}
-                      </div>
-                    </label>
-                  </div>
-                  <div className="bg-accent h-[1px]"></div>
-                </>
-              ))}
-            </div>
-
-            <div className="bg-purple-50 text-sm p-4 rounded-lg flex-1">
-              <h2 className="bg-accent h-10 pt-2 px-4 rounded-md mb-4">
-                Select Menus
-              </h2>
-              <div>
-                {menus.map((menu) => (
-                  <div key={menu._id}>
-                    <span className="text-accent font-semibold ">
-                      {menu.menuTitle}
-                    </span>
-                    {renderSubmenus(menu.submenu)}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
           <div
             className="flex justify-center
           mt-10"
