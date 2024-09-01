@@ -133,8 +133,10 @@ function GroupList({ groups }) {
                 <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 w-9/12">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th className="px-6 py-3">Name</th>
-                      <th className="px-6 py-3">Action</th>
+                      <th className="px-6 py-3">Icon</th>
+                      <th className="px-6 py-3">Menu Title</th>
+                      <th className="px-6 py-3">Sub Menu Title</th>
+                      <th className="px-6 py-3">Sub Menu URL</th>
                     </tr>
                   </thead>
                   <tbody>
