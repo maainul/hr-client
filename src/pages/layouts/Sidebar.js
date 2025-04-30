@@ -14,6 +14,7 @@ const Sidebar = () => {
         { params: { userGroup } }
       );
       const subMenus = res.data.plist[0].subMenus;
+      console.log(subMenus);
       const menuObject = {};
       subMenus.forEach((subItem) => {
         const { menuID } = subItem;

@@ -46,12 +46,14 @@ import Users from "./pages/auth/users/Users";
 import UserForm from "./pages/auth/users/UserForm";
 import EmployeeForm from "./pages/hr/employee/EmployeeForm";
 import LeaveTypes from "./pages/hr/leaveType/LeaveTypes";
-import LeaveTypeDetails from './pages/hr/leaveType/LeaveTypeDetails';
-import LeaveTypeUpdate from './pages/hr/leaveType/LeaveTypeUpdate';
-import EmployeeLeaves from './pages/hr/employeeLeave/EmployeeLeaves';
-import EmployeeLeaveDetails from './pages/hr/employeeLeave/EmployeeLeaveDetails';
+import LeaveTypeDetails from "./pages/hr/leaveType/LeaveTypeDetails";
+import LeaveTypeUpdate from "./pages/hr/leaveType/LeaveTypeUpdate";
+import EmployeeLeaves from "./pages/hr/employeeLeave/EmployeeLeaves";
+import EmployeeLeaveDetails from "./pages/hr/employeeLeave/EmployeeLeaveDetails";
 import EmployeeLeaveUpdate from "./pages/hr/employeeLeave/EmployeeLeaveUpdate";
-import EmployeeLeaveBalances from './pages/hr/employeeLeaveBalance/EmployeeLeaveBalances';
+import EmployeeLeaveBalances from "./pages/hr/employeeLeaveBalance/EmployeeLeaveBalances";
+import StockTransactionTypes from "./pages/prod/stockTransactionType/StockTransactionTypes";
+import StockTransactions from "./pages/prod/stockTransaction/StockTransactions";
 
 function Router() {
   const { loggedIn } = useContext(AuthContext);
@@ -69,7 +71,6 @@ function Router() {
         {loggedIn && (
           <Route element={<WithSidebarLayout />}>
             <Route path="/" element={<MainLayout />} />
-
             {/* Department */}
             <Route path="/departments" element={<Departments />} />
             <Route path="/department/:id" element={<DepartmentDetails />} />
@@ -81,7 +82,6 @@ function Router() {
               path="/department/update/status/:id"
               element={<DepartmentStatusUpdate />}
             />
-
             {/* Designation */}
             <Route path="/designations" element={<Designations />} />
             <Route path="/designation/:id" element={<DesignationDetails />} />
@@ -93,7 +93,6 @@ function Router() {
               path="/designation/update/status/:id"
               element={<DesignationStatusUpdate />}
             />
-
             {/* Unit */}
             <Route path="/units" element={<Units />} />
             <Route path="/unit/:id" element={<UnitDetails />} />
@@ -102,7 +101,6 @@ function Router() {
               path="/unit/update/status/:id"
               element={<UnitStatusUpdate />}
             />
-
             {/* Division */}
             <Route path="/divisions" element={<Divisions />} />
             <Route path="/division/:id" element={<DivisionDetails />} />
@@ -111,13 +109,11 @@ function Router() {
               path="/division/update/status/:id"
               element={<DivisionStatusUpdate />}
             />
-
             {/* Groups */}
             <Route path="/profile" element={<Profile />} />
             <Route path="/groups" element={<Groups />} />
             <Route path="/group/:id" element={<GroupDetails />} />
             <Route path="/group/update/:id" element={<GroupUpdate />} />
-
             {/* SalaryGrade */}
             <Route path="/salary-grade" element={<SalaryGrades />} />
             <Route path="/salary-grade/:id" element={<SalaryGradeDetails />} />
@@ -129,7 +125,6 @@ function Router() {
               path="/salary-grade/status/:id"
               element={<SalaryGradeStatusUpdate />}
             />
-
             {/* Policy */}
             <Route path="/policy" element={<Policies />} />
             <Route path="/policy/:id" element={<PolicyDetails />} />
@@ -138,7 +133,6 @@ function Router() {
               path="/policy/update/status/:id"
               element={<PolicyStatusUpdate />}
             />
-
             {/* Employee */}
             <Route path="/employee" element={<Employees />} />
             <Route path="/employee/add" element={<EmployeeForm />} />
@@ -148,29 +142,40 @@ function Router() {
               path="/employee/update/status/:id"
               element={<EmployeeStatusUpdate />}
             />
-
             {/* Menu */}
             <Route path="/menu" element={<Menus />} />
             <Route path="/menu/:id" element={<MenuDetails />} />
             <Route path="/menu/update/:id" element={<MenuUpdate />} />
-
             {/* Users */}
             <Route path="/users" element={<Users />} />
             <Route path="/user/create" element={<UserForm />} />
             <Route path="*" element={<div>Page Not Found</div>} />
-
             {/* Leave Type */}
             <Route path="/leave-type" element={<LeaveTypes />} />
             <Route path="/leave-type/:id" element={<LeaveTypeDetails />} />
-            <Route path="/leave-type/update/:id" element={<LeaveTypeUpdate />} />
-
+            <Route
+              path="/leave-type/update/:id"
+              element={<LeaveTypeUpdate />}
+            />
             {/* Leave Type */}
             <Route path="/employee-leave" element={<EmployeeLeaves />} />
             <Route path="/leave-type/:id" element={<EmployeeLeaveDetails />} />
-            <Route path="/leave-type/update/:id" element={<EmployeeLeaveUpdate />} />
-
-            <Route path="/employee-leave-balance" element={<EmployeeLeaveBalances />} />
-
+            <Route
+              path="/leave-type/update/:id"
+              element={<EmployeeLeaveUpdate />}
+            />
+            <Route
+              path="/employee-leave-balance"
+              element={<EmployeeLeaveBalances />}
+            />
+            <Route
+              path="/stocktransaction-type/list"
+              element={<StockTransactionTypes />}
+            />
+            <Route
+              path="/stocktransaction/list"
+              element={<StockTransactions />}
+            />
           </Route>
         )}
       </Routes>
